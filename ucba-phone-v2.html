@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UCBA Phone</title>
+<style>
+:root{--navy:#0d1b3d;--navy2:#15284f;--line:#d9dee8;--muted:#7b8496;--soft:#f5f7fb;--blue:#2f6df6}
+*{box-sizing:border-box}body{margin:0;background:#eef1f6;color:#101827;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans KR",Arial,sans-serif}
+.phone{width:min(100%,760px);margin:18px auto;background:#fff;border:1px solid #cfd5df;border-radius:34px;overflow:hidden;box-shadow:0 10px 34px rgba(15,30,60,.10)}
+.title{background:var(--navy);color:#fff;text-align:center;font-weight:800;font-size:30px;letter-spacing:.02em;padding:20px 22px 14px}
+.status{background:var(--navy2);color:#fff;display:flex;justify-content:space-between;align-items:center;padding:10px 24px 12px;font-size:17px}
+.section{border-top:1px solid var(--line)}.section-head{min-height:44px;padding:9px 20px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line)}
+.section-head strong{font-size:19px}.sub{font-size:13px;color:var(--muted);margin-left:7px;font-weight:500}.rows{padding:0 18px}
+.row{display:grid;grid-template-columns:42px 1fr auto;gap:10px;align-items:center;padding:10px 0;border-bottom:1px solid #e5e8ee}.row:last-child{border-bottom:0}
+.ico{width:36px;height:36px;border-radius:10px;display:grid;place-items:center;background:var(--soft);font-size:20px}.avatar{border-radius:50%}
+.mainline{font-weight:700;font-size:16px;line-height:1.18}.en{font-size:15px;line-height:1.22;margin-top:2px}.ko{font-size:13px;line-height:1.18;color:var(--muted);margin-top:2px}
+.time{font-size:13px;color:var(--muted);white-space:nowrap;align-self:start;padding-top:2px}.unread{display:inline-block;width:8px;height:8px;background:var(--blue);border-radius:50%;margin-left:5px}
+.two-col{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--line)}.two-col .section{border-top:0}.two-col .section:first-child{border-right:1px solid var(--line)}
+.compact .row{grid-template-columns:28px 1fr;padding:9px 0}.compact .ico{width:26px;height:26px;border-radius:8px;background:transparent;font-size:17px}
+.footer{border-top:1px solid var(--line);text-align:center;color:var(--muted);font-size:12px;padding:9px 12px 11px}
+@media(max-width:620px){.phone{margin:0;border-radius:0;border-left:0;border-right:0}.title{font-size:24px}.two-col{grid-template-columns:1fr}.two-col .section:first-child{border-right:0;border-bottom:1px solid var(--line)}}
+</style>
+</head>
+<body>
+<div class="phone">
+<div class="title" id="phoneTitle">NAME'S PHONE</div>
+<div class="status"><span id="statusTime">10:47 PM ☾</span><span id="statusRight">▮▮▮▮ 5G&nbsp;&nbsp;82% ▣</span></div>
+<section class="section"><div class="section-head"><div><strong>🔔 NOTIFICATIONS</strong><span class="sub">알림</span></div></div><div class="rows" id="notifications"></div></section>
+<section class="section"><div class="section-head"><div><strong>💬 MESSAGES</strong><span class="sub">메시지</span></div></div><div class="rows" id="messages"></div></section>
+<section class="section"><div class="section-head"><div><strong>📞 RECENT CALLS</strong><span class="sub">최근 통화</span></div></div><div class="rows" id="calls"></div></section>
+<div class="two-col">
+<section class="section compact"><div class="section-head"><div><strong>🔎 SEARCH</strong><span class="sub">최근 검색어</span></div></div><div class="rows" id="searches"></div></section>
+<section class="section compact"><div class="section-head"><div><strong>📋 NOTES</strong><span class="sub">메모 / 일정</span></div></div><div class="rows" id="notes"></div></section>
+</div>
+<div class="footer">🔒 UCBA PERSONAL DEVICE</div>
+</div>
+<script>
+/*
+Dynamic fields supplied by /폰:
+name   = character full name
+rpTime = current RP time (e.g. "4:38 PM")
+battery= current/continued battery value (e.g. "67%")
+All other sections are populated from the same data payload.
+*/
+const demo={name:"Nathan Wolf",rpTime:"10:47 PM",battery:"82%",
+notifications:[["💬","Surfsharks","Vincent: Practice at 6 AM tomorrow.","빈센트: 내일 오전 6시 훈련.","10:42 PM",true],["📩","Messages","Raul: Are you free after training?","라울: 훈련 끝나고 시간 돼?","10:35 PM",true],["📅","Tides Training","Strength & Conditioning — Tomorrow 7:00 AM","근력·컨디셔닝 — 내일 오전 7시","10:00 PM",false]],
+messages:[["●","Raul Hays","Don't skip dinner. You'll regret it.","저녁 거르지 마. 후회한다.","10:41 PM",true],["●","Vincent Kline","I left food in the fridge. Eat it.","냉장고에 음식 넣어뒀어. 먹어.","10:28 PM",true],["●","Isaac Donovan","Mila stole your towel again.","밀라가 네 수건 또 훔쳐갔어.","9:55 PM",false]],
+calls:[["↗","Dad","Outgoing call · 4m 12s","발신 · 4분 12초","9:12 PM",false],["↙","Isaac Donovan","Incoming call · 12s","수신 · 12초","8:47 PM",false],["✕","Unknown","Missed call","부재중 전화","6:33 PM",false]],
+searches:[["⌕","","best late-night diners brock avery","브록에이버리 심야 식당","",""],["⌕","","shoulder mobility after swimming","수영 후 어깨 가동성","",""],["⌕","","why does a dog avoid one person","개가 왜 한 사람만 어색해하나","",""]],
+notes:[["▤","","Friday 9:40 shoulder re-eval","금요일 9:40 어깨 재평가","",""],["▤","","Tides practice 7 AM","타이즈 훈련 오전 7시","",""],["▤","","Pick up Mila's food","밀라 사료 찾기","",""],["▤","","Call mechanic about brakes","브레이크 점검 전화","",""]]};
+function parseData(){const p=new URLSearchParams(location.search),raw=p.get("data");if(!raw)return demo;try{return {...demo,...JSON.parse(decodeURIComponent(raw))}}catch(e){return demo}}
+function esc(s){return String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]))}
+function rowHTML(r,c=false){const [icon,name,en,ko,time,unread]=r;return `<div class="row"><div class="ico ${c?"":"avatar"}">${esc(icon)}</div><div>${name?`<div class="mainline">${esc(name)}${unread?'<span class="unread"></span>':''}</div>`:""}${en?`<div class="en">${esc(en)}</div>`:""}${ko?`<div class="ko">${esc(ko)}</div>`:""}</div>${time?`<div class="time">${esc(time)}</div>`:""}</div>`}
+const d=parseData();
+document.getElementById("phoneTitle").textContent=(d.name||"NAME").toUpperCase()+"'S PHONE";
+document.getElementById("statusTime").textContent=(d.rpTime||d.time||"10:47 PM")+" ☾";
+document.getElementById("statusRight").textContent="▮▮▮▮ 5G  "+(d.battery||"82%")+" ▣";
+["notifications","messages","calls"].forEach(k=>document.getElementById(k).innerHTML=(d[k]||[]).map(r=>rowHTML(r,false)).join(""));
+["searches","notes"].forEach(k=>document.getElementById(k).innerHTML=(d[k]||[]).map(r=>rowHTML(r,true)).join(""));
+</script>
+</body>
+</html>
