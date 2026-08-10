@@ -17,12 +17,9 @@
   --blue:#3978ff;
 }
 
-*{
-  box-sizing:border-box;
-}
+*{box-sizing:border-box}
 
-html,
-body{
+html,body{
   margin:0;
   padding:0;
 }
@@ -40,25 +37,24 @@ body{
 }
 
 .phone{
-  width:700px;
-  max-width:700px;
+  width:660px;
+  max-width:660px;
   margin:0 auto;
   background:#fff;
   border:1px solid #cfd5df;
-  border-radius:25px;
+  border-radius:24px;
   overflow:hidden;
   box-shadow:0 8px 28px rgba(10,25,55,.10);
 }
 
-
-/* ───────── 상단 ───────── */
+/* 상단 */
 
 .phone-title{
   background:var(--navy);
   color:#fff;
   text-align:center;
   padding:15px 20px 12px;
-  font-size:25px;
+  font-size:26px;
   line-height:1;
   font-weight:800;
   letter-spacing:.015em;
@@ -71,7 +67,7 @@ body{
   justify-content:space-between;
   align-items:center;
   padding:8px 18px 9px;
-  font-size:14px;
+  font-size:15px;
   line-height:1;
 }
 
@@ -80,15 +76,14 @@ body{
   white-space:nowrap;
 }
 
-
-/* ───────── 공통 섹션 ───────── */
+/* 섹션 */
 
 .section{
   border-top:1px solid var(--line);
 }
 
 .section-title{
-  height:37px;
+  height:39px;
   display:flex;
   align-items:center;
   padding:0 15px;
@@ -97,7 +92,7 @@ body{
 }
 
 .section-title strong{
-  font-size:17px;
+  font-size:18px;
   line-height:1;
   letter-spacing:.01em;
 }
@@ -105,7 +100,7 @@ body{
 .section-title .kr-label{
   margin-left:6px;
   color:var(--muted);
-  font-size:11px;
+  font-size:11.5px;
   font-weight:500;
 }
 
@@ -113,15 +108,14 @@ body{
   padding:0 14px;
 }
 
-
-/* ───────── 일반 리스트 ───────── */
+/* 일반 행 */
 
 .row{
   display:grid;
-  grid-template-columns:34px minmax(0,1fr) auto;
-  column-gap:9px;
+  grid-template-columns:35px minmax(0,1fr) auto;
+  column-gap:10px;
   align-items:center;
-  min-height:58px;
+  min-height:62px;
   padding:7px 0;
   border-bottom:1px solid var(--line-soft);
 }
@@ -131,13 +125,13 @@ body{
 }
 
 .icon{
-  width:29px;
-  height:29px;
+  width:30px;
+  height:30px;
   display:grid;
   place-items:center;
   border-radius:50%;
   background:var(--soft);
-  font-size:15px;
+  font-size:16px;
   line-height:1;
 }
 
@@ -149,7 +143,7 @@ body{
   display:flex;
   align-items:center;
   min-width:0;
-  font-size:14px;
+  font-size:15px;
   line-height:1.15;
   font-weight:700;
   white-space:nowrap;
@@ -159,15 +153,14 @@ body{
 
 .unread-dot{
   flex:0 0 auto;
-  width:6px;
-  height:6px;
+  width:7px;
+  height:7px;
   margin-left:5px;
   border-radius:50%;
   background:var(--blue);
 }
 
-
-/* ───────── EN 위 / KR 아래 ───────── */
+/* 영문 위 / 한글 아래 */
 
 .text-pair{
   min-width:0;
@@ -176,7 +169,7 @@ body{
 
 .en{
   min-width:0;
-  font-size:13px;
+  font-size:14px;
   line-height:1.22;
   color:#283142;
   white-space:nowrap;
@@ -187,7 +180,7 @@ body{
 .kr{
   min-width:0;
   margin-top:2px;
-  font-size:12px;
+  font-size:13px;
   line-height:1.2;
   color:var(--muted);
   white-space:nowrap;
@@ -199,20 +192,19 @@ body{
   align-self:start;
   padding-top:1px;
   color:var(--muted);
-  font-size:11px;
+  font-size:11.5px;
   line-height:1.2;
   white-space:nowrap;
 }
 
-
-/* ───────── Search ───────── */
+/* Search */
 
 .search-row{
   display:grid;
-  grid-template-columns:25px minmax(0,1fr);
-  column-gap:7px;
+  grid-template-columns:26px minmax(0,1fr);
+  column-gap:8px;
   align-items:center;
-  min-height:48px;
+  min-height:52px;
   padding:6px 0;
   border-bottom:1px solid var(--line-soft);
 }
@@ -222,23 +214,22 @@ body{
 }
 
 .search-row .icon{
-  width:21px;
-  height:21px;
+  width:22px;
+  height:22px;
   background:transparent;
   border-radius:5px;
-  font-size:13px;
+  font-size:14px;
 }
 
 .search-row .en{
-  font-size:13px;
+  font-size:14px;
 }
 
 .search-row .kr{
-  font-size:12px;
+  font-size:13px;
 }
 
-
-/* ───────── Notes + Schedule ───────── */
+/* Notes / Schedule */
 
 .bottom-grid{
   display:grid;
@@ -259,15 +250,15 @@ body{
 }
 
 .bottom-section .rows{
-  padding:0 11px;
+  padding:0 10px;
 }
 
 .mini-row{
   display:grid;
   grid-template-columns:18px minmax(0,1fr);
-  column-gap:5px;
+  column-gap:6px;
   align-items:center;
-  min-height:46px;
+  min-height:49px;
   padding:5px 0;
   border-bottom:1px solid var(--line-soft);
 }
@@ -289,25 +280,24 @@ body{
 }
 
 .mini-row .en{
-  font-size:12px;
+  font-size:12.5px;
   line-height:1.18;
 }
 
 .mini-row .kr{
   margin-top:2px;
-  font-size:11.5px;
+  font-size:12px;
   line-height:1.18;
 }
 
-
-/* ───────── 기타 ───────── */
+/* 기타 */
 
 .empty{
-  min-height:38px;
+  min-height:40px;
   display:flex;
   align-items:center;
   color:#a0a7b3;
-  font-size:11px;
+  font-size:12px;
 }
 
 .footer{
@@ -315,20 +305,18 @@ body{
   padding:6px 12px 8px;
   text-align:center;
   color:#98a0ad;
-  font-size:9px;
+  font-size:9.5px;
   letter-spacing:.03em;
 }
 
-
-/* Worker 캡처에서 폭 고정 */
-@media(max-width:700px){
+@media(max-width:660px){
   body{
-    width:700px;
+    width:660px;
   }
 
   .phone{
-    width:700px;
-    max-width:700px;
+    width:660px;
+    max-width:660px;
   }
 }
 </style>
@@ -344,93 +332,62 @@ body{
 
   <div class="statusbar">
     <span id="rpTime">--:--</span>
-
     <span class="status-right" id="battery">
       ▮▮▮▮ 5G&nbsp;&nbsp;--%
     </span>
   </div>
 
-
-  <!-- NOTIFICATIONS -->
   <section class="section">
-
     <div class="section-title">
       <strong>🔔 NOTIFICATIONS</strong>
       <span class="kr-label">알림</span>
     </div>
-
     <div class="rows" id="notifications"></div>
-
   </section>
 
-
-  <!-- MESSAGES -->
   <section class="section">
-
     <div class="section-title">
       <strong>💬 MESSAGES</strong>
       <span class="kr-label">메시지</span>
     </div>
-
     <div class="rows" id="messages"></div>
-
   </section>
 
-
-  <!-- RECENT CALLS -->
   <section class="section">
-
     <div class="section-title">
       <strong>📞 RECENT CALLS</strong>
       <span class="kr-label">최근 통화</span>
     </div>
-
     <div class="rows" id="calls"></div>
-
   </section>
 
-
-  <!-- SEARCH -->
   <section class="section">
-
     <div class="section-title">
       <strong>🔎 SEARCH</strong>
       <span class="kr-label">최근 검색어</span>
     </div>
-
     <div class="rows" id="searches"></div>
-
   </section>
 
-
-  <!-- NOTES / SCHEDULE -->
   <div class="bottom-grid">
 
     <section class="bottom-section">
-
       <div class="section-title">
         <strong>📋 NOTES</strong>
         <span class="kr-label">메모</span>
       </div>
-
       <div class="rows" id="notes"></div>
-
     </section>
 
-
     <section class="bottom-section">
-
       <div class="section-title">
         <strong>📅 SCHEDULE</strong>
         <span class="kr-label">일정</span>
       </div>
-
       <div class="rows" id="schedule"></div>
-
     </section>
 
   </div>
-
 
   <div class="footer">
     🔒 PERSONAL DEVICE
@@ -438,13 +395,9 @@ body{
 
 </div>
 
-
 <script>
 
-/* ───────── 기본 유틸 ───────── */
-
 function esc(value){
-
   return String(value ?? "").replace(
     /[&<>"']/g,
     char => ({
@@ -457,78 +410,52 @@ function esc(value){
   );
 }
 
-
 function items(section){
-
   if(!section) return [];
-
-  return section
-    .split("~~")
-    .filter(Boolean);
+  return section.split("~~").filter(Boolean);
 }
 
-
 function fields(item){
-
   return String(item || "").split("::");
 }
 
-
-/* ───────── 제목: 영문만 ───────── */
-
 function englishNameOnly(value){
 
-  const original =
-    String(value || "").trim();
+  const original = String(value || "").trim();
 
-  if(!original){
-    return "NAME";
-  }
+  if(!original) return "NAME";
 
-  const english =
-    original
-      .replace(/[^A-Za-z' -]+/g, " ")
-      .replace(/\s+/g, " ")
-      .trim();
+  const english = original
+    .replace(/[^A-Za-z' -]+/g," ")
+    .replace(/\s+/g," ")
+    .trim();
 
   return english || original;
 }
 
-
-/* ───────── 데이터 읽기 ───────── */
-
 function parseData(){
 
   const raw =
-    new URLSearchParams(
-      window.location.search
-    ).get("data");
+    new URLSearchParams(window.location.search)
+      .get("data");
 
-  if(!raw){
-    return {};
-  }
+  if(!raw) return {};
 
-  const parts =
-    raw.split("||");
-
+  const parts = raw.split("||");
 
   const [
-    name = "",
-    rpTime = "",
-    battery = "",
-    notificationSection = "",
-    messageSection = "",
-    callSection = "",
-    searchSection = "",
-    noteSection = "",
-    scheduleSection = ""
+    name="",
+    rpTime="",
+    battery="",
+    notificationSection="",
+    messageSection="",
+    callSection="",
+    searchSection="",
+    noteSection="",
+    scheduleSection=""
   ] = parts;
 
-
-  /* 알림 아이콘 */
-
   const notificationIcons = {
-
     msg:"💬",
     sns:"📸",
     calendar:"📅",
@@ -541,38 +468,29 @@ function parseData(){
     system:"⚙️"
   };
 
-
-  /* 알림 */
-
   const notifications =
     items(notificationSection)
       .slice(0,4)
       .map(item => {
 
         const [
-          type = "",
-          who = "",
-          en = "",
-          kr = "",
-          time = "",
-          unread = "0"
+          type="",
+          who="",
+          en="",
+          kr="",
+          time="",
+          unread="0"
         ] = fields(item);
 
         return {
-
-          icon:
-            notificationIcons[type] || "🔔",
-
+          icon:notificationIcons[type] || "🔔",
           name:who,
           en,
           kr,
           time,
-          unread:unread === "1"
+          unread:unread==="1"
         };
       });
-
-
-  /* 메시지 */
 
   const messages =
     items(messageSection)
@@ -580,26 +498,22 @@ function parseData(){
       .map(item => {
 
         const [
-          who = "",
-          en = "",
-          kr = "",
-          time = "",
-          unread = "0"
+          who="",
+          en="",
+          kr="",
+          time="",
+          unread="0"
         ] = fields(item);
 
         return {
-
           icon:"💬",
           name:who,
           en,
           kr,
           time,
-          unread:unread === "1"
+          unread:unread==="1"
         };
       });
-
-
-  /* 통화 */
 
   const calls =
     items(callSection)
@@ -607,31 +521,20 @@ function parseData(){
       .map(item => {
 
         const [
-          who = "",
-          en = "",
-          kr = "",
-          time = "",
-          direction = ""
+          who="",
+          en="",
+          kr="",
+          time="",
+          direction=""
         ] = fields(item);
 
+        let icon="📞";
 
-        let icon = "📞";
-
-        if(direction === "out"){
-          icon = "↗";
-        }
-
-        else if(direction === "in"){
-          icon = "↙";
-        }
-
-        else if(direction === "miss"){
-          icon = "✕";
-        }
-
+        if(direction==="out") icon="↗";
+        else if(direction==="in") icon="↙";
+        else if(direction==="miss") icon="✕";
 
         return {
-
           icon,
           name:who,
           en,
@@ -641,76 +544,52 @@ function parseData(){
         };
       });
 
-
-  /* 검색 */
-
   const searches =
     items(searchSection)
       .slice(0,4)
       .map(item => {
 
-        const [
-          en = "",
-          kr = ""
-        ] = fields(item);
+        const [en="",kr=""] = fields(item);
 
         return {
-
           icon:"🔎",
           en,
           kr
         };
       });
 
-
-  /* 메모 */
-
   const notes =
     items(noteSection)
       .slice(0,4)
       .map(item => {
 
-        const [
-          en = "",
-          kr = ""
-        ] = fields(item);
+        const [en="",kr=""] = fields(item);
 
         return {
-
           icon:"▪",
           en,
           kr
         };
       });
-
-
-  /* 일정 */
 
   const schedule =
     items(scheduleSection)
       .slice(0,4)
       .map(item => {
 
-        const [
-          en = "",
-          kr = ""
-        ] = fields(item);
+        const [en="",kr=""] = fields(item);
 
         return {
-
           icon:"▪",
           en,
           kr
         };
       });
 
-
   return {
-
     name,
     rpTime,
     battery,
-
     notifications,
     messages,
     calls,
@@ -720,57 +599,28 @@ function parseData(){
   };
 }
 
+function pairHTML(en,kr){
 
-/* ───────── EN / KR 세로 출력 ───────── */
+  en=String(en || "").trim();
+  kr=String(kr || "").trim();
 
-function pairHTML(en, kr){
-
-  en =
-    String(en || "").trim();
-
-  kr =
-    String(kr || "").trim();
-
-
-  if(!en && !kr){
-    return "";
-  }
-
-
-  if(en && kr){
-
-    return `
-      <div class="text-pair">
-
-        <div class="en"
-             title="${esc(en)}">
-          ${esc(en)}
-        </div>
-
-        <div class="kr"
-             title="${esc(kr)}">
-          ${esc(kr)}
-        </div>
-
-      </div>
-    `;
-  }
-
+  if(!en && !kr) return "";
 
   return `
     <div class="text-pair">
-
-      <div class="en"
-           title="${esc(en || kr)}">
-        ${esc(en || kr)}
-      </div>
-
+      ${
+        en
+        ? `<div class="en" title="${esc(en)}">${esc(en)}</div>`
+        : ""
+      }
+      ${
+        kr
+        ? `<div class="kr" title="${esc(kr)}">${esc(kr)}</div>`
+        : ""
+      }
     </div>
   `;
 }
-
-
-/* ───────── 일반 행 ───────── */
 
 function normalRowHTML(row){
 
@@ -786,9 +636,7 @@ function normalRowHTML(row){
         ${
           row.name
           ?
-          `
-          <div class="name">
-
+          `<div class="name">
             <span style="
               min-width:0;
               overflow:hidden;
@@ -797,39 +645,29 @@ function normalRowHTML(row){
             ">
               ${esc(row.name)}
             </span>
-
             ${
               row.unread
-              ?
-              `<span class="unread-dot"></span>`
-              :
-              ""
+              ? `<span class="unread-dot"></span>`
+              : ""
             }
-
-          </div>
-          `
+          </div>`
           :
           ""
         }
 
-        ${pairHTML(row.en, row.kr)}
+        ${pairHTML(row.en,row.kr)}
 
       </div>
 
       ${
         row.time
-        ?
-        `<div class="time">${esc(row.time)}</div>`
-        :
-        ""
+        ? `<div class="time">${esc(row.time)}</div>`
+        : ""
       }
 
     </div>
   `;
 }
-
-
-/* ───────── 검색 행 ───────── */
 
 function searchRowHTML(row){
 
@@ -841,15 +679,12 @@ function searchRowHTML(row){
       </div>
 
       <div class="content">
-        ${pairHTML(row.en, row.kr)}
+        ${pairHTML(row.en,row.kr)}
       </div>
 
     </div>
   `;
 }
-
-
-/* ───────── 메모 / 일정 행 ───────── */
 
 function miniRowHTML(row){
 
@@ -861,30 +696,21 @@ function miniRowHTML(row){
       </div>
 
       <div class="content">
-        ${pairHTML(row.en, row.kr)}
+        ${pairHTML(row.en,row.kr)}
       </div>
 
     </div>
   `;
 }
 
+function renderNormal(id,rows){
 
-/* ───────── 출력 ───────── */
-
-function renderNormal(id, rows){
-
-  const el =
-    document.getElementById(id);
-
+  const el=document.getElementById(id);
 
   if(!Array.isArray(rows) || !rows.length){
-
-    el.innerHTML =
-      `<div class="empty">No data</div>`;
-
+    el.innerHTML=`<div class="empty">No data</div>`;
     return;
   }
-
 
   el.innerHTML =
     rows
@@ -893,21 +719,14 @@ function renderNormal(id, rows){
       .join("");
 }
 
+function renderSearch(id,rows){
 
-function renderSearch(id, rows){
-
-  const el =
-    document.getElementById(id);
-
+  const el=document.getElementById(id);
 
   if(!Array.isArray(rows) || !rows.length){
-
-    el.innerHTML =
-      `<div class="empty">No data</div>`;
-
+    el.innerHTML=`<div class="empty">No data</div>`;
     return;
   }
-
 
   el.innerHTML =
     rows
@@ -916,21 +735,14 @@ function renderSearch(id, rows){
       .join("");
 }
 
+function renderMini(id,rows){
 
-function renderMini(id, rows){
-
-  const el =
-    document.getElementById(id);
-
+  const el=document.getElementById(id);
 
   if(!Array.isArray(rows) || !rows.length){
-
-    el.innerHTML =
-      `<div class="empty">No data</div>`;
-
+    el.innerHTML=`<div class="empty">No data</div>`;
     return;
   }
-
 
   el.innerHTML =
     rows
@@ -939,71 +751,26 @@ function renderMini(id, rows){
       .join("");
 }
 
+const data=parseData();
 
-/* ───────── 실행 ───────── */
-
-const data =
-  parseData();
-
-
-const displayName =
+const displayName=
   englishNameOnly(data.name);
 
+document.getElementById("phoneTitle").textContent =
+  displayName.toUpperCase() + "'S PHONE";
 
-document.getElementById(
-  "phoneTitle"
-).textContent =
-  displayName.toUpperCase() +
-  "'S PHONE";
-
-
-document.getElementById(
-  "rpTime"
-).textContent =
+document.getElementById("rpTime").textContent =
   data.rpTime || "--:--";
 
+document.getElementById("battery").textContent =
+  "▮▮▮▮ 5G  " + (data.battery || "--%");
 
-document.getElementById(
-  "battery"
-).textContent =
-  "▮▮▮▮ 5G  " +
-  (data.battery || "--%");
-
-
-renderNormal(
-  "notifications",
-  data.notifications
-);
-
-
-renderNormal(
-  "messages",
-  data.messages
-);
-
-
-renderNormal(
-  "calls",
-  data.calls
-);
-
-
-renderSearch(
-  "searches",
-  data.searches
-);
-
-
-renderMini(
-  "notes",
-  data.notes
-);
-
-
-renderMini(
-  "schedule",
-  data.schedule
-);
+renderNormal("notifications",data.notifications);
+renderNormal("messages",data.messages);
+renderNormal("calls",data.calls);
+renderSearch("searches",data.searches);
+renderMini("notes",data.notes);
+renderMini("schedule",data.schedule);
 
 </script>
 
