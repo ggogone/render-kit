@@ -4,79 +4,297 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>personal notes</title>
+
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+
 <style>
-:root{--navy:#17365f;--navy2:#10294a;--text:#202733;--muted:#8993a3;--line:#e5e9ef;--soft:#f6f8fb}
+:root{
+  --navy:#17365f;
+  --navy2:#10294a;
+  --text:#202733;
+  --muted:#8993a3;
+  --line:#e5e9ef;
+  --soft:#f6f8fb;
+}
+
 *{box-sizing:border-box}
-html,body{margin:0;padding:0;background:#f5f7fa;color:var(--text)}
-body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans KR",Arial,sans-serif}
-.shell{width:1200px;margin:0 auto;background:#fff;border:1px solid #e3e8ef;display:grid;grid-template-columns:1fr 1fr;min-height:820px}
-.left,.right{padding:38px 44px 34px}
-.left{border-right:1px solid var(--line)}
-.topline{display:flex;justify-content:space-between;align-items:center;gap:20px}
-.title{font-size:28px;font-weight:800;color:var(--navy2);letter-spacing:-.02em}
-.subtitle{margin-top:5px;font-size:12px;color:var(--muted)}
-.date{font-size:12px;font-weight:700;color:var(--navy2);letter-spacing:.08em;white-space:nowrap}
 
-.cards{margin-top:26px;display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
-.card{min-height:132px;border:1px solid var(--line);border-radius:16px;padding:16px;background:#fff}
-.card h3{margin:0 0 16px;font-size:11px;color:var(--navy);letter-spacing:.06em}
-.big{font-size:16px;line-height:1.45}
-.small{font-size:12px;line-height:1.55;color:#495363}
+html,body{
+  margin:0;
+  padding:0;
+  background:#f5f7fa;
+  color:var(--text);
+}
 
-/* TODAY'S PHOTO — 실제 이미지 대신 사진 기록 */
-.photo-note{display:flex;flex-direction:column;justify-content:space-between}
-.photo-note .photo-time{font-size:11px;color:var(--muted);font-weight:700;letter-spacing:.04em}
-.photo-note .photo-desc{font-size:13px;line-height:1.5;color:#2b3442;margin-top:8px}
+body{
+  font-family:Pretendard,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  letter-spacing:-0.01em;
+}
 
-.weekly{margin-top:28px}
-.section-title{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
-.section-title strong{color:var(--navy2);font-size:13px;letter-spacing:.06em}
-.section-title span{font-size:10px;color:var(--muted)}
+.shell{
+  width:1200px;
+  margin:0 auto;
+  background:#fff;
+  border:1px solid #e3e8ef;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  min-height:820px;
+}
+
+.left,.right{
+  padding:38px 44px 34px;
+}
+
+.left{
+  border-right:1px solid var(--line);
+}
+
+.topline{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:20px;
+}
+
+.title{
+  font-size:28px;
+  font-weight:800;
+  color:var(--navy2);
+  letter-spacing:-0.025em;
+}
+
+.subtitle{
+  margin-top:5px;
+  font-size:12px;
+  font-weight:400;
+  color:var(--muted);
+  letter-spacing:-0.01em;
+}
+
+.date{
+  font-size:12px;
+  font-weight:700;
+  color:var(--navy2);
+  letter-spacing:.08em;
+  white-space:nowrap;
+}
+
+.cards{
+  margin-top:26px;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+}
+
+.card{
+  min-height:132px;
+  border:1px solid var(--line);
+  border-radius:16px;
+  padding:16px;
+  background:#fff;
+}
+
+.card h3{
+  margin:0 0 16px;
+  font-size:11px;
+  font-weight:750;
+  color:var(--navy);
+  letter-spacing:.06em;
+}
+
+.big{
+  font-size:16px;
+  line-height:1.5;
+  font-weight:500;
+}
+
+.small{
+  font-size:12px;
+  line-height:1.6;
+  color:#495363;
+  font-weight:400;
+}
+
+.photo-note{
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+}
+
+.photo-note .photo-time{
+  font-size:11px;
+  color:var(--muted);
+  font-weight:700;
+  letter-spacing:.04em;
+}
+
+.photo-note .photo-desc{
+  font-size:13px;
+  line-height:1.55;
+  color:#2b3442;
+  margin-top:8px;
+  font-weight:450;
+}
+
+.weekly{
+  margin-top:28px;
+}
+
+.section-title{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:12px;
+}
+
+.section-title strong{
+  color:var(--navy2);
+  font-size:13px;
+  font-weight:750;
+  letter-spacing:.06em;
+}
+
+.section-title span{
+  font-size:10px;
+  color:var(--muted);
+}
 
 .week-row{
-display:grid;
-grid-template-columns:56px 1fr auto;
-gap:14px;
-align-items:center;
-border:1px solid var(--line);
-border-radius:13px;
-padding:12px 14px;
-margin-bottom:8px
+  display:grid;
+  grid-template-columns:56px 1fr auto;
+  gap:14px;
+  align-items:center;
+  border:1px solid var(--line);
+  border-radius:13px;
+  padding:12px 14px;
+  margin-bottom:8px;
 }
-.week-day{font-size:16px;font-weight:800;color:var(--navy2)}
-.week-day small{display:block;font-size:9px;color:var(--muted);font-weight:700;margin-top:2px}
-.week-text{font-size:12px;line-height:1.45;color:#3f4856}
-.week-more{font-size:16px;color:#9aa3b0}
 
-.foot{margin-top:28px;font-size:9px;color:#9aa3b0;letter-spacing:.06em}
-
-.entry-title{display:flex;align-items:center;gap:8px;margin:18px 0}
-.entry-title:before,.unsaid-head:before{
-content:"";
-width:3px;
-height:18px;
-background:var(--navy);
-border-radius:3px
+.week-day{
+  font-size:16px;
+  font-weight:800;
+  color:var(--navy2);
 }
-.entry-title strong,.unsaid-head strong{font-size:13px;color:var(--navy2);letter-spacing:.05em}
-.entry-title span{font-size:10px;color:var(--muted)}
 
-.paragraph{padding-bottom:20px;margin-bottom:20px;border-bottom:1px solid var(--line)}
-.paragraph:last-of-type{border-bottom:0}
-.en{font-size:14px;line-height:1.65;color:#222a36;white-space:pre-line}
-.kr{margin-top:10px;font-size:12px;line-height:1.65;color:#7d8796;white-space:pre-line}
+.week-day small{
+  display:block;
+  font-size:9px;
+  color:var(--muted);
+  font-weight:700;
+  margin-top:2px;
+}
 
-.unsaid{margin-top:28px;padding-top:6px}
-.unsaid-head{display:flex;align-items:center;gap:8px;margin-bottom:14px}
+.week-text{
+  font-size:12px;
+  line-height:1.5;
+  color:#3f4856;
+  font-weight:400;
+}
 
-.credit{margin-top:34px;text-align:right;font-size:9px;color:#9aa3b0;line-height:1.5}
-.credit b{color:var(--navy2)}
+.week-more{
+  font-size:16px;
+  color:#9aa3b0;
+}
 
-.empty{color:#a2aab6;font-size:11px;padding:8px 0}
+.foot{
+  margin-top:28px;
+  font-size:9px;
+  color:#9aa3b0;
+  letter-spacing:.06em;
+}
+
+.entry-title{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  margin:18px 0;
+}
+
+.entry-title:before,
+.unsaid-head:before{
+  content:"";
+  width:3px;
+  height:18px;
+  background:var(--navy);
+  border-radius:3px;
+}
+
+.entry-title strong,
+.unsaid-head strong{
+  font-size:13px;
+  font-weight:750;
+  color:var(--navy2);
+  letter-spacing:.05em;
+}
+
+.entry-title span{
+  font-size:10px;
+  color:var(--muted);
+}
+
+.paragraph{
+  padding-bottom:20px;
+  margin-bottom:20px;
+  border-bottom:1px solid var(--line);
+}
+
+.paragraph:last-of-type{
+  border-bottom:0;
+}
+
+.en{
+  font-size:14px;
+  line-height:1.72;
+  font-weight:400;
+  letter-spacing:-0.005em;
+  color:#222a36;
+  white-space:pre-line;
+}
+
+.kr{
+  margin-top:10px;
+  font-size:12px;
+  line-height:1.72;
+  font-weight:400;
+  letter-spacing:-0.018em;
+  color:#7d8796;
+  white-space:pre-line;
+}
+
+.unsaid{
+  margin-top:28px;
+  padding-top:6px;
+}
+
+.unsaid-head{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  margin-bottom:14px;
+}
+
+.credit{
+  margin-top:34px;
+  text-align:right;
+  font-size:9px;
+  color:#9aa3b0;
+  line-height:1.5;
+}
+
+.credit b{
+  color:var(--navy2);
+  font-weight:750;
+}
+
+.empty{
+  color:#a2aab6;
+  font-size:11px;
+  padding:8px 0;
+}
 
 @media(max-width:1200px){
-body{width:1200px}
-.shell{width:1200px}
+  body{width:1200px}
+  .shell{width:1200px}
 }
 </style>
 </head>
@@ -87,57 +305,57 @@ body{width:1200px}
 <section class="left">
 
 <div class="topline">
-<div>
-<div class="title">← personal notes</div>
-<div class="subtitle">things I didn’t say.</div>
-</div>
-<div class="date" id="dateTop">SEP 25 · THU · 2025</div>
+  <div>
+    <div class="title">← personal notes</div>
+    <div class="subtitle">things I didn’t say.</div>
+  </div>
+  <div class="date" id="dateTop">SEP 25 · THU · 2025</div>
 </div>
 
 <div class="cards">
 
 <div class="card">
-<h3>WEATHER</h3>
-<div class="big" id="weather">Overcast<br>22°C</div>
+  <h3>WEATHER</h3>
+  <div class="big" id="weather">Overcast<br>22°C</div>
 </div>
 
 <div class="card">
-<h3>NOW PLAYING</h3>
-<div class="big" id="music">No Cars Go</div>
-<div class="small" id="artist">Arcade Fire</div>
+  <h3>NOW PLAYING</h3>
+  <div class="big" id="music">No Cars Go</div>
+  <div class="small" id="artist">Arcade Fire</div>
 </div>
 
 <div class="card photo-note">
-<h3>TODAY'S PHOTO</h3>
-<div class="photo-time" id="photoTime">18:42</div>
-<div class="photo-desc" id="photoDesc">Rain on the guest-room window.</div>
+  <h3>TODAY'S PHOTO</h3>
+  <div class="photo-time" id="photoTime">18:42</div>
+  <div class="photo-desc" id="photoDesc">Rain on the guest-room window.</div>
 </div>
 
 <div class="card">
-<h3>COMPLETED</h3>
-<div class="big" id="completed">3 / 4</div>
-<div class="small" id="completedText"></div>
+  <h3>COMPLETED</h3>
+  <div class="big" id="completed">3 / 4</div>
+  <div class="small" id="completedText"></div>
 </div>
 
 <div class="card">
-<h3>SCHEDULE</h3>
-<div class="small" id="schedule"></div>
+  <h3>SCHEDULE</h3>
+  <div class="small" id="schedule"></div>
 </div>
 
 <div class="card">
-<h3>MOOD</h3>
-<div class="big" id="mood">quiet</div>
-<div class="small" id="moodDots">● ● ○ ○ ○</div>
+  <h3>MOOD</h3>
+  <div class="big" id="mood">quiet</div>
+  <div class="small" id="moodDots">● ● ○ ○ ○</div>
 </div>
 
 </div>
 
 <div class="weekly">
-<div class="section-title">
-<strong>WEEKLY</strong>
-<span>previous entries only</span>
-</div>
-<div id="weeklyList"></div>
+  <div class="section-title">
+    <strong>WEEKLY</strong>
+    <span>previous entries only</span>
+  </div>
+  <div id="weeklyList"></div>
 </div>
 
 <div class="foot">🔒 PRIVATE JOURNAL · LOCAL ONLY</div>
@@ -147,214 +365,199 @@ body{width:1200px}
 <section class="right">
 
 <div class="topline">
-<div></div>
-<div class="date" id="dateRight"></div>
+  <div></div>
+  <div class="date" id="dateRight"></div>
 </div>
 
 <div class="entry-title">
-<strong>TODAY</strong>
-<span id="todayLabel"></span>
+  <strong>TODAY</strong>
+  <span id="todayLabel"></span>
 </div>
 
 <div id="entries"></div>
 
 <div class="unsaid">
-<div class="unsaid-head">
-<strong>UNSAID</strong>
-</div>
-<div class="en" id="unsaidEn"></div>
-<div class="kr" id="unsaidKr"></div>
+  <div class="unsaid-head">
+    <strong>UNSAID</strong>
+  </div>
+  <div class="en" id="unsaidEn"></div>
+  <div class="kr" id="unsaidKr"></div>
 </div>
 
 <div class="credit">
-designed by <b>RAUL HAYS</b><br>
-<span>(with unnecessary comments from colin)</span>
+  designed by <b>RAUL HAYS</b><br>
+  <span>(with unnecessary comments from colin)</span>
 </div>
 
 </section>
+
 </div>
 
 <script>
 function esc(v){
-return String(v??"").replace(/[&<>"']/g,c=>({
-"&":"&amp;",
-"<":"&lt;",
-">":"&gt;",
-'"':"&quot;",
-"'":"&#39;"
-}[c]))
+  return String(v??"").replace(/[&<>"']/g,c=>({
+    "&":"&amp;",
+    "<":"&lt;",
+    ">":"&gt;",
+    '"':"&quot;",
+    "'":"&#39;"
+  }[c]))
 }
 
 function parseDateOnly(s){
-const m=String(s||"").match(/^(\d{4})-(\d{2})-(\d{2})$/);
-return m?new Date(+m[1],+m[2]-1,+m[3]):null
+  const m=String(s||"").match(/^(\d{4})-(\d{2})-(\d{2})$/);
+  return m?new Date(+m[1],+m[2]-1,+m[3]):null
 }
 
 function fmtTop(s){
-const d=parseDateOnly(s);
-if(!d)return s;
+  const d=parseDateOnly(s);
+  if(!d)return s;
 
-const M=["JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC"];
-const D=["SUN","MON","TUE","WED","THU","FRI","SAT"];
+  const M=["JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC"];
+  const D=["SUN","MON","TUE","WED","THU","FRI","SAT"];
 
-return `${M[d.getMonth()]} ${String(d.getDate()).padStart(2,"0")} · ${D[d.getDay()]} · ${d.getFullYear()}`
+  return `${M[d.getMonth()]} ${String(d.getDate()).padStart(2,"0")} · ${D[d.getDay()]} · ${d.getFullYear()}`
 }
 
 function fmtShort(s){
-const d=parseDateOnly(s);
-if(!d)return s;
+  const d=parseDateOnly(s);
+  if(!d)return s;
 
-const M=["JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC"];
-const D=["SUN","MON","TUE","WED","THU","FRI","SAT"];
+  const M=["JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC"];
+  const D=["SUN","MON","TUE","WED","THU","FRI","SAT"];
 
-return `${M[d.getMonth()]} ${String(d.getDate()).padStart(2,"0")}, ${D[d.getDay()]}`
+  return `${M[d.getMonth()]} ${String(d.getDate()).padStart(2,"0")}, ${D[d.getDay()]}`
 }
 
 function parseData(){
+  const raw=new URLSearchParams(location.search).get("data");
+  if(!raw)return null;
 
-const raw=new URLSearchParams(location.search).get("data");
-if(!raw)return null;
+  const p=raw.split("||");
+  const photoParts=(p[4]||"").split("^^");
 
-const p=raw.split("||");
-
-const photoParts=(p[4]||"").split("^^");
-
-return{
-date:p[0]||"",
-weather:p[1]||"",
-music:p[2]||"",
-artist:p[3]||"",
-
-photoDesc:photoParts[0]||"",
-photoTime:photoParts[1]||"",
-
-completed:p[5]||"",
-completedText:p[6]||"",
-schedule:p[7]||"",
-mood:p[8]||"",
-moodDots:p[9]||"",
-weekly:p[10]||"",
-entries:p[11]||"",
-unsaidEn:p[12]||"",
-unsaidKr:p[13]||""
-}
+  return{
+    date:p[0]||"",
+    weather:p[1]||"",
+    music:p[2]||"",
+    artist:p[3]||"",
+    photoDesc:photoParts[0]||"",
+    photoTime:photoParts[1]||"",
+    completed:p[5]||"",
+    completedText:p[6]||"",
+    schedule:p[7]||"",
+    mood:p[8]||"",
+    moodDots:p[9]||"",
+    weekly:p[10]||"",
+    entries:p[11]||"",
+    unsaidEn:p[12]||"",
+    unsaidKr:p[13]||""
+  }
 }
 
 function weeklyHTML(raw,currentDate){
+  const current=parseDateOnly(currentDate);
 
-const current=parseDateOnly(currentDate);
+  if(!raw||!current)
+    return '<div class="empty">No previous entries</div>';
 
-if(!raw||!current)
-return '<div class="empty">No previous entries</div>';
+  const items=raw
+    .split("~~")
+    .filter(Boolean)
+    .map(x=>{
+      const [date="",day="",summary=""]=x.split("^^");
 
-const items=raw
-.split("~~")
-.filter(Boolean)
-.map(x=>{
+      return{
+        date,
+        day,
+        summary,
+        d:parseDateOnly(date)
+      }
+    })
+    .filter(x=>x.d&&x.d<current)
+    .sort((a,b)=>b.d-a.d)
+    .slice(0,4);
 
-const [date="",day="",summary=""]=x.split("^^");
+  if(!items.length)
+    return '<div class="empty">No previous entries</div>';
 
-return{
-date,
-day,
-summary,
-d:parseDateOnly(date)
-}
+  return items.map(x=>`
+    <div class="week-row">
+      <div class="week-day">
+        ${String(x.d.getDate()).padStart(2,"0")}
+        <small>${esc(x.day)}</small>
+      </div>
 
-})
-.filter(x=>x.d&&x.d<current)
-.sort((a,b)=>b.d-a.d)
-.slice(0,4);
+      <div class="week-text">
+        ${esc(x.summary)}
+      </div>
 
-if(!items.length)
-return '<div class="empty">No previous entries</div>';
-
-return items.map(x=>`
-
-<div class="week-row">
-
-<div class="week-day">
-${String(x.d.getDate()).padStart(2,"0")}
-<small>${esc(x.day)}</small>
-</div>
-
-<div class="week-text">
-${esc(x.summary)}
-</div>
-
-<div class="week-more">•••</div>
-
-</div>
-
-`).join("")
+      <div class="week-more">•••</div>
+    </div>
+  `).join("")
 }
 
 function entriesHTML(raw){
+  if(!raw)
+    return '<div class="empty">No entry</div>';
 
-if(!raw)
-return '<div class="empty">No entry</div>';
+  return raw
+    .split("~~")
+    .filter(Boolean)
+    .map(x=>{
+      const [en="",kr=""]=x.split("^^");
 
-return raw
-.split("~~")
-.filter(Boolean)
-.map(x=>{
-
-const [en="",kr=""]=x.split("^^");
-
-return `
-<div class="paragraph">
-<div class="en">${esc(en)}</div>
-<div class="kr">${esc(kr)}</div>
-</div>
-`
-
-}).join("")
+      return `
+        <div class="paragraph">
+          <div class="en">${esc(en)}</div>
+          <div class="kr">${esc(kr)}</div>
+        </div>
+      `
+    })
+    .join("")
 }
 
 const d=parseData();
 
 if(d){
+  dateTop.textContent=fmtTop(d.date);
+  dateRight.textContent=fmtTop(d.date)+" ·•••";
+  todayLabel.textContent=fmtShort(d.date);
 
-dateTop.textContent=fmtTop(d.date);
-dateRight.textContent=fmtTop(d.date)+" ·•••";
-todayLabel.textContent=fmtShort(d.date);
+  weather.innerHTML=esc(d.weather).replaceAll("^^","<br>");
 
-weather.innerHTML=esc(d.weather).replaceAll("^^","<br>");
+  music.textContent=d.music;
+  artist.textContent=d.artist;
 
-music.textContent=d.music;
-artist.textContent=d.artist;
+  photoDesc.textContent=d.photoDesc||"No photo";
+  photoTime.textContent=d.photoTime||"—";
 
-photoDesc.textContent=d.photoDesc||"No photo";
-photoTime.textContent=d.photoTime||"—";
+  completed.textContent=d.completed;
 
-completed.textContent=d.completed;
+  completedText.innerHTML=
+    esc(d.completedText).replaceAll("^^","<br>");
 
-completedText.innerHTML=
-esc(d.completedText).replaceAll("^^","<br>");
+  schedule.innerHTML=
+    esc(d.schedule).replaceAll("^^","<br>");
 
-schedule.innerHTML=
-esc(d.schedule).replaceAll("^^","<br>");
+  mood.textContent=d.mood;
+  moodDots.textContent=d.moodDots;
 
-mood.textContent=d.mood;
-moodDots.textContent=d.moodDots;
+  weeklyList.innerHTML=
+    weeklyHTML(d.weekly,d.date);
 
-weeklyList.innerHTML=
-weeklyHTML(d.weekly,d.date);
+  entries.innerHTML=
+    entriesHTML(d.entries);
 
-entries.innerHTML=
-entriesHTML(d.entries);
-
-unsaidEn.textContent=d.unsaidEn;
-unsaidKr.textContent=d.unsaidKr;
+  unsaidEn.textContent=d.unsaidEn;
+  unsaidKr.textContent=d.unsaidKr;
 
 }else{
+  weeklyList.innerHTML=
+    '<div class="empty">No data</div>';
 
-weeklyList.innerHTML=
-'<div class="empty">No data</div>';
-
-entries.innerHTML=
-'<div class="empty">No data</div>';
-
+  entries.innerHTML=
+    '<div class="empty">No data</div>';
 }
 </script>
 
