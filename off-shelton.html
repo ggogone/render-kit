@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OFF SHELTON</title>
+<style>
+:root{--navy:#17365f;--navy-dark:#10294a;--blue:#2f6fd6;--text:#1f2632;--muted:#8b94a3;--line:#e5e9ef;--soft:#f4f6f9;--bubble:#f1f4f8;--bubble-kr:#7f8998}
+*{box-sizing:border-box}html,body{margin:0;padding:0}
+body{background:#f7f8fa;color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans KR",Arial,sans-serif}
+.chat{width:700px;margin:0 auto;background:#fff;border:1px solid #e2e7ed;border-radius:24px;overflow:hidden;box-shadow:0 6px 24px rgba(20,40,70,.07)}
+.header{background:#fff;border-bottom:1px solid var(--line);padding:24px 28px 18px}
+.brand-row{display:flex;justify-content:space-between;align-items:center;gap:18px}.brand{min-width:0}
+.logo{color:var(--navy-dark);font-size:29px;line-height:1;font-weight:900;letter-spacing:.015em}
+.tagline{margin-top:6px;color:var(--muted);font-size:12.5px}
+.header-actions{display:flex;align-items:center;gap:9px}.icon-btn{width:36px;height:36px;border-radius:50%;background:var(--soft);display:grid;place-items:center;color:#667181;font-size:15px}
+.room{margin-top:20px;display:flex;justify-content:space-between;align-items:flex-end;gap:16px}.room-left{min-width:0}
+.room-label{color:var(--blue);font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;margin-bottom:5px}
+.room-name{font-size:20px;line-height:1.2;font-weight:800;color:#171d27}.room-meta{color:var(--muted);font-size:11px;margin-top:5px}
+.online{display:flex;align-items:center;gap:6px;color:#7d8795;font-size:11px;white-space:nowrap}.online-dot{width:7px;height:7px;border-radius:50%;background:#36b37e}
+.messages{padding:22px 26px 28px}.message{display:flex;align-items:flex-start;gap:10px;margin-bottom:17px}.message:last-child{margin-bottom:0}
+.avatar{width:34px;height:34px;flex:0 0 34px;border-radius:50%;background:#eef2f6;color:#7d8795;display:grid;place-items:center;font-size:11px;font-weight:800}
+.msg-wrap{min-width:0;max-width:84%}.msg-head{display:flex;align-items:center;gap:8px;margin:0 0 5px 2px}
+.name{font-size:11.5px;font-weight:800;color:#27303d}.time{font-size:10px;color:#a0a8b4}
+.bubble{display:inline-block;max-width:100%;background:var(--bubble);border:1px solid #e9edf2;border-radius:5px 15px 15px 15px;padding:10px 13px 9px}
+.en{font-size:13px;line-height:1.45;color:#252d39;white-space:pre-wrap;overflow-wrap:anywhere}
+.kr{margin-top:4px;font-size:10.8px;line-height:1.4;color:var(--bubble-kr);white-space:pre-wrap;overflow-wrap:anywhere}
+.empty{padding:34px;text-align:center;color:#a1a9b5;font-size:12px}
+.footer{border-top:1px solid var(--line);padding:9px 16px 11px;text-align:center;color:#a2a9b4;font-size:9px;letter-spacing:.04em}
+@media(max-width:700px){body{width:700px}.chat{width:700px;max-width:700px}}
+</style>
+</head>
+<body>
+<div class="chat">
+<header class="header">
+<div class="brand-row">
+<div class="brand">
+<div class="logo">OFF SHELTON</div>
+<div class="tagline">Keep it off the feed.</div>
+</div>
+<div class="header-actions"><div class="icon-btn">⌕</div><div class="icon-btn">•••</div></div>
+</div>
+<div class="room">
+<div class="room-left">
+<div class="room-label">GROUP CHAT</div>
+<div class="room-name" id="roomName">TEAM CHAT</div>
+<div class="room-meta" id="roomMeta">—</div>
+</div>
+<div class="online"><span class="online-dot"></span><span>active now</span></div>
+</div>
+</header>
+<main class="messages" id="messages"></main>
+<div class="footer">OFF SHELTON · PRIVATE CHAT</div>
+</div>
+<script>
+function esc(v){return String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function initials(name){return String(name||"?").trim().split(/\s+/).map(x=>x[0]||"").join("").slice(0,2).toUpperCase()}
+function parseData(){
+ const raw=new URLSearchParams(window.location.search).get("data");
+ if(!raw)return null;
+ const parts=raw.split("||");
+ const roomName=parts[0]||"TEAM CHAT";
+ const memberCount=parts[1]||"";
+ const messageRaw=parts.slice(2).join("||");
+ const messages=messageRaw.split("~~").filter(Boolean).map(item=>{
+   const [name="",time="",en="",kr=""]=String(item).split("::");
+   return {name,time,en,kr};
+ });
+ return {roomName,memberCount,messages};
+}
+function messageHTML(m){return `<div class="message"><div class="avatar">${esc(initials(m.name))}</div><div class="msg-wrap"><div class="msg-head"><span class="name">${esc(m.name)}</span>${m.time?`<span class="time">${esc(m.time)}</span>`:""}</div><div class="bubble"><div class="en">${esc(m.en)}</div>${m.kr?`<div class="kr">${esc(m.kr)}</div>`:""}</div></div></div>`}
+const data=parseData(),messages=document.getElementById("messages");
+if(!data){messages.innerHTML=`<div class="empty">No data</div>`}
+else{
+ document.getElementById("roomName").textContent=data.roomName;
+ document.getElementById("roomMeta").textContent=data.memberCount?`${data.memberCount} members`:"private group";
+ messages.innerHTML=data.messages.length?data.messages.map(messageHTML).join(""):`<div class="empty">No messages</div>`;
+}
+</script>
+</body>
+</html>
