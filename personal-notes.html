@@ -5,7 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>personal notes</title>
 
-<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+<link rel="stylesheet" as="style" crossorigin
+href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
 
 <style>
 :root{
@@ -68,7 +69,6 @@ body{
   font-size:12px;
   font-weight:400;
   color:var(--muted);
-  letter-spacing:-0.01em;
 }
 
 .date{
@@ -118,17 +118,16 @@ body{
 .photo-note{
   display:flex;
   flex-direction:column;
-  justify-content:space-between;
 }
 
-.photo-note .photo-time{
+.photo-time{
   font-size:11px;
   color:var(--muted);
   font-weight:700;
   letter-spacing:.04em;
 }
 
-.photo-note .photo-desc{
+.photo-desc{
   font-size:13px;
   line-height:1.55;
   color:#2b3442;
@@ -300,6 +299,7 @@ body{
 </head>
 
 <body>
+
 <div class="shell">
 
 <section class="left">
@@ -333,7 +333,7 @@ body{
 
 <div class="card">
   <h3>COMPLETED</h3>
-  <div class="big" id="completed">3 / 4</div>
+  <div class="big" id="completed">3/4</div>
   <div class="small" id="completedText"></div>
 </div>
 
@@ -345,22 +345,28 @@ body{
 <div class="card">
   <h3>MOOD</h3>
   <div class="big" id="mood">quiet</div>
-  <div class="small" id="moodDots">● ● ○ ○ ○</div>
+  <div class="small" id="moodDots">● ● ● ○ ○</div>
 </div>
 
 </div>
 
 <div class="weekly">
-  <div class="section-title">
-    <strong>WEEKLY</strong>
-    <span>previous entries only</span>
-  </div>
-  <div id="weeklyList"></div>
+
+<div class="section-title">
+  <strong>WEEKLY</strong>
+  <span>previous entries only</span>
 </div>
 
-<div class="foot">🔒 PRIVATE JOURNAL · LOCAL ONLY</div>
+<div id="weeklyList"></div>
+
+</div>
+
+<div class="foot">
+🔒 PRIVATE JOURNAL · LOCAL ONLY
+</div>
 
 </section>
+
 
 <section class="right">
 
@@ -377,23 +383,28 @@ body{
 <div id="entries"></div>
 
 <div class="unsaid">
-  <div class="unsaid-head">
-    <strong>UNSAID</strong>
-  </div>
-  <div class="en" id="unsaidEn"></div>
-  <div class="kr" id="unsaidKr"></div>
+
+<div class="unsaid-head">
+  <strong>UNSAID</strong>
+</div>
+
+<div class="en" id="unsaidEn"></div>
+<div class="kr" id="unsaidKr"></div>
+
 </div>
 
 <div class="credit">
-  designed by <b>RAUL HAYS</b><br>
-  <span>(with unnecessary comments from colin)</span>
+designed by <b>RAUL HAYS</b><br>
+<span>(with unnecessary comments from colin)</span>
 </div>
 
 </section>
 
 </div>
 
+
 <script>
+
 function esc(v){
   return String(v??"").replace(/[&<>"']/g,c=>({
     "&":"&amp;",
@@ -404,161 +415,454 @@ function esc(v){
   }[c]))
 }
 
+
 function parseDateOnly(s){
-  const m=String(s||"").match(/^(\d{4})-(\d{2})-(\d{2})$/);
-  return m?new Date(+m[1],+m[2]-1,+m[3]):null
+
+  const m=
+    String(s||"")
+    .match(/^(\d{4})-(\d{2})-(\d{2})$/);
+
+  return m
+    ? new Date(+m[1],+m[2]-1,+m[3])
+    : null;
 }
+
 
 function fmtTop(s){
+
   const d=parseDateOnly(s);
+
   if(!d)return s;
 
-  const M=["JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC"];
-  const D=["SUN","MON","TUE","WED","THU","FRI","SAT"];
+  const M=[
+    "JAN","FEB","MAR","APR",
+    "MAY","JUN","JUL","AUG",
+    "SEP","OCT","NOV","DEC"
+  ];
 
-  return `${M[d.getMonth()]} ${String(d.getDate()).padStart(2,"0")} · ${D[d.getDay()]} · ${d.getFullYear()}`
+  const D=[
+    "SUN","MON","TUE","WED",
+    "THU","FRI","SAT"
+  ];
+
+  return `${M[d.getMonth()]} ${String(d.getDate()).padStart(2,"0")} · ${D[d.getDay()]} · ${d.getFullYear()}`;
 }
+
 
 function fmtShort(s){
+
   const d=parseDateOnly(s);
+
   if(!d)return s;
 
-  const M=["JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC"];
-  const D=["SUN","MON","TUE","WED","THU","FRI","SAT"];
+  const M=[
+    "JAN","FEB","MAR","APR",
+    "MAY","JUN","JUL","AUG",
+    "SEP","OCT","NOV","DEC"
+  ];
 
-  return `${M[d.getMonth()]} ${String(d.getDate()).padStart(2,"0")}, ${D[d.getDay()]}`
+  const D=[
+    "SUN","MON","TUE","WED",
+    "THU","FRI","SAT"
+  ];
+
+  return `${M[d.getMonth()]} ${String(d.getDate()).padStart(2,"0")}, ${D[d.getDay()]}`;
 }
 
+
 function parseData(){
-  const raw=new URLSearchParams(location.search).get("data");
+
+  const raw=
+    new URLSearchParams(location.search)
+    .get("data");
+
   if(!raw)return null;
 
   const p=raw.split("||");
-  const photoParts=(p[4]||"").split("^^");
+
+  const photoParts=
+    (p[4]||"").split("^^");
 
   return{
     date:p[0]||"",
     weather:p[1]||"",
     music:p[2]||"",
     artist:p[3]||"",
+
     photoDesc:photoParts[0]||"",
     photoTime:photoParts[1]||"",
+
     completed:p[5]||"",
     completedText:p[6]||"",
     schedule:p[7]||"",
+
     mood:p[8]||"",
     moodDots:p[9]||"",
+
     weekly:p[10]||"",
     entries:p[11]||"",
+
     unsaidEn:p[12]||"",
     unsaidKr:p[13]||""
   }
 }
 
-function weeklyHTML(raw,currentDate){
-  const current=parseDateOnly(currentDate);
 
-  if(!raw||!current)
+/* COMPLETED 자동 보정 */
+
+function normalizeCompleted(
+  raw,
+  completedText,
+  schedule
+){
+
+  const value=
+    String(raw||"").trim();
+
+  /*
+    모델이 이미
+    3/4
+    3 / 4
+    형태로 줬으면 그대로 사용
+  */
+
+  if(/^\d+\s*\/\s*\d+$/.test(value)){
+    return value.replace(/\s/g,"");
+  }
+
+
+  /*
+    완료 항목 실제 개수
+  */
+
+  const done=
+    String(completedText||"")
+    .split("^^")
+    .filter(x=>x.trim())
+    .length;
+
+
+  /*
+    남은 일정 실제 개수
+  */
+
+  const remaining=
+    String(schedule||"")
+    .split("^^")
+    .filter(x=>x.trim())
+    .length;
+
+
+  /*
+    모델이 숫자 하나만 줘도
+    완료항목 + 남은일정 기준으로
+    자동 계산
+  */
+
+  if(done || remaining){
+    return `${done}/${done+remaining}`;
+  }
+
+
+  /*
+    데이터가 정말 아무것도 없다면
+  */
+
+  if(/^\d+$/.test(value)){
+    return `${value}/${value}`;
+  }
+
+  return "0/0";
+}
+
+
+/* MOOD 숫자 → ●○ 5칸 자동 변환 */
+
+function normalizeMood(raw){
+
+  const value=
+    String(raw||"").trim();
+
+
+  /*
+    이미 ●○가 5개 들어왔다면
+    그대로 사용
+  */
+
+  const existing=
+    value.match(/[●○]/g);
+
+  if(existing && existing.length===5){
+    return existing.join(" ");
+  }
+
+
+  /*
+    숫자로 들어온 경우
+    10점 만점으로 해석
+
+    0 → ○ ○ ○ ○ ○
+    2 → ● ○ ○ ○ ○
+    4 → ● ● ○ ○ ○
+    6 → ● ● ● ○ ○
+    8 → ● ● ● ● ○
+    10 → ● ● ● ● ●
+  */
+
+  const n=Number(value);
+
+  if(Number.isFinite(n)){
+
+    const score=
+      Math.max(0,Math.min(10,n));
+
+    const filled=
+      Math.round(score/2);
+
+    return [
+      ...Array(filled).fill("●"),
+      ...Array(5-filled).fill("○")
+    ].join(" ");
+  }
+
+
+  /*
+    이상한 값이면 빈 상태
+  */
+
+  return "○ ○ ○ ○ ○";
+}
+
+
+function weeklyHTML(
+  raw,
+  currentDate
+){
+
+  const current=
+    parseDateOnly(currentDate);
+
+  if(!raw || !current){
     return '<div class="empty">No previous entries</div>';
+  }
 
-  const items=raw
+
+  const items=
+    raw
     .split("~~")
     .filter(Boolean)
+
     .map(x=>{
-      const [date="",day="",summary=""]=x.split("^^");
+
+      const [
+        date="",
+        day="",
+        summary=""
+      ]=x.split("^^");
 
       return{
         date,
         day,
         summary,
         d:parseDateOnly(date)
-      }
+      };
     })
-    .filter(x=>x.d&&x.d<current)
-    .sort((a,b)=>b.d-a.d)
+
+    /*
+      오늘 기록 자동 제외
+    */
+
+    .filter(
+      x=>x.d && x.d<current
+    )
+
+    /*
+      최신 날짜부터
+    */
+
+    .sort(
+      (a,b)=>b.d-a.d
+    )
+
+    /*
+      최대 4개
+    */
+
     .slice(0,4);
 
-  if(!items.length)
+
+  if(!items.length){
     return '<div class="empty">No previous entries</div>';
+  }
+
 
   return items.map(x=>`
+
     <div class="week-row">
+
       <div class="week-day">
+
         ${String(x.d.getDate()).padStart(2,"0")}
-        <small>${esc(x.day)}</small>
+
+        <small>
+          ${esc(x.day)}
+        </small>
+
       </div>
+
 
       <div class="week-text">
         ${esc(x.summary)}
       </div>
 
-      <div class="week-more">•••</div>
+
+      <div class="week-more">
+        •••
+      </div>
+
     </div>
-  `).join("")
+
+  `).join("");
 }
 
+
 function entriesHTML(raw){
-  if(!raw)
+
+  if(!raw){
     return '<div class="empty">No entry</div>';
+  }
+
 
   return raw
     .split("~~")
     .filter(Boolean)
+
     .map(x=>{
-      const [en="",kr=""]=x.split("^^");
+
+      const [
+        en="",
+        kr=""
+      ]=x.split("^^");
+
 
       return `
+
         <div class="paragraph">
-          <div class="en">${esc(en)}</div>
-          <div class="kr">${esc(kr)}</div>
+
+          <div class="en">
+            ${esc(en)}
+          </div>
+
+          <div class="kr">
+            ${esc(kr)}
+          </div>
+
         </div>
-      `
+
+      `;
     })
-    .join("")
+
+    .join("");
 }
+
 
 const d=parseData();
 
+
 if(d){
-  dateTop.textContent=fmtTop(d.date);
-  dateRight.textContent=fmtTop(d.date)+" ·•••";
-  todayLabel.textContent=fmtShort(d.date);
 
-  weather.innerHTML=esc(d.weather).replaceAll("^^","<br>");
+  dateTop.textContent=
+    fmtTop(d.date);
 
-  music.textContent=d.music;
-  artist.textContent=d.artist;
+  dateRight.textContent=
+    fmtTop(d.date)+" ·•••";
 
-  photoDesc.textContent=d.photoDesc||"No photo";
-  photoTime.textContent=d.photoTime||"—";
+  todayLabel.textContent=
+    fmtShort(d.date);
 
-  completed.textContent=d.completed;
+
+  weather.innerHTML=
+    esc(d.weather)
+    .replaceAll("^^","<br>");
+
+
+  music.textContent=
+    d.music;
+
+  artist.textContent=
+    d.artist;
+
+
+  photoDesc.textContent=
+    d.photoDesc || "No photo";
+
+  photoTime.textContent=
+    d.photoTime || "—";
+
+
+  /*
+    모델이 3만 보내도
+    화면에서는 3/4 등으로 보정
+  */
+
+  completed.textContent=
+    normalizeCompleted(
+      d.completed,
+      d.completedText,
+      d.schedule
+    );
+
 
   completedText.innerHTML=
-    esc(d.completedText).replaceAll("^^","<br>");
+    esc(d.completedText)
+    .replaceAll("^^","<br>");
+
 
   schedule.innerHTML=
-    esc(d.schedule).replaceAll("^^","<br>");
+    esc(d.schedule)
+    .replaceAll("^^","<br>");
 
-  mood.textContent=d.mood;
-  moodDots.textContent=d.moodDots;
+
+  mood.textContent=
+    d.mood;
+
+
+  /*
+    모델이 6이라고 보내도
+    ● ● ● ○ ○ 로 변환
+  */
+
+  moodDots.textContent=
+    normalizeMood(d.moodDots);
+
 
   weeklyList.innerHTML=
-    weeklyHTML(d.weekly,d.date);
+    weeklyHTML(
+      d.weekly,
+      d.date
+    );
+
 
   entries.innerHTML=
     entriesHTML(d.entries);
 
-  unsaidEn.textContent=d.unsaidEn;
-  unsaidKr.textContent=d.unsaidKr;
+
+  unsaidEn.textContent=
+    d.unsaidEn;
+
+  unsaidKr.textContent=
+    d.unsaidKr;
+
 
 }else{
+
   weeklyList.innerHTML=
     '<div class="empty">No data</div>';
 
   entries.innerHTML=
     '<div class="empty">No data</div>';
 }
+
 </script>
 
 </body>
