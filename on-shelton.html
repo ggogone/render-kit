@@ -1,5 +1,462 @@
 <!DOCTYPE html>
-<html lang="ko"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>ON SHELTON</title>
-<style>:root{--navy:#17365f;--navy-dark:#10294a;--blue:#2f6fd6;--text:#1e2430;--muted:#8a93a3;--line:#e7ebf0;--soft:#f5f7fa;--chip:#f2f4f7}*{box-sizing:border-box}html,body{margin:0;padding:0;background:#f7f8fa;color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans KR",Arial,sans-serif}.wrap{width:760px;margin:0 auto;background:#fff}.header{padding:26px 34px 18px;border-bottom:1px solid var(--line);background:#fff}.top{display:flex;justify-content:space-between;align-items:flex-start;gap:24px}.brand{min-width:220px}.logo{font-size:31px;font-weight:900;color:var(--navy-dark)}.tagline{margin-top:6px;font-size:13px;color:var(--muted)}.search{flex:1;height:42px;border:1px solid #dfe4ea;border-radius:24px;display:flex;align-items:center;padding:0 16px;color:#9aa2af;font-size:13px}.actions{display:flex;gap:10px}.circle{width:38px;height:38px;display:grid;place-items:center;border-radius:50%;background:var(--soft)}.write{height:38px;padding:0 16px;border-radius:20px;background:var(--navy);color:#fff;display:flex;align-items:center;font-size:13px;font-weight:700}.nav{display:flex;gap:34px;padding:19px 34px 12px;font-size:13px;font-weight:700;color:#4c5565}.nav .active{color:var(--navy)}.categories{display:flex;gap:9px;padding:18px 34px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);overflow:hidden}.chip{padding:9px 15px;border-radius:18px;background:var(--chip);font-size:12px;white-space:nowrap}.chip.active{background:var(--navy);color:#fff;font-weight:700}.feed{padding:18px 34px 32px}.post{border:1px solid #e5e9ee;border-radius:16px;overflow:hidden;margin-bottom:18px;background:#fff;box-shadow:0 3px 12px rgba(18,37,63,.04)}.post-main{padding:20px 22px 18px}.post-top{display:flex;gap:8px;font-size:12px;color:var(--muted);margin-bottom:12px}.category{color:var(--blue);font-weight:700}.post-title{font-size:21px;line-height:1.35;font-weight:800;margin-bottom:9px}.author{font-size:12px;color:var(--muted);margin-bottom:15px}.body{font-size:14px;line-height:1.75;white-space:pre-line}.stats{display:flex;gap:24px;margin-top:17px;color:#7d8796;font-size:12px}.comments{border-top:1px solid var(--line);padding:0 22px}.comment{display:grid;grid-template-columns:36px minmax(0,1fr) auto;gap:10px;align-items:center;padding:13px 0;border-bottom:1px solid #edf0f4}.comment:last-child{border-bottom:0}.avatar{width:30px;height:30px;border-radius:50%;background:#eef1f5;display:grid;place-items:center;color:#a3abb7}.comment-head{display:flex;gap:8px;margin-bottom:4px}.comment-user{font-size:12px;font-weight:800}.comment-time{font-size:11px;color:var(--muted)}.comment-text{font-size:13px}.comment-like{font-size:11px;color:#7e8795}.empty{padding:20px;color:#a0a7b3;font-size:12px}.footer{text-align:center;padding:10px 0 18px;font-size:10px;color:#a1a8b2}@media(max-width:760px){body,.wrap{width:760px;max-width:760px}}</style></head>
-<body><div class="wrap"><header class="header"><div class="top"><div class="brand"><div class="logo">ON SHELTON</div><div class="tagline">The campus, unfiltered.</div></div><div class="search">🔎&nbsp;&nbsp; 게시글, 키워드 검색</div><div class="actions"><div class="circle">🔔</div><div class="circle">👤</div><div class="write">✎ 글쓰기</div></div></div><nav class="nav"><span class="active">HOME</span><span>TRENDING</span><span>BOARDS</span><span>CAMPUS LIFE</span><span>CONFESSIONS</span></nav></header><div class="categories"><span class="chip active">전체</span><span class="chip">자유게시판</span><span class="chip">기숙사</span><span class="chip">수업</span><span class="chip">스포츠</span><span class="chip">연애</span><span class="chip">그릭라이프</span><span class="chip">분실물</span><span class="chip">중고거래</span></div><main class="feed" id="feed"></main><div class="footer">ON SHELTON · STUDENT COMMUNITY</div></div>
-<script>function esc(v){return String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}function parseComment(i){const[u="익명",t="",x="",l="0"]=String(i).split("^^");return{u,t,x,l}}function parsePost(r){const[c="자유게시판",t="",title="",u="익명",g="",b="",v="0",l="0",cc="0",cr=""]=String(r).split("::");return{c,t,title,u,g,b,v,l,cc,comments:cr?cr.split("~~").filter(Boolean).slice(0,5).map(parseComment):[]}}function parseData(){const r=new URLSearchParams(location.search).get("data");return r?r.split("||").filter(Boolean).slice(0,3).map(parsePost):[]}function commentHTML(c){return `<div class="comment"><div class="avatar">●</div><div><div class="comment-head"><span class="comment-user">${esc(c.u)}</span><span class="comment-time">${esc(c.t)}</span></div><div class="comment-text">${esc(c.x)}</div></div><div class="comment-like">♡ ${esc(c.l)}</div></div>`}function postHTML(p){return `<article class="post"><div class="post-main"><div class="post-top"><span class="category">${esc(p.c)}</span><span>·</span><span>${esc(p.t)}</span></div><div class="post-title">${esc(p.title)}</div><div class="author">${esc(p.u)}${p.g?` · ${esc(p.g)}`:""}</div><div class="body">${esc(p.b)}</div><div class="stats"><span>◉ 조회 ${esc(p.v)}</span><span>♡ 좋아요 ${esc(p.l)}</span><span>◯ 댓글 ${esc(p.cc)}</span></div></div><div class="comments">${p.comments.length?p.comments.map(commentHTML).join(""):'<div class="empty">댓글 없음</div>'}</div></article>`}const posts=parseData(),feed=document.getElementById("feed");feed.innerHTML=posts.length?posts.map(postHTML).join(""):'<div class="empty">No data</div>';</script></body></html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>ON SHELTON</title>
+
+<link rel="stylesheet" as="style" crossorigin
+href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+
+<style>
+:root{
+  --navy:#17365f;
+  --navy-dark:#10294a;
+  --blue:#2f6fd6;
+  --text:#1e2430;
+  --muted:#8a93a3;
+  --line:#e7ebf0;
+  --soft:#f5f7fa;
+  --chip:#f2f4f7
+}
+
+*{
+  box-sizing:border-box
+}
+
+html,body{
+  margin:0;
+  padding:0;
+  background:#f7f8fa;
+  color:var(--text);
+  font-family:Pretendard,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif
+}
+
+.wrap{
+  width:760px;
+  margin:0 auto;
+  background:#fff
+}
+
+.header{
+  padding:26px 34px 18px;
+  border-bottom:1px solid var(--line);
+  background:#fff
+}
+
+.top{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:24px
+}
+
+.brand{
+  min-width:220px
+}
+
+.logo{
+  font-size:31px;
+  font-weight:900;
+  color:var(--navy-dark)
+}
+
+.tagline{
+  margin-top:6px;
+  font-size:13px;
+  font-weight:500;
+  color:var(--muted)
+}
+
+.search{
+  flex:1;
+  height:42px;
+  border:1px solid #dfe4ea;
+  border-radius:24px;
+  display:flex;
+  align-items:center;
+  padding:0 16px;
+  color:#9aa2af;
+  font-size:13px;
+  font-weight:500
+}
+
+.actions{
+  display:flex;
+  gap:10px
+}
+
+.circle{
+  width:38px;
+  height:38px;
+  display:grid;
+  place-items:center;
+  border-radius:50%;
+  background:var(--soft)
+}
+
+.write{
+  height:38px;
+  padding:0 16px;
+  border-radius:20px;
+  background:var(--navy);
+  color:#fff;
+  display:flex;
+  align-items:center;
+  font-size:13px;
+  font-weight:700
+}
+
+.nav{
+  display:flex;
+  gap:34px;
+  padding:19px 34px 12px;
+  font-size:13px;
+  font-weight:700;
+  color:#4c5565
+}
+
+.nav .active{
+  color:var(--navy)
+}
+
+.categories{
+  display:flex;
+  gap:9px;
+  padding:18px 34px;
+  border-top:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+  overflow:hidden
+}
+
+.chip{
+  padding:9px 15px;
+  border-radius:18px;
+  background:var(--chip);
+  font-size:12px;
+  font-weight:500;
+  white-space:nowrap
+}
+
+.chip.active{
+  background:var(--navy);
+  color:#fff;
+  font-weight:700
+}
+
+.feed{
+  padding:18px 34px 32px
+}
+
+.post{
+  border:1px solid #e5e9ee;
+  border-radius:16px;
+  overflow:hidden;
+  margin-bottom:18px;
+  background:#fff;
+  box-shadow:0 3px 12px rgba(18,37,63,.04)
+}
+
+.post-main{
+  padding:20px 22px 18px
+}
+
+.post-top{
+  display:flex;
+  gap:8px;
+  font-size:12px;
+  font-weight:500;
+  color:var(--muted);
+  margin-bottom:12px
+}
+
+.category{
+  color:var(--blue);
+  font-weight:700
+}
+
+.post-title{
+  font-size:21px;
+  line-height:1.35;
+  font-weight:800;
+  margin-bottom:9px
+}
+
+.author{
+  font-size:12px;
+  font-weight:500;
+  color:var(--muted);
+  margin-bottom:15px
+}
+
+.body{
+  font-size:14px;
+  line-height:1.75;
+  font-weight:500;
+  white-space:pre-line
+}
+
+.stats{
+  display:flex;
+  gap:24px;
+  margin-top:17px;
+  color:#7d8796;
+  font-size:12px;
+  font-weight:500
+}
+
+.comments{
+  border-top:1px solid var(--line);
+  padding:0 22px
+}
+
+.comment{
+  display:grid;
+  grid-template-columns:36px minmax(0,1fr) auto;
+  gap:10px;
+  align-items:center;
+  padding:13px 0;
+  border-bottom:1px solid #edf0f4
+}
+
+.comment:last-child{
+  border-bottom:0
+}
+
+.avatar{
+  width:30px;
+  height:30px;
+  border-radius:50%;
+  background:#eef1f5;
+  display:grid;
+  place-items:center;
+  color:#a3abb7
+}
+
+.comment-head{
+  display:flex;
+  gap:8px;
+  margin-bottom:4px
+}
+
+.comment-user{
+  font-size:12px;
+  font-weight:800
+}
+
+.comment-time{
+  font-size:11px;
+  font-weight:500;
+  color:var(--muted)
+}
+
+.comment-text{
+  font-size:13px;
+  font-weight:500
+}
+
+.comment-like{
+  font-size:11px;
+  font-weight:500;
+  color:#7e8795
+}
+
+.empty{
+  padding:20px;
+  color:#a0a7b3;
+  font-size:12px;
+  font-weight:500
+}
+
+.footer{
+  text-align:center;
+  padding:10px 0 18px;
+  font-size:10px;
+  font-weight:500;
+  color:#a1a8b2
+}
+
+@media(max-width:760px){
+  body,.wrap{
+    width:760px;
+    max-width:760px
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="wrap">
+
+<header class="header">
+
+<div class="top">
+
+<div class="brand">
+<div class="logo">ON SHELTON</div>
+<div class="tagline">The campus, unfiltered.</div>
+</div>
+
+<div class="search">🔎&nbsp;&nbsp; 게시글, 키워드 검색</div>
+
+<div class="actions">
+<div class="circle">🔔</div>
+<div class="circle">👤</div>
+<div class="write">✎ 글쓰기</div>
+</div>
+
+</div>
+
+<nav class="nav">
+<span class="active">HOME</span>
+<span>TRENDING</span>
+<span>BOARDS</span>
+<span>CAMPUS LIFE</span>
+<span>CONFESSIONS</span>
+</nav>
+
+</header>
+
+<div class="categories">
+<span class="chip active">전체</span>
+<span class="chip">자유게시판</span>
+<span class="chip">기숙사</span>
+<span class="chip">수업</span>
+<span class="chip">스포츠</span>
+<span class="chip">연애</span>
+<span class="chip">그릭라이프</span>
+<span class="chip">분실물</span>
+<span class="chip">중고거래</span>
+</div>
+
+<main class="feed" id="feed"></main>
+
+<div class="footer">ON SHELTON · STUDENT COMMUNITY</div>
+
+</div>
+
+<script>
+function esc(v){
+  return String(v??"").replace(/[&<>"']/g,c=>({
+    "&":"&amp;",
+    "<":"&lt;",
+    ">":"&gt;",
+    '"':"&quot;",
+    "'":"&#39;"
+  }[c]))
+}
+
+function parseComment(i){
+  const[u="익명",t="",x="",l="0"]=String(i).split("^^");
+  return{u,t,x,l}
+}
+
+function parsePost(r){
+  const[
+    c="자유게시판",
+    t="",
+    title="",
+    u="익명",
+    g="",
+    b="",
+    v="0",
+    l="0",
+    cc="0",
+    cr=""
+  ]=String(r).split("::");
+
+  return{
+    c,
+    t,
+    title,
+    u,
+    g,
+    b,
+    v,
+    l,
+    cc,
+    comments:cr
+      ?cr.split("~~").filter(Boolean).slice(0,5).map(parseComment)
+      :[]
+  }
+}
+
+function parseData(){
+  const r=new URLSearchParams(location.search).get("data");
+
+  return r
+    ?r.split("||").filter(Boolean).slice(0,3).map(parsePost)
+    :[]
+}
+
+function commentHTML(c){
+  return `
+    <div class="comment">
+      <div class="avatar">●</div>
+
+      <div>
+        <div class="comment-head">
+          <span class="comment-user">${esc(c.u)}</span>
+          <span class="comment-time">${esc(c.t)}</span>
+        </div>
+
+        <div class="comment-text">${esc(c.x)}</div>
+      </div>
+
+      <div class="comment-like">♡ ${esc(c.l)}</div>
+    </div>
+  `
+}
+
+function postHTML(p){
+  return `
+    <article class="post">
+
+      <div class="post-main">
+
+        <div class="post-top">
+          <span class="category">${esc(p.c)}</span>
+          <span>·</span>
+          <span>${esc(p.t)}</span>
+        </div>
+
+        <div class="post-title">${esc(p.title)}</div>
+
+        <div class="author">
+          ${esc(p.u)}${p.g?` · ${esc(p.g)}`:""}
+        </div>
+
+        <div class="body">${esc(p.b)}</div>
+
+        <div class="stats">
+          <span>◉ 조회 ${esc(p.v)}</span>
+          <span>♡ 좋아요 ${esc(p.l)}</span>
+          <span>◯ 댓글 ${esc(p.cc)}</span>
+        </div>
+
+      </div>
+
+      <div class="comments">
+        ${
+          p.comments.length
+            ?p.comments.map(commentHTML).join("")
+            :'<div class="empty">댓글 없음</div>'
+        }
+      </div>
+
+    </article>
+  `
+}
+
+const posts=parseData();
+const feed=document.getElementById("feed");
+
+feed.innerHTML=
+  posts.length
+    ?posts.map(postHTML).join("")
+    :'<div class="empty">No data</div>';
+</script>
+
+</body>
+</html>
