@@ -1,0 +1,554 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>The Varenmont Post</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap');
+
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:#d7d3ca}
+  body{font-family:"Source Serif 4","Noto Serif KR",Georgia,serif;color:#172033}
+  .paper{
+    width:1060px;
+    margin:0 auto;
+    padding:30px 34px 24px;
+    background:#f5f1e8;
+    box-shadow:0 14px 50px rgba(0,0,0,.18)
+  }
+  .kr{color:#8b9098;font-family:"Noto Serif KR",serif}
+  .en{color:#273142}
+
+  .masthead{
+    text-align:center;
+    padding:16px 0 11px;
+    border-top:3px solid #0d2b59;
+    border-bottom:2px solid #0d2b59
+  }
+  .masthead h1{
+    margin:0;
+    font-family:"Source Serif 4",Georgia,serif;
+    font-size:59px;
+    line-height:.95;
+    letter-spacing:-2.2px;
+    font-weight:600;
+    color:#0d2b59
+  }
+  .mast-sub{
+    margin-top:10px;
+    font-size:10.5px;
+    letter-spacing:1.85px;
+    font-weight:700
+  }
+  .issuebar{
+    display:grid;
+    grid-template-columns:1fr auto 1fr;
+    gap:14px;
+    align-items:center;
+    padding:9px 0 11px;
+    border-bottom:1px solid #0d2b59;
+    font:700 10px/1 Arial,"Pretendard",sans-serif;
+    letter-spacing:.3px
+  }
+  .issuebar .right{text-align:right}
+
+  /* Main article and side rail always share the same top and bottom. */
+  .topgrid{
+    display:grid;
+    grid-template-columns:minmax(0,1.94fr) minmax(0,1fr);
+    gap:18px;
+    margin-top:20px;
+    align-items:stretch
+  }
+  .main-column{
+    min-width:0;
+    display:flex;
+    flex-direction:column
+  }
+  .section-kicker{
+    font:800 12.5px/1 Arial,"Pretendard",sans-serif;
+    color:#0d2b59;
+    margin-bottom:13px
+  }
+  .headline{
+    margin:0;
+    max-width:100%;
+    font-size:42px;
+    line-height:1.12;
+    letter-spacing:-1.8px;
+    font-weight:700;
+    color:#111
+  }
+  .headline-kr{
+    margin:7px 0 0;
+    font-size:18px;
+    line-height:1.35;
+    font-weight:600;
+    letter-spacing:-.65px
+  }
+  .summary{margin:14px 0 16px}
+  .summary .en{margin:0 0 4px;font-size:12.8px;line-height:1.45}
+  .summary .kr{margin:0;font-size:11.4px;line-height:1.5}
+
+  /* Narrower article columns = naturally taller article block. */
+  .article{
+    border-top:2px solid #0d2b59;
+    padding-top:14px;
+    columns:2;
+    column-gap:20px;
+    column-rule:1px solid rgba(13,43,89,.14)
+  }
+  .article .pair{
+    break-inside:avoid;
+    margin:0 0 13px
+  }
+  .article .en{margin:0 0 5px;font-size:12.4px;line-height:1.52}
+  .article .kr{margin:0;font-size:11px;line-height:1.56}
+
+  .onscene{
+    margin-top:15px;
+    border-top:1px solid #0d2b59;
+    border-bottom:1px solid #0d2b59;
+    display:grid;
+    grid-template-columns:108px minmax(0,1fr) 118px;
+    align-items:center;
+    min-height:58px
+  }
+  .onscene .label{
+    display:flex;
+    align-items:center;
+    padding:9px 10px 9px 2px;
+    font:800 10.5px/1.15 Arial,"Pretendard",sans-serif;
+    color:#0d2b59
+  }
+  .onscene .label svg{
+    width:19px;height:19px;
+    flex:0 0 auto;
+    margin-right:7px;
+    fill:none;
+    stroke:currentColor;
+    stroke-width:1.7
+  }
+  .onscene .desc{
+    border-left:1px solid #a1a7af;
+    padding:8px 13px;
+    min-width:0
+  }
+  .onscene .desc .en{
+    margin:0 0 2px;
+    font-size:10.2px;
+    line-height:1.35
+  }
+  .onscene .desc .kr{
+    margin:0;
+    font-size:9.4px;
+    line-height:1.4
+  }
+  .onscene .credit{
+    border-left:1px solid #a1a7af;
+    padding:8px 0 8px 12px;
+    font:700 8px/1.35 Arial,"Pretendard",sans-serif;
+    color:#4e5868
+  }
+  .onscene .credit span{
+    display:block;
+    margin-top:2px;
+    color:#172033;
+    font-weight:800
+  }
+
+  .side-stack{
+    min-width:0;
+    display:flex;
+    flex-direction:column;
+    gap:16px;
+    height:100%
+  }
+  .box{
+    border:1px solid #69778a;
+    background:rgba(255,255,255,.12)
+  }
+  .box-title{
+    background:#0d2b59;
+    color:#fff;
+    text-align:center;
+    padding:8px 10px;
+    font:800 14px/1 Arial,"Pretendard",sans-serif;
+    letter-spacing:.25px
+  }
+
+  .voices{flex:0 0 auto}
+  .voice{padding:13px 14px}
+  .voice + .voice{border-top:1px dotted #69778a}
+  .voice .name{
+    font:800 12.3px/1.15 Arial,"Pretendard",sans-serif;
+    color:#0d2b59
+  }
+  .voice .role{
+    margin-top:3px;
+    font:700 8.6px/1.2 Arial,"Pretendard",sans-serif;
+    color:#35527a;
+    text-transform:uppercase
+  }
+  .voice .en{margin:9px 0 3px;font-size:10.7px;line-height:1.42}
+  .voice .kr{margin:0;font-size:9.9px;line-height:1.46}
+
+  /* Fills all leftover height so the right rail bottom aligns perfectly. */
+  .briefs{
+    flex:1 1 auto;
+    display:flex;
+    flex-direction:column
+  }
+  .briefs .brief-body{
+    flex:1;
+    display:flex;
+    flex-direction:column
+  }
+  .brief{
+    flex:1;
+    padding:12px 14px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center
+  }
+  .brief + .brief{border-top:1px dotted #69778a}
+  .brief .tag{
+    font:800 8.8px/1 Arial,"Pretendard",sans-serif;
+    letter-spacing:.7px;
+    color:#0d2b59;
+    margin-bottom:6px
+  }
+  .brief .en{margin:0 0 3px;font-size:10.5px;line-height:1.42}
+  .brief .kr{margin:0;font-size:9.8px;line-height:1.45}
+
+  /* Bottom three rectangles share exactly the same top/bottom. */
+  .bottomgrid{
+    display:grid;
+    grid-template-columns:.92fr 1.04fr 1.04fr;
+    gap:18px;
+    margin-top:18px;
+    align-items:stretch
+  }
+  .panel{
+    border:1px solid #788392;
+    background:rgba(255,255,255,.10);
+    display:flex;
+    flex-direction:column;
+    min-width:0
+  }
+  .panel-body{
+    padding:12px 13px 13px;
+    flex:1
+  }
+
+  .event{
+    display:grid;
+    grid-template-columns:53px 1fr;
+    gap:10px;
+    padding:4px 0 12px
+  }
+  .event + .event{border-top:1px dotted #7d8795;padding-top:13px}
+  .event-date{
+    font:800 9px/1 Arial,"Pretendard",sans-serif;
+    color:#0d2b59
+  }
+  .event-date strong{
+    display:block;
+    font-size:24px;
+    line-height:1;
+    margin-top:4px
+  }
+  .event .place{
+    font:800 8.5px/1.2 Arial,"Pretendard",sans-serif;
+    color:#3f516d
+  }
+  .event .title{margin-top:4px;font-size:12.4px;font-weight:700;line-height:1.28}
+  .event .en{margin-top:4px;font-size:9.8px;line-height:1.4}
+  .event .kr{margin-top:3px;font-size:9.3px;line-height:1.44}
+
+  .pulse{
+    display:grid;
+    grid-template-columns:34px 1fr;
+    gap:9px;
+    padding:9px 0 11px
+  }
+  .pulse + .pulse{border-top:1px dotted #7d8795}
+  .avatar{
+    width:32px;height:32px;
+    border-radius:50%;
+    background:linear-gradient(#b8b8b8,#777);
+    position:relative;
+    overflow:hidden
+  }
+  .avatar:before{
+    content:"";
+    position:absolute;
+    left:10px;top:5px;
+    width:12px;height:12px;
+    border-radius:50%;
+    background:#323232
+  }
+  .avatar:after{
+    content:"";
+    position:absolute;
+    left:5px;bottom:0;
+    width:22px;height:15px;
+    border-radius:12px 12px 5px 5px;
+    background:#323232
+  }
+  .pulse .en{font-size:10.4px;line-height:1.4;margin:0 0 3px}
+  .pulse .kr{font-size:9.6px;line-height:1.43;margin:0}
+  .pulse .meta{
+    margin-top:4px;
+    font:700 8.3px/1.2 Arial,"Pretendard",sans-serif;
+    color:#576275
+  }
+
+  .notice{
+    display:grid;
+    grid-template-columns:31px 1fr;
+    gap:9px;
+    padding:10px 0
+  }
+  .notice + .notice{border-top:1px dotted #7d8795}
+  .notice .icon{width:25px;height:25px;color:#0d2b59}
+  .notice .icon svg{
+    width:100%;height:100%;
+    fill:none;
+    stroke:currentColor;
+    stroke-width:1.75;
+    stroke-linecap:round;
+    stroke-linejoin:round
+  }
+  .notice .en{margin:0 0 3px;font-size:10.1px;line-height:1.4}
+  .notice .kr{margin:0;font-size:9.5px;line-height:1.44}
+
+  .credits{
+    margin-top:17px;
+    padding-top:9px;
+    border-top:1px solid #0d2b59;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    font:800 9px/1.3 Arial,"Pretendard",sans-serif;
+    letter-spacing:.2px
+  }
+  .credits div:last-child{text-align:right}
+  .credits span{color:#555f70;font-weight:700;margin-right:7px}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="icon-electric" viewBox="0 0 24 24"><path d="M13 2 5.5 13h5L9.8 22 18.5 10h-5L13 2Z"/></symbol>
+  <symbol id="icon-academic" viewBox="0 0 24 24"><path d="M4 3.5h11a2 2 0 0 1 2 2V20H6a2 2 0 0 1-2-2Z"/><path d="M8 8h5M8 12h4M14.5 15.5l4-4 2 2-4 4-3 1Z"/></symbol>
+  <symbol id="icon-news" viewBox="0 0 24 24"><path d="M4 5h12a2 2 0 0 1 2 2v12H6a2 2 0 0 1-2-2Z"/><path d="M18 8h2v9a2 2 0 0 1-2 2"/><path d="M7 8h7M7 11h7M7 15h3M12 15h2"/></symbol>
+  <symbol id="icon-location" viewBox="0 0 24 24"><path d="M12 21s6-5.1 6-11a6 6 0 1 0-12 0c0 5.9 6 11 6 11Z"/><circle cx="12" cy="10" r="2"/></symbol>
+  <symbol id="icon-calendar" viewBox="0 0 24 24"><rect x="3.5" y="5.5" width="17" height="15" rx="1.5"/><path d="M7 3v5M17 3v5M3.5 9.5h17M7 13h3M14 13h3M7 17h3"/></symbol>
+  <symbol id="icon-warning" viewBox="0 0 24 24"><path d="M12 3 2.8 20h18.4Z"/><path d="M12 9v5"/><circle cx="12" cy="17" r=".7" fill="currentColor" stroke="none"/></symbol>
+  <symbol id="icon-maintenance" viewBox="0 0 24 24"><path d="M14.5 6.5a4 4 0 0 0-5.2 5.2L4 17l3 3 5.3-5.3a4 4 0 0 0 5.2-5.2l-2.6 2.6-3-3Z"/></symbol>
+  <symbol id="icon-hours" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7v5l3.5 2"/></symbol>
+</svg>
+
+<main class="paper">
+  <header class="masthead">
+    <h1>THE VARENMONT POST</h1>
+    <div class="mast-sub">VARENMONT UNIVERSITY · THE INDEPENDENT STUDENT NEWSPAPER</div>
+  </header>
+
+  <div class="issuebar">
+    <div>VOL. 84, NO. 06</div>
+    <div id="date">CURRENT ISSUE</div>
+    <div class="right">TRUTH · COMMUNITY · CURIOSITY</div>
+  </div>
+
+  <section class="topgrid">
+    <div class="main-column">
+      <div class="section-kicker">CAMPUS</div>
+      <h2 class="headline" id="headline-en"></h2>
+      <div class="headline-kr kr" id="headline-kr"></div>
+
+      <div class="summary">
+        <p class="en" id="summary-en"></p>
+        <p class="kr" id="summary-kr"></p>
+      </div>
+
+      <div class="article" id="article"></div>
+
+      <div class="onscene">
+        <div class="label">
+          <svg viewBox="0 0 24 24"><rect x="3.5" y="6.5" width="17" height="13" rx="2"/><path d="M8 6.5 9.5 4.5h5L16 6.5"/><circle cx="12" cy="13" r="3.2"/></svg>
+          ON SCENE
+        </div>
+        <div class="desc">
+          <p class="en" id="photo-en"></p>
+          <p class="kr" id="photo-kr"></p>
+        </div>
+        <div class="credit">PHOTO NOTE<br><span id="photo-credit"></span></div>
+      </div>
+    </div>
+
+    <div class="side-stack">
+      <aside class="box voices">
+        <div class="box-title">VOICES</div>
+        <div id="voices"></div>
+      </aside>
+
+      <aside class="box briefs">
+        <div class="box-title">QUICK BRIEF</div>
+        <div class="brief-body" id="briefs"></div>
+      </aside>
+    </div>
+  </section>
+
+  <section class="bottomgrid">
+    <div class="panel">
+      <div class="box-title">UPCOMING</div>
+      <div class="panel-body" id="events"></div>
+    </div>
+
+    <div class="panel">
+      <div class="box-title">CAMPUS PULSE</div>
+      <div class="panel-body" id="pulse"></div>
+    </div>
+
+    <div class="panel">
+      <div class="box-title">NOTICE BOARD</div>
+      <div class="panel-body" id="notices"></div>
+    </div>
+  </section>
+
+  <footer class="credits">
+    <div><span>PHOTOGRAPHY</span><b id="photographer"></b></div>
+    <div><span>REPORTING</span><b id="reporter"></b></div>
+  </footer>
+</main>
+
+<script>
+const raw = new URLSearchParams(location.search).get("data") || "";
+
+function txt(v=""){ return v.replace(/\+/g," ").trim(); }
+function esc(v=""){
+  return txt(v).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+function pair(v=""){
+  const a=v.split("^^");
+  return [a[0]||"", a.slice(1).join("^^")||""];
+}
+function rows(v=""){ return v ? v.split("~~").filter(Boolean) : []; }
+
+const f = raw.split("||");
+
+/*
+0 date
+1 headline EN^^KR
+2 summary EN^^KR
+3 photo EN^^KR
+4 article: EN^^KR~~EN^^KR
+5 key voices: NAME^^ROLE^^EN^^KR~~x3
+6 quick briefs: TAG^^EN^^KR~~x1~3
+7 events: DATE^^PLACE^^TITLE^^EN^^KR~~x2
+8 anonymous voices: META^^EN^^KR~~x3
+9 notices: TYPE^^EN^^KR~~x1~3
+10 photographer
+11 reporter
+*/
+
+document.getElementById("date").textContent = txt(f[0] || "CURRENT ISSUE");
+
+const [headlineEn, headlineKr] = pair(f[1]);
+document.getElementById("headline-en").textContent = txt(headlineEn);
+document.getElementById("headline-kr").textContent = txt(headlineKr);
+
+const [summaryEn, summaryKr] = pair(f[2]);
+document.getElementById("summary-en").textContent = txt(summaryEn);
+document.getElementById("summary-kr").textContent = txt(summaryKr);
+
+const [photoEn, photoKr] = pair(f[3]);
+document.getElementById("photo-en").textContent = txt(photoEn);
+document.getElementById("photo-kr").textContent = txt(photoKr);
+
+document.getElementById("article").innerHTML = rows(f[4]).slice(0,2).map(r=>{
+  const [en,kr]=pair(r);
+  return `<div class="pair"><p class="en">${esc(en)}</p><p class="kr">${esc(kr)}</p></div>`;
+}).join("");
+
+document.getElementById("voices").innerHTML = rows(f[5]).slice(0,3).map(r=>{
+  const a=r.split("^^");
+  return `<div class="voice">
+    <div class="name">${esc(a[0]||"")}</div>
+    <div class="role">${esc(a[1]||"")}</div>
+    <p class="en">${esc(a[2]||"")}</p>
+    <p class="kr">${esc(a.slice(3).join("^^")||"")}</p>
+  </div>`;
+}).join("");
+
+const briefRows = rows(f[6]).slice(0,3);
+document.getElementById("briefs").innerHTML = briefRows.length ? briefRows.map(r=>{
+  const a=r.split("^^");
+  return `<div class="brief">
+    <div class="tag">${esc(a[0]||"CAMPUS")}</div>
+    <p class="en">${esc(a[1]||"")}</p>
+    <p class="kr">${esc(a.slice(2).join("^^")||"")}</p>
+  </div>`;
+}).join("") : `<div class="brief"><div class="tag">CAMPUS</div><p class="en">No additional briefs for this issue.</p><p class="kr">이번 호 추가 단신 없음.</p></div>`;
+
+function eventDate(v){
+  const s=txt(v);
+  const m=s.match(/^([A-Za-z가-힣.]+)\s*([0-9]{1,2})$/);
+  if(m) return `${esc(m[1])}<strong>${esc(m[2])}</strong>`;
+  return esc(s);
+}
+document.getElementById("events").innerHTML = rows(f[7]).slice(0,2).map(r=>{
+  const a=r.split("^^");
+  return `<div class="event">
+    <div class="event-date">${eventDate(a[0]||"")}</div>
+    <div>
+      <div class="place">${esc(a[1]||"")}</div>
+      <div class="title">${esc(a[2]||"")}</div>
+      <div class="en">${esc(a[3]||"")}</div>
+      <div class="kr">${esc(a.slice(4).join("^^")||"")}</div>
+    </div>
+  </div>`;
+}).join("");
+
+document.getElementById("pulse").innerHTML = rows(f[8]).slice(0,3).map(r=>{
+  const a=r.split("^^");
+  return `<div class="pulse">
+    <div class="avatar"></div>
+    <div>
+      <p class="en">${esc(a[1]||"")}</p>
+      <p class="kr">${esc(a.slice(2).join("^^")||"")}</p>
+      <div class="meta">${esc(a[0]||"")}</div>
+    </div>
+  </div>`;
+}).join("");
+
+const aliases = {
+  "전기":"electric","시설/전기":"electric","electric":"electric",
+  "시험":"academic","학사":"academic","학사/시험":"academic","academic":"academic",
+  "신문":"news","신문부":"news","news":"news",
+  "장소":"location","장소변경":"location","location":"location",
+  "일정":"calendar","calendar":"calendar",
+  "주의":"warning","안전":"warning","warning":"warning",
+  "보수":"maintenance","시설보수":"maintenance","maintenance":"maintenance",
+  "운영시간":"hours","시간":"hours","hours":"hours"
+};
+document.getElementById("notices").innerHTML = rows(f[9]).slice(0,3).map(r=>{
+  const a=r.split("^^");
+  const key=txt(a[0]);
+  const type=aliases[key.toLowerCase()] || aliases[key] || "news";
+  return `<div class="notice">
+    <div class="icon"><svg viewBox="0 0 24 24"><use href="#icon-${type}"></use></svg></div>
+    <div><p class="en">${esc(a[1]||"")}</p><p class="kr">${esc(a.slice(2).join("^^")||"")}</p></div>
+  </div>`;
+}).join("");
+
+const photographer = txt(f[10] || "");
+const reporter = txt(f[11] || "");
+document.getElementById("photo-credit").textContent = photographer;
+document.getElementById("photographer").textContent = photographer;
+document.getElementById("reporter").textContent = reporter;
+</script>
+</body>
+</html>
