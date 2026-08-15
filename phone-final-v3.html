@@ -3,789 +3,105 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Phone Renderer</title>
-
-<link rel="stylesheet" as="style" crossorigin
-href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
-
+<title>Phone Renderer v2</title>
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
 <style>
-:root{
-  --navy:#0f1d3a;
-  --navy2:#17294d;
-  --line:#dfe3ea;
-  --line-soft:#eceff4;
-  --text:#172033;
-  --muted:#7f8898;
-  --soft:#f5f7fa;
-  --blue:#3978ff;
-}
-
-*{box-sizing:border-box}
-
-html,body{
-  margin:0;
-  padding:0;
-}
-
-body{
-  background:#eef1f5;
-  color:var(--text);
-  font-family:
-    Pretendard,
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    sans-serif;
-}
-
-.phone{
-  width:660px;
-  max-width:660px;
-  margin:0 auto;
-  background:#fff;
-  border:1px solid #cfd5df;
-  border-radius:24px;
-  overflow:hidden;
-  box-shadow:0 8px 28px rgba(10,25,55,.10);
-}
-
-/* 상단 */
-
-.phone-title{
-  background:var(--navy);
-  color:#fff;
-  text-align:center;
-  padding:15px 20px 12px;
-  font-size:26px;
-  line-height:1;
-  font-weight:800;
-  letter-spacing:.015em;
-}
-
-.statusbar{
-  background:var(--navy2);
-  color:#fff;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:8px 18px 9px;
-  font-size:15px;
-  line-height:1;
-  font-weight:600;
-}
-
-.status-right{
-  opacity:.96;
-  white-space:nowrap;
-}
-
-/* 섹션 */
-
-.section{
-  border-top:1px solid var(--line);
-}
-
-.section-title{
-  height:39px;
-  display:flex;
-  align-items:center;
-  padding:0 15px;
-  border-bottom:1px solid var(--line);
-  background:#fff;
-}
-
-.section-title strong{
-  font-size:18px;
-  line-height:1;
-  font-weight:800;
-  letter-spacing:.01em;
-}
-
-.section-title .kr-label{
-  margin-left:6px;
-  color:var(--muted);
-  font-size:11.5px;
-  font-weight:600;
-}
-
-.rows{
-  padding:0 14px;
-}
-
-/* 일반 행 */
-
-.row{
-  display:grid;
-  grid-template-columns:35px minmax(0,1fr) auto;
-  column-gap:10px;
-  align-items:center;
-  min-height:62px;
-  padding:7px 0;
-  border-bottom:1px solid var(--line-soft);
-}
-
-.row:last-child{
-  border-bottom:0;
-}
-
-.icon{
-  width:30px;
-  height:30px;
-  display:grid;
-  place-items:center;
-  border-radius:50%;
-  background:var(--soft);
-  font-size:16px;
-  line-height:1;
-}
-
-.content{
-  min-width:0;
-}
-
-.name{
-  display:flex;
-  align-items:center;
-  min-width:0;
-  font-size:15px;
-  line-height:1.15;
-  font-weight:700;
-  white-space:nowrap;
-  overflow:hidden;
-  text-overflow:ellipsis;
-}
-
-.unread-dot{
-  flex:0 0 auto;
-  width:7px;
-  height:7px;
-  margin-left:5px;
-  border-radius:50%;
-  background:var(--blue);
-}
-
-/* 영문 위 / 한글 아래 */
-
-.text-pair{
-  min-width:0;
-  margin-top:3px;
-}
-
-.en{
-  min-width:0;
-  font-size:14px;
-  line-height:1.22;
-  font-weight:600;
-  color:#283142;
-  white-space:nowrap;
-  overflow:hidden;
-  text-overflow:ellipsis;
-}
-
-.kr{
-  min-width:0;
-  margin-top:2px;
-  font-size:13px;
-  line-height:1.2;
-  font-weight:600;
-  color:var(--muted);
-  white-space:nowrap;
-  overflow:hidden;
-  text-overflow:ellipsis;
-}
-
-.time{
-  align-self:start;
-  padding-top:1px;
-  color:var(--muted);
-  font-size:11.5px;
-  line-height:1.2;
-  font-weight:600;
-  white-space:nowrap;
-}
-
-/* Search */
-
-.search-row{
-  display:grid;
-  grid-template-columns:26px minmax(0,1fr);
-  column-gap:8px;
-  align-items:center;
-  min-height:52px;
-  padding:6px 0;
-  border-bottom:1px solid var(--line-soft);
-}
-
-.search-row:last-child{
-  border-bottom:0;
-}
-
-.search-row .icon{
-  width:22px;
-  height:22px;
-  background:transparent;
-  border-radius:5px;
-  font-size:14px;
-}
-
-.search-row .en{
-  font-size:14px;
-  font-weight:600;
-}
-
-.search-row .kr{
-  font-size:13px;
-  font-weight:600;
-}
-
-/* Notes / Schedule */
-
-.bottom-grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  border-top:1px solid var(--line);
-}
-
-.bottom-section{
-  min-width:0;
-}
-
-.bottom-section:first-child{
-  border-right:1px solid var(--line);
-}
-
-.bottom-section .section-title{
-  border-bottom:1px solid var(--line);
-}
-
-.bottom-section .rows{
-  padding:0 10px;
-}
-
-.mini-row{
-  display:grid;
-  grid-template-columns:18px minmax(0,1fr);
-  column-gap:6px;
-  align-items:center;
-  min-height:49px;
-  padding:5px 0;
-  border-bottom:1px solid var(--line-soft);
-}
-
-.mini-row:last-child{
-  border-bottom:0;
-}
-
-.mini-row .icon{
-  width:17px;
-  height:17px;
-  background:transparent;
-  border-radius:0;
-  font-size:11px;
-}
-
-.mini-row .text-pair{
-  margin-top:0;
-}
-
-.mini-row .en{
-  font-size:12.5px;
-  line-height:1.18;
-  font-weight:600;
-}
-
-.mini-row .kr{
-  margin-top:2px;
-  font-size:12px;
-  line-height:1.18;
-  font-weight:600;
-}
-
-/* 기타 */
-
-.empty{
-  min-height:40px;
-  display:flex;
-  align-items:center;
-  color:#a0a7b3;
-  font-size:12px;
-  font-weight:600;
-}
-
-.footer{
-  border-top:1px solid var(--line);
-  padding:6px 12px 8px;
-  text-align:center;
-  color:#98a0ad;
-  font-size:9.5px;
-  font-weight:600;
-  letter-spacing:.03em;
-}
-
-@media(max-width:660px){
-  body{
-    width:660px;
-  }
-
-  .phone{
-    width:660px;
-    max-width:660px;
-  }
-}
+:root{--bg:#f2f2f7;--card:#fff;--text:#111114;--muted:#8e8e93;--line:#e5e5ea;--blue:#0a84ff;--soft:#f7f7fa;--green:#32d74b;--red:#ff453a}
+*{box-sizing:border-box}html,body{margin:0;padding:0}
+body{background:#000;color:var(--text);font-family:Pretendard,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+.phone-shell{width:520px;margin:0 auto;padding:7px;background:#111;border-radius:50px;box-shadow:0 0 0 2px #4a4a4a,0 18px 48px rgba(0,0,0,.38)}
+.phone{overflow:hidden;border-radius:43px;background:var(--bg)}
+.statusbar{height:58px;position:relative;display:flex;align-items:flex-start;justify-content:space-between;padding:14px 22px 0;background:#fff;font-size:14px;font-weight:700}
+.status-time{min-width:70px;line-height:1}.status-center{position:absolute;left:50%;top:8px;transform:translateX(-50%)}
+.dynamic-island{width:126px;height:36px;border-radius:22px;background:#000;position:relative}
+.dynamic-island:after{content:"";position:absolute;right:15px;top:13px;width:8px;height:8px;border-radius:50%;background:radial-gradient(circle at 40% 40%,#17304d 0 13%,#0d1b2d 25%,#05070a 60%)}
+.status-right{min-width:102px;display:flex;justify-content:flex-end;align-items:center;gap:7px;font-size:13px;line-height:1}.status-bars{letter-spacing:-1px;font-size:14px}
+.top-title{background:#fff;padding:4px 20px 15px;border-bottom:1px solid var(--line)}
+.phone-name{font-size:26px;line-height:1.05;font-weight:800;letter-spacing:-.025em}.phone-sub{margin-top:4px;color:var(--muted);font-size:11px;font-weight:600}
+.section{padding:14px 14px 0}.section-head{display:flex;align-items:center;justify-content:space-between;margin:0 4px 7px}
+.section-head-left{display:flex;align-items:baseline;gap:6px}.section-head strong{font-size:15px;line-height:1;font-weight:800}.section-head .kr-label{color:var(--muted);font-size:10px;font-weight:600}
+.card{overflow:hidden;background:var(--card);border-radius:17px;box-shadow:0 .5px 0 rgba(0,0,0,.04)}
+.notification{display:grid;grid-template-columns:34px minmax(0,1fr) auto;gap:9px;align-items:start;padding:10px 12px}.notification+.notification{border-top:1px solid var(--line)}
+.app-icon{width:32px;height:32px;display:grid;place-items:center;border-radius:9px;background:var(--soft);font-size:17px}
+.item-main{min-width:0}.item-name{display:flex;align-items:center;min-width:0;font-size:12.5px;line-height:1.18;font-weight:700}
+.unread-dot{flex:0 0 auto;width:6px;height:6px;margin-left:5px;border-radius:50%;background:var(--blue)}
+.item-time{padding-top:1px;color:var(--muted);font-size:9.8px;line-height:1.2;font-weight:600;white-space:nowrap}
+.pair{margin-top:3px;min-width:0}.en{color:#25252a;font-size:11.5px;line-height:1.26;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.kr{margin-top:1px;color:var(--muted);font-size:10.6px;line-height:1.24;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.message-row{display:grid;grid-template-columns:36px minmax(0,1fr) auto;gap:10px;align-items:center;padding:9px 12px}.message-row+.message-row{border-top:1px solid var(--line)}
+.avatar{width:34px;height:34px;display:grid;place-items:center;border-radius:50%;background:linear-gradient(145deg,#e2e5ea,#aeb5bf);color:#fff;font-size:12px;font-weight:800}
+.message-row .item-name{font-size:12.8px}
+.calls-grid{display:grid;grid-template-columns:1fr 1fr}.call-card{min-width:0;padding:11px 12px 10px}
+.call-card:nth-child(odd){border-right:1px solid var(--line)}.call-card:nth-child(n+3){border-top:1px solid var(--line)}
+.call-top{display:flex;justify-content:space-between;gap:8px;align-items:center}.call-name{min-width:0;font-size:12.3px;line-height:1.18;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.call-time{color:var(--muted);font-size:9.6px;font-weight:600;white-space:nowrap}.call-meta{margin-top:5px;display:flex;align-items:center;gap:5px;color:var(--muted);font-size:10px;font-weight:600}
+.call-symbol{font-size:13px;font-weight:800}.call-symbol.miss{color:var(--red)}.call-symbol.in{color:var(--green)}.call-symbol.out{color:var(--blue)}
+.search-box{height:35px;display:flex;align-items:center;gap:7px;margin-bottom:7px;padding:0 11px;border-radius:11px;background:#e4e4e9;color:#707078;font-size:11px;font-weight:600}
+.search-list{background:#fff;border-radius:17px;overflow:hidden}.search-row{display:grid;grid-template-columns:23px minmax(0,1fr);gap:7px;align-items:center;padding:8px 12px}
+.search-row+.search-row{border-top:1px solid var(--line)}.search-icon{color:#74747b;font-size:13px;text-align:center}.search-row .en{font-size:11.2px}.search-row .kr{font-size:10.3px}
+.widgets{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:14px}.widget{min-width:0;background:#fff;border-radius:17px;overflow:hidden;box-shadow:0 .5px 0 rgba(0,0,0,.04)}
+.widget-title{display:flex;align-items:center;gap:6px;padding:11px 12px 8px;font-size:13px;font-weight:800}.widget-title .kr-label{color:var(--muted);font-size:9.5px;font-weight:600}
+.mini-row{display:grid;grid-template-columns:12px minmax(0,1fr);gap:6px;align-items:start;padding:8px 11px}.mini-row+.mini-row{border-top:1px solid var(--line)}
+.bullet{padding-top:2px;color:#4d535e;font-size:9px}.mini-row .en{font-size:10.5px;line-height:1.22;white-space:normal;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+.mini-row .kr{font-size:9.8px;line-height:1.2;white-space:normal;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+.empty{padding:13px;color:#aaaab1;font-size:10px;font-weight:600}
+.footer{padding:3px 0 10px;text-align:center;color:#9a9aa1;font-size:8.5px;font-weight:700;letter-spacing:.06em}.home-indicator{width:118px;height:4px;margin:5px auto 2px;border-radius:5px;background:#111}
+@media(max-width:520px){body{width:520px}.phone-shell{width:520px}}
 </style>
 </head>
-
 <body>
+<div class="phone-shell"><div class="phone">
+<div class="statusbar"><div class="status-time" id="statusTime">--:--</div><div class="status-center"><div class="dynamic-island"></div></div><div class="status-right"><span class="status-bars">▮▮▮▮</span><span>5G</span><span id="battery">--%</span></div></div>
+<div class="top-title"><div class="phone-name" id="phoneTitle">NAME'S PHONE</div><div class="phone-sub">Personal device · current timeline</div></div>
 
-<div class="phone">
+<section class="section"><div class="section-head"><div class="section-head-left"><strong>Notifications</strong><span class="kr-label">알림</span></div></div><div class="card" id="notifications"></div></section>
+<section class="section"><div class="section-head"><div class="section-head-left"><strong>Messages</strong><span class="kr-label">메시지</span></div></div><div class="card" id="messages"></div></section>
+<section class="section"><div class="section-head"><div class="section-head-left"><strong>Recent Calls</strong><span class="kr-label">최근 통화</span></div></div><div class="card calls-grid" id="calls"></div></section>
+<section class="section"><div class="section-head"><div class="section-head-left"><strong>Search</strong><span class="kr-label">최근 검색어</span></div></div><div class="search-box">⌕ Search</div><div class="search-list" id="searches"></div></section>
 
-  <div class="phone-title" id="phoneTitle">
-    NAME'S PHONE
-  </div>
-
-  <div class="statusbar">
-    <span id="rpTime">--:--</span>
-    <span class="status-right" id="battery">
-      ▮▮▮▮ 5G&nbsp;&nbsp;--%
-    </span>
-  </div>
-
-  <section class="section">
-    <div class="section-title">
-      <strong>🔔 NOTIFICATIONS</strong>
-      <span class="kr-label">알림</span>
-    </div>
-    <div class="rows" id="notifications"></div>
-  </section>
-
-  <section class="section">
-    <div class="section-title">
-      <strong>💬 MESSAGES</strong>
-      <span class="kr-label">메시지</span>
-    </div>
-    <div class="rows" id="messages"></div>
-  </section>
-
-  <section class="section">
-    <div class="section-title">
-      <strong>📞 RECENT CALLS</strong>
-      <span class="kr-label">최근 통화</span>
-    </div>
-    <div class="rows" id="calls"></div>
-  </section>
-
-  <section class="section">
-    <div class="section-title">
-      <strong>🔎 SEARCH</strong>
-      <span class="kr-label">최근 검색어</span>
-    </div>
-    <div class="rows" id="searches"></div>
-  </section>
-
-  <div class="bottom-grid">
-
-    <section class="bottom-section">
-      <div class="section-title">
-        <strong>📋 NOTES</strong>
-        <span class="kr-label">메모</span>
-      </div>
-      <div class="rows" id="notes"></div>
-    </section>
-
-    <section class="bottom-section">
-      <div class="section-title">
-        <strong>📅 SCHEDULE</strong>
-        <span class="kr-label">일정</span>
-      </div>
-      <div class="rows" id="schedule"></div>
-    </section>
-
-  </div>
-
-  <div class="footer">
-    🔒 PERSONAL DEVICE
-  </div>
-
+<div class="widgets">
+<section class="widget"><div class="widget-title">📝 Notes <span class="kr-label">메모</span></div><div id="notes"></div></section>
+<section class="widget"><div class="widget-title">📅 Schedule <span class="kr-label">일정</span></div><div id="schedule"></div></section>
 </div>
+<div class="footer">🔒 PERSONAL DEVICE<div class="home-indicator"></div></div>
+</div></div>
 
 <script>
-
-function esc(value){
-  return String(value ?? "").replace(
-    /[&<>"']/g,
-    char => ({
-      "&":"&amp;",
-      "<":"&lt;",
-      ">":"&gt;",
-      '"':"&quot;",
-      "'":"&#39;"
-    }[char])
-  );
-}
-
-function items(section){
-  if(!section) return [];
-  return section.split("~~").filter(Boolean);
-}
-
-function fields(item){
-  return String(item || "").split("::");
-}
-
-function englishNameOnly(value){
-
-  const original = String(value || "").trim();
-
-  if(!original) return "NAME";
-
-  const english = original
-    .replace(/[^A-Za-z' -]+/g," ")
-    .replace(/\s+/g," ")
-    .trim();
-
-  return english || original;
-}
-
+function esc(value){return String(value??"").replace(/[&<>"']/g,char=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[char]))}
+function items(section){if(!section)return[];return section.split("~~").filter(Boolean)}
+function fields(item){return String(item||"").split("::")}
+function englishNameOnly(value){const original=String(value||"").trim();if(!original)return"NAME";const english=original.replace(/[^A-Za-z' -]+/g," ").replace(/\s+/g," ").trim();return english||original}
+function initials(name){const s=String(name||"").trim();if(!s)return"?";const words=s.split(/\s+/).filter(Boolean);return words.map(w=>w[0]||"").join("").slice(0,2).toUpperCase()}
 function parseData(){
-
-  const raw =
-    new URLSearchParams(window.location.search)
-      .get("data");
-
-  if(!raw) return {};
-
-  const parts = raw.split("||");
-
-  const [
-    name="",
-    rpTime="",
-    battery="",
-    notificationSection="",
-    messageSection="",
-    callSection="",
-    searchSection="",
-    noteSection="",
-    scheduleSection=""
-  ] = parts;
-
-  const notificationIcons = {
-    msg:"💬",
-    sns:"📸",
-    calendar:"📅",
-    school:"🎓",
-    sport:"🏊",
-    mail:"✉️",
-    news:"📰",
-    delivery:"📦",
-    bank:"💳",
-    system:"⚙️"
-  };
-
-  const notifications =
-    items(notificationSection)
-      .slice(0,4)
-      .map(item => {
-
-        const [
-          type="",
-          who="",
-          en="",
-          kr="",
-          time="",
-          unread="0"
-        ] = fields(item);
-
-        return {
-          icon:notificationIcons[type] || "🔔",
-          name:who,
-          en,
-          kr,
-          time,
-          unread:unread==="1"
-        };
-      });
-
-  const messages =
-    items(messageSection)
-      .slice(0,4)
-      .map(item => {
-
-        const [
-          who="",
-          en="",
-          kr="",
-          time="",
-          unread="0"
-        ] = fields(item);
-
-        return {
-          icon:"💬",
-          name:who,
-          en,
-          kr,
-          time,
-          unread:unread==="1"
-        };
-      });
-
-  const calls =
-    items(callSection)
-      .slice(0,4)
-      .map(item => {
-
-        const [
-          who="",
-          en="",
-          kr="",
-          time="",
-          direction=""
-        ] = fields(item);
-
-        let icon="📞";
-
-        if(direction==="out") icon="↗";
-        else if(direction==="in") icon="↙";
-        else if(direction==="miss") icon="✕";
-
-        return {
-          icon,
-          name:who,
-          en,
-          kr,
-          time,
-          unread:false
-        };
-      });
-
-  const searches =
-    items(searchSection)
-      .slice(0,4)
-      .map(item => {
-
-        const [en="",kr=""] = fields(item);
-
-        return {
-          icon:"🔎",
-          en,
-          kr
-        };
-      });
-
-  const notes =
-    items(noteSection)
-      .slice(0,4)
-      .map(item => {
-
-        const [en="",kr=""] = fields(item);
-
-        return {
-          icon:"▪",
-          en,
-          kr
-        };
-      });
-
-  const schedule =
-    items(scheduleSection)
-      .slice(0,4)
-      .map(item => {
-
-        const [en="",kr=""] = fields(item);
-
-        return {
-          icon:"▪",
-          en,
-          kr
-        };
-      });
-
-  return {
-    name,
-    rpTime,
-    battery,
-    notifications,
-    messages,
-    calls,
-    searches,
-    notes,
-    schedule
-  };
+ const raw=new URLSearchParams(window.location.search).get("data"); if(!raw)return{};
+ const parts=raw.split("||");
+ const [name="",rpTime="",battery="",notificationSection="",messageSection="",callSection="",searchSection="",noteSection="",scheduleSection=""]=parts;
+ const notificationIcons={msg:"💬",sns:"📸",calendar:"📅",school:"🎓",sport:"🏊",mail:"✉️",news:"📰",delivery:"📦",bank:"💳",system:"⚙️"};
+ const notifications=items(notificationSection).slice(0,4).map(item=>{const[type="",who="",en="",kr="",time="",unread="0"]=fields(item);return{icon:notificationIcons[type]||"🔔",name:who,en,kr,time,unread:unread==="1"}});
+ const messages=items(messageSection).slice(0,4).map(item=>{const[who="",en="",kr="",time="",unread="0"]=fields(item);return{name:who,en,kr,time,unread:unread==="1"}});
+ const calls=items(callSection).slice(0,4).map(item=>{const[who="",en="",kr="",time="",direction=""]=fields(item);return{name:who,en,kr,time,direction}});
+ const searches=items(searchSection).slice(0,4).map(item=>{const[en="",kr=""]=fields(item);return{en,kr}});
+ const notes=items(noteSection).slice(0,4).map(item=>{const[en="",kr=""]=fields(item);return{en,kr}});
+ const schedule=items(scheduleSection).slice(0,4).map(item=>{const[en="",kr=""]=fields(item);return{en,kr}});
+ return{name,rpTime,battery,notifications,messages,calls,searches,notes,schedule}
 }
-
-function pairHTML(en,kr){
-
-  en=String(en || "").trim();
-  kr=String(kr || "").trim();
-
-  if(!en && !kr) return "";
-
-  return `
-    <div class="text-pair">
-      ${
-        en
-        ? `<div class="en" title="${esc(en)}">${esc(en)}</div>`
-        : ""
-      }
-      ${
-        kr
-        ? `<div class="kr" title="${esc(kr)}">${esc(kr)}</div>`
-        : ""
-      }
-    </div>
-  `;
-}
-
-function normalRowHTML(row){
-
-  return `
-    <div class="row">
-
-      <div class="icon">
-        ${esc(row.icon || "")}
-      </div>
-
-      <div class="content">
-
-        ${
-          row.name
-          ?
-          `<div class="name">
-            <span style="
-              min-width:0;
-              overflow:hidden;
-              text-overflow:ellipsis;
-              white-space:nowrap;
-            ">
-              ${esc(row.name)}
-            </span>
-            ${
-              row.unread
-              ? `<span class="unread-dot"></span>`
-              : ""
-            }
-          </div>`
-          :
-          ""
-        }
-
-        ${pairHTML(row.en,row.kr)}
-
-      </div>
-
-      ${
-        row.time
-        ? `<div class="time">${esc(row.time)}</div>`
-        : ""
-      }
-
-    </div>
-  `;
-}
-
-function searchRowHTML(row){
-
-  return `
-    <div class="search-row">
-
-      <div class="icon">
-        ${esc(row.icon || "🔎")}
-      </div>
-
-      <div class="content">
-        ${pairHTML(row.en,row.kr)}
-      </div>
-
-    </div>
-  `;
-}
-
-function miniRowHTML(row){
-
-  return `
-    <div class="mini-row">
-
-      <div class="icon">
-        ${esc(row.icon || "▪")}
-      </div>
-
-      <div class="content">
-        ${pairHTML(row.en,row.kr)}
-      </div>
-
-    </div>
-  `;
-}
-
-function renderNormal(id,rows){
-
-  const el=document.getElementById(id);
-
-  if(!Array.isArray(rows) || !rows.length){
-    el.innerHTML=`<div class="empty">No data</div>`;
-    return;
-  }
-
-  el.innerHTML =
-    rows
-      .slice(0,4)
-      .map(normalRowHTML)
-      .join("");
-}
-
-function renderSearch(id,rows){
-
-  const el=document.getElementById(id);
-
-  if(!Array.isArray(rows) || !rows.length){
-    el.innerHTML=`<div class="empty">No data</div>`;
-    return;
-  }
-
-  el.innerHTML =
-    rows
-      .slice(0,4)
-      .map(searchRowHTML)
-      .join("");
-}
-
-function renderMini(id,rows){
-
-  const el=document.getElementById(id);
-
-  if(!Array.isArray(rows) || !rows.length){
-    el.innerHTML=`<div class="empty">No data</div>`;
-    return;
-  }
-
-  el.innerHTML =
-    rows
-      .slice(0,4)
-      .map(miniRowHTML)
-      .join("");
-}
-
-const data=parseData();
-
-const displayName=
-  englishNameOnly(data.name);
-
-document.getElementById("phoneTitle").textContent =
-  displayName.toUpperCase() + "'S PHONE";
-
-document.getElementById("rpTime").textContent =
-  data.rpTime || "--:--";
-
-document.getElementById("battery").textContent =
-  "▮▮▮▮ 5G  " + (data.battery || "--%");
-
-renderNormal("notifications",data.notifications);
-renderNormal("messages",data.messages);
-renderNormal("calls",data.calls);
-renderSearch("searches",data.searches);
-renderMini("notes",data.notes);
-renderMini("schedule",data.schedule);
-
+function pairHTML(en,kr){en=String(en||"").trim();kr=String(kr||"").trim();if(!en&&!kr)return"";return`<div class="pair">${en?`<div class="en" title="${esc(en)}">${esc(en)}</div>`:""}${kr?`<div class="kr" title="${esc(kr)}">${esc(kr)}</div>`:""}</div>`}
+function notificationHTML(row){return`<div class="notification"><div class="app-icon">${esc(row.icon||"🔔")}</div><div class="item-main"><div class="item-name"><span>${esc(row.name||"")}</span>${row.unread?`<span class="unread-dot"></span>`:""}</div>${pairHTML(row.en,row.kr)}</div>${row.time?`<div class="item-time">${esc(row.time)}</div>`:""}</div>`}
+function messageHTML(row){return`<div class="message-row"><div class="avatar">${esc(initials(row.name).slice(0,1))}</div><div class="item-main"><div class="item-name"><span>${esc(row.name||"")}</span>${row.unread?`<span class="unread-dot"></span>`:""}</div>${pairHTML(row.en,row.kr)}</div>${row.time?`<div class="item-time">${esc(row.time)}</div>`:""}</div>`}
+function callHTML(row){let symbol="☎",cls="";if(row.direction==="out"){symbol="↗";cls="out"}else if(row.direction==="in"){symbol="↙";cls="in"}else if(row.direction==="miss"){symbol="×";cls="miss"};return`<div class="call-card"><div class="call-top"><div class="call-name">${esc(row.name||"")}</div><div class="call-time">${esc(row.time||"")}</div></div><div class="call-meta"><span class="call-symbol ${cls}">${symbol}</span><span>${row.direction==="miss"?"Missed":row.direction==="out"?"Outgoing":row.direction==="in"?"Incoming":"Call"}</span></div></div>`}
+function searchHTML(row){return`<div class="search-row"><div class="search-icon">⌕</div><div>${pairHTML(row.en,row.kr)}</div></div>`}
+function miniHTML(row){return`<div class="mini-row"><div class="bullet">▪</div><div>${pairHTML(row.en,row.kr)}</div></div>`}
+function renderList(id,rows,renderer){const el=document.getElementById(id);if(!Array.isArray(rows)||!rows.length){el.innerHTML=`<div class="empty">No data</div>`;return}el.innerHTML=rows.slice(0,4).map(renderer).join("")}
+const data=parseData(),displayName=englishNameOnly(data.name);
+document.getElementById("phoneTitle").textContent=displayName.toUpperCase()+"'S PHONE";
+document.getElementById("statusTime").textContent=data.rpTime||"--:--";
+document.getElementById("battery").textContent=data.battery||"--%";
+renderList("notifications",data.notifications,notificationHTML);
+renderList("messages",data.messages,messageHTML);
+renderList("calls",data.calls,callHTML);
+renderList("searches",data.searches,searchHTML);
+renderList("notes",data.notes,miniHTML);
+renderList("schedule",data.schedule,miniHTML);
 </script>
-
 </body>
 </html>
