@@ -608,6 +608,49 @@ body{
   margin-right:8px;
 }
 </style>
+
+<style>
+/* ===== v12 alignment polish ===== */
+
+/* UPCOMING: center the event block vertically; center date column only */
+.event{
+  align-items:center;
+  padding-left:6px;
+  padding-right:6px;
+}
+.event-date{
+  text-align:center;
+}
+
+/* CAMPUS PULSE: vertically center avatar and quote/meta block */
+.pulse{
+  align-items:center;
+}
+
+/* NOTICE BOARD: vertically center icon and notice text as one row */
+.notice{
+  align-items:center;
+}
+
+/* Keep actual copy left-aligned for newspaper readability */
+.event > div:last-child,
+.pulse > div:last-child,
+.notice .text{
+  text-align:left;
+}
+
+/* Slightly even out visual breathing room in all three lower panels */
+.bottomgrid .panel-body{
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-start;
+}
+
+.notice .icon{
+  align-self:center;
+}
+</style>
+
 </head>
 
 <body>
