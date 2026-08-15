@@ -136,7 +136,7 @@ body{
 
 .topgrid{
   display:grid;
-  grid-template-columns:minmax(0,1.94fr) minmax(0,1fr);
+  grid-template-columns:minmax(0,2fr) minmax(0,1fr);
   gap:18px;
   align-items:stretch;
 }
@@ -170,10 +170,12 @@ body{
 }
 
 .box-title{
-  background:var(--navy);
-  color:#fff;
-  text-align:center;
-  padding:10px 12px;
+  background:transparent;
+  color:var(--navy);
+  text-align:left;
+  padding:11px 0 9px;
+  margin:0 15px;
+  border-bottom:2px solid var(--navy);
   font:800 16.5px/1 "Noto Sans KR",Arial,sans-serif;
   letter-spacing:.35px;
 }
@@ -320,7 +322,7 @@ body{
 
 .bottomgrid{
   display:grid;
-  grid-template-columns:.92fr 1.04fr 1.04fr;
+  grid-template-columns:repeat(3,minmax(0,1fr));
   gap:18px;
   margin-top:22px;
   align-items:stretch;
@@ -635,37 +637,14 @@ body{
     <div class="right">TRUTH · COMMUNITY · CURIOSITY</div>
   </div>
 
-  <div class="section-kicker">CAMPUS</div>
-
-  <h2 class="headline" id="headline-en"></h2>
-  <div class="headline-kr" id="headline-kr"></div>
-  <div class="summary" id="summary"></div>
-
   <section class="topgrid">
 
     <div class="main-column">
+      <div class="section-kicker">CAMPUS</div>
+      <h2 class="headline" id="headline-en"></h2>
+      <div class="headline-kr" id="headline-kr"></div>
+      <div class="summary" id="summary"></div>
       <div class="article" id="article"></div>
-    </div>
-
-    <aside class="box briefs">
-      <div class="box-title">QUICK BRIEF</div>
-      <div class="brief-body" id="briefs"></div>
-    </aside>
-
-  </section>
-
-  <div class="onscene">
-    <div class="label">
-      <svg viewBox="0 0 24 24">
-        <rect x="3.5" y="6.5" width="17" height="13" rx="2"/>
-        <path d="M8 6.5 9.5 4.5h5L16 6.5"/>
-        <circle cx="12" cy="13" r="3.2"/>
-      </svg>
-      ON SCENE
-    </div>
-    <div class="desc" id="photo"></div>
-    <div class="credit">PHOTO NOTE<br><span id="photo-credit"></span></div>
-  </div>
 
   <section class="keyvoice">
     <div class="box-title">KEY VOICE</div>
@@ -857,3 +836,36 @@ document.getElementById("reporter").textContent = reporter;
 
 </body>
 </html>
+
+<style>
+.keyvoice > .box-title{
+  text-align:center;
+}
+.briefs > .box-title{
+  text-align:left;
+}
+.panel > .box-title{
+  text-align:left;
+}
+
+/* Keep every major box on the exact same outer newspaper grid. */
+.topgrid,
+.keyvoice,
+.bottomgrid,
+.campus-ad,
+.credits{
+  width:100%;
+}
+
+/* Equal bottom thirds, no visual narrowing of UPCOMING. */
+.bottomgrid > .panel{
+  width:100%;
+}
+
+/* Slightly lighter outlines to avoid a dashboard/notice-board look. */
+.box,
+.keyvoice,
+.panel{
+  border-color:#9aa2ad;
+}
+</style>
