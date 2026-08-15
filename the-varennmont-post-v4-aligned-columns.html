@@ -651,6 +651,143 @@ body{
 }
 </style>
 
+
+<style>
+/* ===== v13 exact vertical distribution ===== */
+
+/* QUICK BRIEF:
+   2 briefs share the upper half equally,
+   iPhone ad occupies the lower half.
+   All horizontal insets align exactly. */
+.brief-body{
+  flex:1;
+  display:grid !important;
+  grid-template-rows:1fr 1fr 2fr !important;
+  min-height:0;
+}
+
+.brief{
+  min-height:0;
+  padding:0 15px !important;
+  display:flex !important;
+  flex-direction:column;
+  justify-content:center !important;
+}
+
+.brief + .brief{
+  position:relative;
+  border-top:0 !important;
+}
+
+.brief + .brief::before{
+  content:"";
+  position:absolute;
+  top:0;
+  left:15px;
+  right:15px;
+  border-top:1px dotted #7a8492;
+}
+
+.iphone-ad{
+  min-height:0 !important;
+  border-top:1px dotted #7a8492;
+}
+
+/* BOTTOM PANELS:
+   the body itself fills all available height. */
+.bottomgrid .panel-body{
+  min-height:0;
+  padding:0 15px !important;
+}
+
+/* UPCOMING: exactly two equal rows.
+   Each event block is vertically centered in its half. */
+#events{
+  display:grid !important;
+  grid-template-rows:repeat(2,minmax(0,1fr));
+}
+
+#events .event{
+  min-height:0;
+  margin:0;
+  padding:12px 6px !important;
+  align-items:center !important;
+  align-content:center;
+}
+
+#events .event + .event{
+  padding-top:12px !important;
+  border-top:1px dotted #7d8795;
+}
+
+#events .event-date{
+  align-self:center;
+  text-align:center;
+}
+
+#events .event > div:last-child{
+  align-self:center;
+}
+
+/* CAMPUS PULSE: exactly three equal rows.
+   Avatar + quote/meta block are centered in each third. */
+#pulse{
+  display:grid !important;
+  grid-template-rows:repeat(3,minmax(0,1fr));
+}
+
+#pulse .pulse{
+  min-height:0;
+  margin:0;
+  padding:10px 0 !important;
+  align-items:center !important;
+  align-content:center;
+}
+
+#pulse .pulse + .pulse{
+  border-top:1px dotted #7d8795;
+}
+
+#pulse .avatar,
+#pulse .pulse > div:last-child{
+  align-self:center;
+}
+
+/* NOTICE BOARD: supports up to three notices.
+   With 3 items = exact thirds; with 2 = exact halves;
+   with 1 = full body. Every row centers its icon/text vertically. */
+#notices{
+  display:grid !important;
+  grid-auto-flow:row;
+  grid-auto-rows:minmax(0,1fr);
+}
+
+#notices .notice{
+  min-height:0;
+  margin:0;
+  padding:12px 0 !important;
+  align-items:center !important;
+  align-content:center;
+}
+
+#notices .notice + .notice{
+  border-top:1px dotted #7d8795;
+}
+
+#notices .notice .icon,
+#notices .notice .text{
+  align-self:center;
+}
+
+/* Keep newspaper copy left-aligned horizontally.
+   "Centering" above is vertical placement inside each allocated row. */
+#events .event > div:last-child,
+#pulse .pulse > div:last-child,
+#notices .notice .text{
+  text-align:left;
+}
+</style>
+
 </head>
 
 <body>
