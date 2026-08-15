@@ -10,17 +10,16 @@
 
 :root{
   --navy:#0d2b59;
-  --ink:#17191d;
-  --text:#293241;
-  --muted:#6f7783;
+  --ink:#15171b;
+  --text:#2c333c;
+  --muted:#687385;
   --paper:#f5f1e8;
-  --line:#8c95a1;
-  --softline:#b8bec7;
+  --line:#9aa3af;
+  --softline:#c2c8d0;
 }
 
 *{box-sizing:border-box}
 html,body{margin:0;padding:0;background:#d7d3ca}
-
 body{
   color:var(--text);
   font-family:"Noto Serif KR","Source Serif 4",Georgia,serif;
@@ -57,20 +56,14 @@ body{
 
 .mast-sub{
   margin-top:16px;
-  font-family:"Noto Sans KR",Arial,sans-serif;
-  font-size:14px;
-  line-height:1.25;
-  font-weight:800;
+  font:800 14px/1.25 "Noto Sans KR",Arial,sans-serif;
   letter-spacing:2px;
   color:#243650;
 }
 
 .publisher{
   margin-top:8px;
-  font-family:"Noto Sans KR",Arial,sans-serif;
-  font-size:11.5px;
-  line-height:1.25;
-  font-weight:700;
+  font:700 11.5px/1.25 "Noto Sans KR",Arial,sans-serif;
   letter-spacing:1.4px;
   color:#667184;
 }
@@ -85,16 +78,28 @@ body{
   font:800 12px/1 "Noto Sans KR",Arial,sans-serif;
   letter-spacing:.25px;
 }
-
 .issuebar .right{text-align:right}
 
 /* =========================
-   HEADLINE AREA
+   TOP 2/3 + 1/3
 ========================= */
 
-.section-kicker{
+.topgrid{
+  display:grid;
+  grid-template-columns:minmax(0,2fr) minmax(0,1fr);
+  gap:18px;
   margin-top:24px;
-  margin-bottom:15px;
+  align-items:stretch;
+}
+
+.main-column{
+  min-width:0;
+  display:flex;
+  flex-direction:column;
+}
+
+.section-kicker{
+  margin:0 0 15px;
   font:800 15px/1 "Noto Sans KR",Arial,sans-serif;
   color:var(--navy);
   letter-spacing:.4px;
@@ -102,7 +107,6 @@ body{
 
 .headline{
   margin:0;
-  max-width:910px;
   font-family:"Source Serif 4",Georgia,serif;
   font-size:54px;
   line-height:1.07;
@@ -130,23 +134,6 @@ body{
   color:#4a515b;
 }
 
-/* =========================
-   ARTICLE + QUICK BRIEF
-========================= */
-
-.topgrid{
-  display:grid;
-  grid-template-columns:minmax(0,2fr) minmax(0,1fr);
-  gap:18px;
-  align-items:stretch;
-}
-
-.main-column{
-  min-width:0;
-  display:flex;
-  flex-direction:column;
-}
-
 .article{
   border-top:2px solid var(--navy);
   padding-top:17px;
@@ -163,63 +150,6 @@ body{
   font-weight:400;
   color:#22272f;
 }
-
-.box{
-  border:1px solid #6f7b8c;
-  background:rgba(255,255,255,.12);
-}
-
-.box-title{
-  background:transparent;
-  color:var(--navy);
-  text-align:left;
-  padding:11px 0 9px;
-  margin:0 15px;
-  border-bottom:2px solid var(--navy);
-  font:800 16.5px/1 "Noto Sans KR",Arial,sans-serif;
-  letter-spacing:.35px;
-}
-
-.briefs{
-  display:flex;
-  flex-direction:column;
-  height:100%;
-}
-
-.brief-body{
-  flex:1;
-  display:flex;
-  flex-direction:column;
-}
-
-.brief{
-  flex:1;
-  padding:17px 17px;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-}
-
-.brief + .brief{border-top:1px dotted #7a8492}
-
-.brief .tag{
-  margin-bottom:8px;
-  font:800 12.5px/1 "Noto Sans KR",Arial,sans-serif;
-  letter-spacing:.5px;
-  color:var(--navy);
-}
-
-.brief .text{
-  margin:0;
-  font-family:"Noto Serif KR",serif;
-  font-size:14.5px;
-  line-height:1.58;
-  color:#303741;
-}
-
-/* =========================
-   ON SCENE
-========================= */
 
 .onscene{
   margin-top:19px;
@@ -274,23 +204,88 @@ body{
 }
 
 /* =========================
-   KEY VOICE CENTER
+   NEWSPAPER SECTION HEADS
+========================= */
+
+.box{
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.10);
+}
+
+.section-head{
+  margin:0 15px;
+  padding:12px 0 9px;
+  border-bottom:2px solid var(--navy);
+  color:var(--navy);
+  font:800 16.5px/1 "Noto Sans KR",Arial,sans-serif;
+  letter-spacing:.35px;
+}
+
+/* QUICK BRIEF fills the full right rail height */
+.briefs{
+  display:flex;
+  flex-direction:column;
+  min-width:0;
+  height:100%;
+}
+
+.brief-body{
+  flex:1;
+  display:flex;
+  flex-direction:column;
+}
+
+.brief{
+  flex:1;
+  padding:18px 17px;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-start;
+}
+
+.brief + .brief{border-top:1px dotted #7a8492}
+
+.brief .tag{
+  margin-bottom:9px;
+  font:800 12.5px/1 "Noto Sans KR",Arial,sans-serif;
+  letter-spacing:.5px;
+  color:var(--navy);
+}
+
+.brief .text{
+  margin:0;
+  font-family:"Noto Serif KR",serif;
+  font-size:14.5px;
+  line-height:1.58;
+  color:#303741;
+}
+
+/* =========================
+   KEY VOICE — FULL WIDTH
 ========================= */
 
 .keyvoice{
   margin-top:22px;
-  border:1px solid #69778a;
-  background:rgba(255,255,255,.12);
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.10);
+}
+
+.keyvoice .section-head{
+  text-align:center;
 }
 
 .keyvoice-grid{
   display:grid;
-  grid-template-columns:repeat(3,1fr);
+  grid-template-columns:repeat(3,minmax(0,1fr));
+}
+
+.keyvoice-grid.two{
+  grid-template-columns:repeat(2,minmax(0,1fr));
 }
 
 .voice{
   min-width:0;
-  padding:18px 18px 19px;
+  padding:19px 18px 20px;
 }
 
 .voice + .voice{
@@ -317,7 +312,7 @@ body{
 }
 
 /* =========================
-   BOTTOM 3 COLUMNS
+   BOTTOM — EXACT 1/3 EACH
 ========================= */
 
 .bottomgrid{
@@ -329,7 +324,7 @@ body{
 }
 
 .panel{
-  border:1px solid #788392;
+  border:1px solid var(--line);
   background:rgba(255,255,255,.10);
   display:flex;
   flex-direction:column;
@@ -342,36 +337,30 @@ body{
 }
 
 /* UPCOMING */
-
 .event{
   display:grid;
   grid-template-columns:58px 1fr;
   gap:11px;
   padding:7px 0 14px;
 }
-
 .event + .event{
   border-top:1px dotted #7d8795;
   padding-top:15px;
 }
-
 .event-date{
   font:800 11.5px/1 "Noto Sans KR",Arial,sans-serif;
   color:var(--navy);
 }
-
 .event-date strong{
   display:block;
   margin-top:5px;
   font-size:30px;
   line-height:1;
 }
-
 .event .place{
   font:800 11px/1.25 "Noto Sans KR",Arial,sans-serif;
   color:#3f516d;
 }
-
 .event .title{
   margin-top:6px;
   font-family:"Noto Serif KR",serif;
@@ -379,7 +368,6 @@ body{
   line-height:1.35;
   font-weight:700;
 }
-
 .event .text{
   margin-top:6px;
   font-family:"Noto Serif KR",serif;
@@ -389,17 +377,13 @@ body{
 }
 
 /* CAMPUS PULSE */
-
 .pulse{
   display:grid;
   grid-template-columns:38px 1fr;
   gap:11px;
   padding:12px 0 14px;
 }
-
-.pulse + .pulse{
-  border-top:1px dotted #7d8795;
-}
+.pulse + .pulse{border-top:1px dotted #7d8795}
 
 .avatar{
   width:36px;
@@ -409,7 +393,6 @@ body{
   position:relative;
   overflow:hidden;
 }
-
 .avatar:before{
   content:"";
   position:absolute;
@@ -420,7 +403,6 @@ body{
   border-radius:50%;
   background:#323232;
 }
-
 .avatar:after{
   content:"";
   position:absolute;
@@ -431,7 +413,6 @@ body{
   border-radius:13px 13px 5px 5px;
   background:#323232;
 }
-
 .pulse .quote{
   margin:0;
   font-family:"Noto Serif KR",serif;
@@ -439,7 +420,6 @@ body{
   line-height:1.55;
   color:#303741;
 }
-
 .pulse .meta{
   margin-top:6px;
   font:700 11px/1.2 "Noto Sans KR",Arial,sans-serif;
@@ -447,24 +427,19 @@ body{
 }
 
 /* NOTICE */
-
 .notice{
   display:grid;
   grid-template-columns:34px 1fr;
   gap:11px;
   padding:13px 0;
 }
-
-.notice + .notice{
-  border-top:1px dotted #7d8795;
-}
+.notice + .notice{border-top:1px dotted #7d8795}
 
 .notice .icon{
   width:28px;
   height:28px;
   color:var(--navy);
 }
-
 .notice .icon svg{
   width:100%;
   height:100%;
@@ -474,7 +449,6 @@ body{
   stroke-linecap:round;
   stroke-linejoin:round;
 }
-
 .notice .text{
   margin:0;
   font-family:"Noto Serif KR",serif;
@@ -504,10 +478,6 @@ body{
       transparent 0 18px,
       rgba(13,43,89,.025) 18px 36px
     );
-}
-
-.ad-copy{
-  min-width:0;
 }
 
 .ad-brand{
@@ -589,23 +559,12 @@ body{
   display:grid;
   grid-template-columns:1fr 1fr;
   font:800 11.5px/1.3 "Noto Sans KR",Arial,sans-serif;
-  letter-spacing:.15px;
 }
-
 .credits div:last-child{text-align:right}
-
 .credits span{
   color:#667083;
   font-weight:700;
   margin-right:8px;
-}
-
-/* 2명일 때 자동 2열 */
-.keyvoice-grid.two{
-  grid-template-columns:repeat(2,1fr);
-}
-.keyvoice-grid.two .voice:nth-child(2){
-  border-left:1px dotted #7f8996;
 }
 </style>
 </head>
@@ -644,34 +603,56 @@ body{
       <h2 class="headline" id="headline-en"></h2>
       <div class="headline-kr" id="headline-kr"></div>
       <div class="summary" id="summary"></div>
+
       <div class="article" id="article"></div>
 
+      <div class="onscene">
+        <div class="label">
+          <svg viewBox="0 0 24 24">
+            <rect x="3.5" y="6.5" width="17" height="13" rx="2"/>
+            <path d="M8 6.5 9.5 4.5h5L16 6.5"/>
+            <circle cx="12" cy="13" r="3.2"/>
+          </svg>
+          ON SCENE
+        </div>
+        <div class="desc" id="photo"></div>
+        <div class="credit">PHOTO NOTE<br><span id="photo-credit"></span></div>
+      </div>
+    </div>
+
+    <aside class="box briefs">
+      <div class="section-head">QUICK BRIEF</div>
+      <div class="brief-body" id="briefs"></div>
+    </aside>
+
+  </section>
+
   <section class="keyvoice">
-    <div class="box-title">KEY VOICE</div>
+    <div class="section-head">KEY VOICE</div>
     <div class="keyvoice-grid" id="voices"></div>
   </section>
 
   <section class="bottomgrid">
 
     <div class="panel">
-      <div class="box-title">UPCOMING</div>
+      <div class="section-head">UPCOMING</div>
       <div class="panel-body" id="events"></div>
     </div>
 
     <div class="panel">
-      <div class="box-title">CAMPUS PULSE</div>
+      <div class="section-head">CAMPUS PULSE</div>
       <div class="panel-body" id="pulse"></div>
     </div>
 
     <div class="panel">
-      <div class="box-title">NOTICE BOARD</div>
+      <div class="section-head">NOTICE BOARD</div>
       <div class="panel-body" id="notices"></div>
     </div>
 
   </section>
 
   <section class="campus-ad" aria-label="Fixed campus advertisement">
-    <div class="ad-copy">
+    <div>
       <div class="ad-brand">POWERADE × VMU ATHLETICS</div>
       <div class="ad-head">HYDRATE FOR WHAT'S NEXT.</div>
       <div class="ad-sub">OFFICIAL SIDELINE PARTNER · SHARKS · VIPERS</div>
@@ -695,11 +676,17 @@ const raw = new URLSearchParams(location.search).get("data") || "";
 function txt(v=""){
   return String(v ?? "").replace(/\+/g," ").trim();
 }
+
 function esc(v=""){
   return txt(v).replace(/[&<>"']/g, c => ({
-    '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
+    '&':'&amp;',
+    '<':'&lt;',
+    '>':'&gt;',
+    '"':'&quot;',
+    "'":'&#39;'
   }[c]));
 }
+
 function rows(v=""){
   return v ? String(v).split("~~").filter(Boolean) : [];
 }
@@ -721,14 +708,22 @@ const f = raw.split("||");
 11 reporter
 */
 
-document.getElementById("date").textContent = txt(f[0] || "CURRENT ISSUE");
+document.getElementById("date").textContent =
+  txt(f[0] || "CURRENT ISSUE");
 
 const headline = String(f[1] || "").split("^^");
-document.getElementById("headline-en").textContent = txt(headline[0] || "");
-document.getElementById("headline-kr").textContent = txt(headline.slice(1).join("^^") || "");
 
-document.getElementById("summary").textContent = txt(f[2] || "");
-document.getElementById("photo").textContent = txt(f[3] || "");
+document.getElementById("headline-en").textContent =
+  txt(headline[0] || "");
+
+document.getElementById("headline-kr").textContent =
+  txt(headline.slice(1).join("^^") || "");
+
+document.getElementById("summary").textContent =
+  txt(f[2] || "");
+
+document.getElementById("photo").textContent =
+  txt(f[3] || "");
 
 document.getElementById("article").innerHTML =
   rows(f[4]).slice(0,2).map(p =>
@@ -737,45 +732,59 @@ document.getElementById("article").innerHTML =
 
 const voiceRows = rows(f[5]).slice(0,3);
 const voices = document.getElementById("voices");
-if(voiceRows.length === 2) voices.classList.add("two");
+
+if(voiceRows.length === 2){
+  voices.classList.add("two");
+}
 
 voices.innerHTML = voiceRows.map(r=>{
   const a = r.split("^^");
+
   return `
     <div class="voice">
       <div class="name">${esc(a[0] || "")}</div>
       <div class="role">${esc(a[1] || "")}</div>
       <p class="quote">${esc(a.slice(2).join("^^") || "")}</p>
-    </div>`;
+    </div>
+  `;
 }).join("");
 
 const briefRows = rows(f[6]).slice(0,2);
+
 document.getElementById("briefs").innerHTML =
   briefRows.length
     ? briefRows.map(r=>{
         const a=r.split("^^");
+
         return `
           <div class="brief">
             <div class="tag">${esc(a[0] || "CAMPUS")}</div>
             <p class="text">${esc(a.slice(1).join("^^") || "")}</p>
-          </div>`;
+          </div>
+        `;
       }).join("")
     : `
       <div class="brief">
         <div class="tag">CAMPUS</div>
         <p class="text">이번 호 추가 단신 없음.</p>
-      </div>`;
+      </div>
+    `;
 
 function eventDate(v){
   const s=txt(v);
   const m=s.match(/^([A-Za-z가-힣.]+)\s*([0-9]{1,2})$/);
-  if(m) return `${esc(m[1])}<strong>${esc(m[2])}</strong>`;
+
+  if(m){
+    return `${esc(m[1])}<strong>${esc(m[2])}</strong>`;
+  }
+
   return esc(s);
 }
 
 document.getElementById("events").innerHTML =
   rows(f[7]).slice(0,2).map(r=>{
     const a=r.split("^^");
+
     return `
       <div class="event">
         <div class="event-date">${eventDate(a[0] || "")}</div>
@@ -784,12 +793,14 @@ document.getElementById("events").innerHTML =
           <div class="title">${esc(a[2] || "")}</div>
           <div class="text">${esc(a.slice(3).join("^^") || "")}</div>
         </div>
-      </div>`;
+      </div>
+    `;
   }).join("");
 
 document.getElementById("pulse").innerHTML =
   rows(f[8]).slice(0,3).map(r=>{
     const a=r.split("^^");
+
     return `
       <div class="pulse">
         <div class="avatar"></div>
@@ -797,33 +808,64 @@ document.getElementById("pulse").innerHTML =
           <p class="quote">${esc(a.slice(1).join("^^") || "")}</p>
           <div class="meta">${esc(a[0] || "")}</div>
         </div>
-      </div>`;
+      </div>
+    `;
   }).join("");
 
 const aliases = {
-  "전기":"electric","시설/전기":"electric","electric":"electric",
-  "시험":"academic","학사":"academic","학사/시험":"academic","academic":"academic",
-  "신문":"news","신문부":"news","news":"news",
-  "장소":"location","장소변경":"location","location":"location",
-  "일정":"calendar","calendar":"calendar",
-  "주의":"warning","안전":"warning","warning":"warning",
-  "보수":"maintenance","시설보수":"maintenance","maintenance":"maintenance",
-  "운영시간":"hours","시간":"hours","hours":"hours"
+  "전기":"electric",
+  "시설/전기":"electric",
+  "electric":"electric",
+
+  "시험":"academic",
+  "학사":"academic",
+  "학사/시험":"academic",
+  "academic":"academic",
+
+  "신문":"news",
+  "신문부":"news",
+  "news":"news",
+
+  "장소":"location",
+  "장소변경":"location",
+  "location":"location",
+
+  "일정":"calendar",
+  "calendar":"calendar",
+
+  "주의":"warning",
+  "안전":"warning",
+  "warning":"warning",
+
+  "보수":"maintenance",
+  "시설보수":"maintenance",
+  "maintenance":"maintenance",
+
+  "운영시간":"hours",
+  "시간":"hours",
+  "hours":"hours"
 };
 
 document.getElementById("notices").innerHTML =
   rows(f[9]).slice(0,2).map(r=>{
     const a=r.split("^^");
     const key=txt(a[0]);
-    const type=aliases[key.toLowerCase()] || aliases[key] || "news";
+
+    const type =
+      aliases[key.toLowerCase()] ||
+      aliases[key] ||
+      "news";
 
     return `
       <div class="notice">
         <div class="icon">
-          <svg viewBox="0 0 24 24"><use href="#icon-${type}"></use></svg>
+          <svg viewBox="0 0 24 24">
+            <use href="#icon-${type}"></use>
+          </svg>
         </div>
         <p class="text">${esc(a.slice(1).join("^^") || "")}</p>
-      </div>`;
+      </div>
+    `;
   }).join("");
 
 const photographer = txt(f[10] || "");
@@ -836,36 +878,3 @@ document.getElementById("reporter").textContent = reporter;
 
 </body>
 </html>
-
-<style>
-.keyvoice > .box-title{
-  text-align:center;
-}
-.briefs > .box-title{
-  text-align:left;
-}
-.panel > .box-title{
-  text-align:left;
-}
-
-/* Keep every major box on the exact same outer newspaper grid. */
-.topgrid,
-.keyvoice,
-.bottomgrid,
-.campus-ad,
-.credits{
-  width:100%;
-}
-
-/* Equal bottom thirds, no visual narrowing of UPCOMING. */
-.bottomgrid > .panel{
-  width:100%;
-}
-
-/* Slightly lighter outlines to avoid a dashboard/notice-board look. */
-.box,
-.keyvoice,
-.panel{
-  border-color:#9aa2ad;
-}
-</style>
