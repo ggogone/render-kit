@@ -1004,7 +1004,8 @@ document.getElementById("briefs").innerHTML =
 
 function eventDate(v){
   const s=txt(v);
-  const m=s.match(/^([A-Za-z가-힣.]+)\s*([0-9]{1,2})$/);
+
+  const m=s.match(/^([A-Za-z가-힣.]+)\s+([0-9]{1,2})(?:\s+[A-Za-z가-힣.]+)?$/);
 
   if(m){
     return `${esc(m[1])}<strong>${esc(m[2])}</strong>`;
@@ -1079,7 +1080,7 @@ const aliases = {
 };
 
 document.getElementById("notices").innerHTML =
-  rows(f[9]).slice(0,2).map(r=>{
+  rows(f[9]).slice(0,3).map(r=>{
     const a=r.split("^^");
     const key=txt(a[0]);
 
