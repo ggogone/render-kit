@@ -149,12 +149,28 @@ html,body{
 }
 
 .post{
-  border:1px solid #e5e9ee;
-  border-radius:16px;
-  overflow:hidden;
-  margin-bottom:18px;
+  border:0;
+  border-radius:0;
+  overflow:visible;
+  margin-bottom:0;
   background:#fff;
-  box-shadow:0 3px 12px rgba(18,37,63,.04)
+  box-shadow:none
+}
+
+.post + .post{
+  position:relative;
+  margin-top:30px;
+  padding-top:30px
+}
+
+.post + .post::before{
+  content:"";
+  position:absolute;
+  top:0;
+  left:48px;
+  right:48px;
+  height:1px;
+  background:var(--line)
 }
 
 .post-main{
