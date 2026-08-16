@@ -198,14 +198,11 @@ function render(d){
   document.getElementById("noticeBlock").style.display=(d.notice||d.author)?"block":"none";
 }
 const data=parseData();
-render(data||{
-  emoji:"🎧",
-  room:"Resonance",
-  members:"4",
-  online:"3",
-  notice:"목요일 12:00 온실 집결 / 96k·24bit·4ch 이상 / 실패조건 문서 3.2항 참조",
-  author:"Sylvère"
-});
+if(data){
+  render(data);
+}else{
+  document.querySelector(".wrap").style.display="none";
+}
 </script>
 </body>
 </html>
