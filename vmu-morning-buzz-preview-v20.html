@@ -264,17 +264,23 @@ html,body{
 }
 
 .half{
-  padding:4px 20px;
+  padding:14px 22px 16px;
 }
 
-.half:first-child{padding-right:24px}
-.half:last-child{padding-left:24px}
+.half:first-child{
+  padding-left:22px;
+  padding-right:22px;
+}
+.half:last-child{
+  padding-left:22px;
+  padding-right:22px;
+}
 
 .topic{
   display:flex;
   align-items:center;
   gap:10px;
-  margin-bottom:10px;
+  margin-bottom:14px;
   color:var(--navy);
   font-size:29px;
   line-height:1.1;
@@ -293,12 +299,15 @@ html,body{
 }
 
 .list li{
-  margin:8px 0;
+  margin:0 0 10px;
   font-size:18px;
   line-height:1.42;
   font-weight:600;
   letter-spacing:-.02em;
   list-style:none;
+}
+.list li:last-child{
+  margin-bottom:0;
 }
 
 .radio-mark{
@@ -399,7 +408,6 @@ html,body{
           <div class="split">
             <div class="half">
               <div class="topic">
-                <span id="c1Icon" class="emoji"></span>
                 <span id="c1Title"></span>
               </div>
               <ul id="c1List" class="list"></ul>
@@ -407,7 +415,6 @@ html,body{
 
             <div class="half">
               <div class="topic">
-                <span id="c2Icon" class="emoji"></span>
                 <span id="c2Title"></span>
               </div>
               <ul id="c2List" class="list"></ul>
@@ -430,7 +437,6 @@ html,body{
           <div class="split">
             <div class="half">
               <div class="topic">
-                <span id="c3Icon" class="emoji"></span>
                 <span id="c3Title"></span>
               </div>
               <ul id="c3List" class="list"></ul>
@@ -438,7 +444,6 @@ html,body{
 
             <div class="half">
               <div class="topic">
-                <span id="c4Icon" class="emoji"></span>
                 <span id="c4Title"></span>
               </div>
               <ul id="c4List" class="list"></ul>
@@ -478,8 +483,7 @@ html,body{
 </div>
 
 <script>
-const fallback =
-["","","","","","","",""].join("||");
+const fallback = ["","","","","","","",""].join("||");
 
 const raw = new URLSearchParams(location.search).get("data") || fallback;
 const p = raw.split("||");
@@ -493,17 +497,6 @@ function parseSection(str=""){
   };
 }
 
-function iconFor(title=""){
-  const t=title.toUpperCase();
-  if(t.includes("QUICK")) return "🎙";
-  if(t.includes("CAMPUS")) return "🏛";
-  if(t.includes("PARTY")) return "🎉";
-  if(t.includes("GAME")) return "🏈";
-  if(t.includes("ROAM")) return "🌊";
-  if(t.includes("ALERT")) return "🚨";
-  if(t.includes("SPOTTED")) return "👀";
-  return "✦";
-}
 
 function fill(id,items){
   const el=document.getElementById(id);
@@ -532,7 +525,6 @@ document.getElementById("airDate").textContent=p[2]||"";
   ["c4",c4]
 ].forEach(([id,s])=>{
   document.getElementById(id+"Title").textContent=s.title;
-  document.getElementById(id+"Icon").textContent=iconFor(s.title);
   fill(id+"List",s.items);
 });
 
