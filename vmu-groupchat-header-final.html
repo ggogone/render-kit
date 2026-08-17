@@ -10,7 +10,14 @@
 *{box-sizing:border-box}
 html,body{margin:0;padding:0;background:transparent!important}
 body{font-family:"Pretendard Variable","Pretendard",sans-serif}
-.wrap{width:900px;min-height:430px;position:relative;background:transparent}
+
+.wrap{
+  width:900px;
+  min-height:430px;
+  position:relative;
+  background:transparent;
+}
+
 .card{
   position:relative;
   width:900px;
@@ -19,6 +26,7 @@ body{font-family:"Pretendard Variable","Pretendard",sans-serif}
   color:#f8fbff;
   background:transparent;
 }
+
 .card::before{
   content:"";
   position:absolute;
@@ -27,14 +35,18 @@ body{font-family:"Pretendard Variable","Pretendard",sans-serif}
   pointer-events:none;
   background:url("data:image/png;base64,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") top left / 900px 430px no-repeat;
 }
-.content{position:relative;z-index:1}
-.stats{position:absolute!important;left:-24px!important;top:-12px!important;
-  letter-spacing:-.01em;
+
+.content{
+  position:relative;
+  z-index:1;
 }
+
 .stats{
-  position:absolute;
-  left:34px;
-  top:30px;
+  position:absolute!important;
+  left:-24px!important;
+  top:-12px!important;
+  letter-spacing:-.01em;
+
   display:flex;
   flex-direction:column;
   gap:3px;
@@ -43,18 +55,60 @@ body{font-family:"Pretendard Variable","Pretendard",sans-serif}
   font-weight:600;
   color:rgba(255,255,255,.80);
 }
-.stat{display:flex;align-items:center;gap:7px;min-height:22px}
-.status-dot{width:16px;height:16px;border-radius:50%;flex:0 0 auto}
-.member-dot{background:#aeb8c8}
-.online-dot{background:#4adf83;box-shadow:0 0 8px rgba(74,223,131,.28)}
-.room{text-align:center;padding:18px 150px 0}
+
+.stat{
+  display:flex;
+  align-items:center;
+  gap:7px;
+  min-height:22px;
+}
+
+.status-dot{
+  width:16px;
+  height:16px;
+  border-radius:50%;
+  flex:0 0 auto;
+}
+
+.member-dot{
+  background:#aeb8c8;
+}
+
+.online-dot{
+  background:#4adf83;
+  box-shadow:0 0 8px rgba(74,223,131,.28);
+}
+
+.room{
+  text-align:center;
+  padding:18px 150px 0;
+}
+
 .room-name{
   font-family:"Pretendard Variable","Pretendard",sans-serif;
-  font-size:48px;line-height:1.12;font-weight:800;letter-spacing:-.025em;
-  overflow-wrap:anywhere;word-break:keep-all;max-width:100%;
+  font-size:48px;
+  line-height:1.12;
+  font-weight:800;
+  letter-spacing:-.025em;
+  overflow-wrap:anywhere;
+  word-break:keep-all;
+  max-width:100%;
 }
-.room-emoji{display:block;margin-top:34px;font-size:68px;line-height:1}
-.notice{width:min(680px,86%);margin:42px auto 0;padding-bottom:60px;text-align:center}
+
+.room-emoji{
+  display:block;
+  margin-top:34px;
+  font-size:68px;
+  line-height:1;
+}
+
+.notice{
+  width:min(680px,86%);
+  margin:42px auto 0;
+  padding-bottom:60px;
+  text-align:center;
+}
+
 .notice-text{
   font-size:22px;
   line-height:1.62;
@@ -64,20 +118,46 @@ body{font-family:"Pretendard Variable","Pretendard",sans-serif}
   overflow-wrap:anywhere;
   word-break:keep-all;
 }
-.quote-mark{display:inline-block;margin:0 8px;font-size:1.08em;font-weight:500;color:rgba(255,255,255,.84)}
+
+.quote-mark{
+  display:inline-block;
+  margin:0 8px;
+  font-size:1.08em;
+  font-weight:500;
+  color:rgba(255,255,255,.84);
+}
+
 .notice-author{
-  margin-top:9px;text-align:center;font-size:18px;line-height:1.3;font-style:italic;
-  font-weight:650;letter-spacing:.01em;color:rgba(255,255,255,.97);
+  margin-top:9px;
+  text-align:center;
+  font-size:18px;
+  line-height:1.3;
+  font-style:italic;
+  font-weight:650;
+  letter-spacing:.01em;
+  color:rgba(255,255,255,.97);
 }
 </style>
 </head>
+
 <body>
+
 <div class="wrap">
   <section class="card">
     <div class="content">
+
       <div class="stats">
-        <div class="stat"><span class="status-dot member-dot"></span><span>Members</span><span id="members"></span></div>
-        <div class="stat"><span class="status-dot online-dot"></span><span>Online</span><span id="online"></span></div>
+        <div class="stat">
+          <span class="status-dot member-dot"></span>
+          <span>Members</span>
+          <span id="members"></span>
+        </div>
+
+        <div class="stat">
+          <span class="status-dot online-dot"></span>
+          <span>Online</span>
+          <span id="online"></span>
+        </div>
       </div>
 
       <div class="room">
@@ -86,9 +166,15 @@ body{font-family:"Pretendard Variable","Pretendard",sans-serif}
       </div>
 
       <div class="notice" id="noticeBlock">
-        <div class="notice-text"><span class="quote-mark">«</span><span id="noticeText"></span><span class="quote-mark">»</span></div>
+        <div class="notice-text">
+          <span class="quote-mark">«</span>
+          <span id="noticeText"></span>
+          <span class="quote-mark">»</span>
+        </div>
+
         <div class="notice-author" id="noticeAuthor"></div>
       </div>
+
     </div>
   </section>
 </div>
@@ -97,24 +183,52 @@ body{font-family:"Pretendard Variable","Pretendard",sans-serif}
 function parseData(){
   const raw=new URLSearchParams(location.search).get("data");
   if(!raw)return null;
+
   const p=raw.split("||");
-  return {emoji:p[0]||"",room:p[1]||"",members:p[2]||"",online:p[3]||"",notice:p[4]||"",author:p[5]||""};
+
+  return {
+    emoji:p[0]||"",
+    room:p[1]||"",
+    members:p[2]||"",
+    online:p[3]||"",
+    notice:p[4]||"",
+    author:p[5]||""
+  };
 }
+
 function render(d){
   const roomName=document.getElementById("roomName");
-  roomName.textContent=d.room;
-  const titleLen=Array.from(d.room).length;
-  roomName.style.fontSize=titleLen<=12?"48px":titleLen<=20?"42px":"36px";
+
+  // 제목 끝에 붙은 이모지 제거
+  // 아래 roomEmoji에만 이모지가 표시됨
+  const cleanRoom=String(d.room||"")
+    .replace(/[\s\p{Extended_Pictographic}\uFE0F\u200D]+$/gu,"")
+    .trim();
+
+  roomName.textContent=cleanRoom;
+
+  const titleLen=Array.from(cleanRoom).length;
+  roomName.style.fontSize=
+    titleLen<=12 ? "48px" :
+    titleLen<=20 ? "42px" :
+    "36px";
 
   document.getElementById("roomEmoji").textContent=d.emoji;
   document.getElementById("members").textContent=d.members;
   document.getElementById("online").textContent=d.online;
-  document.getElementById("noticeText").textContent=d.notice.replace(/ /g,"\u2009");
-  document.getElementById("noticeAuthor").textContent=d.author||"";
-  document.getElementById("noticeBlock").style.display=(d.notice||d.author)?"block":"none";
+
+  document.getElementById("noticeText").textContent=
+    d.notice.replace(/ /g,"\u2009");
+
+  document.getElementById("noticeAuthor").textContent=
+    d.author||"";
+
+  document.getElementById("noticeBlock").style.display=
+    (d.notice||d.author) ? "block" : "none";
 }
 
 const data=parseData();
+
 render(data||{
   emoji:"🎧",
   room:"Resonance",
@@ -124,5 +238,6 @@ render(data||{
   author:"Sylvère"
 });
 </script>
+
 </body>
 </html>
