@@ -330,8 +330,6 @@ body{
 
 /* =========================
    COMPOSER
-   Expands upward for 1~3 lines.
-   Chat area shrinks via flex.
 ========================= */
 
 .composer-area{
@@ -367,7 +365,6 @@ body{
   align-items:center;
   justify-content:center;
   padding:0;
-  line-height:0;
 }
 
 .compose-box{
@@ -472,8 +469,13 @@ body{
   width:37px;
   height:40px;
 
-  display:grid;
-  place-items:center;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  padding:0;
+  text-align:center;
+  line-height:1;
 
   border-radius:5px;
   background:var(--key);
@@ -549,8 +551,8 @@ body{
   transform:none;
 }
 
+/* optical alignment */
 
-/* v15 final optical alignment */
 .owner-island span{
   display:block;
   line-height:1;
@@ -562,14 +564,6 @@ body{
   place-items:center !important;
   padding:0 !important;
   line-height:0 !important;
-}
-
-.plus-btn .plus-icon{
-  display:block;
-  width:20px;
-  height:20px;
-  margin:0;
-  transform:none;
 }
 
 .send-btn{
@@ -618,7 +612,6 @@ body{
 
 <div class="phone">
 
-  <!-- STATUS -->
   <div class="statusbar">
 
     <div class="status-left">
@@ -632,7 +625,6 @@ body{
 
     <div class="status-right">
 
-      <!-- Cellular -->
       <svg class="status-svg" width="20" height="14" viewBox="0 0 20 14" aria-hidden="true">
         <rect x="1" y="9.2" width="3" height="3.8" rx="1.4" fill="#111"/>
         <rect x="6" y="6.2" width="3" height="6.8" rx="1.4" fill="#111"/>
@@ -642,7 +634,6 @@ body{
 
       <span class="network-label">5G</span>
 
-      <!-- Battery -->
       <svg class="status-svg" width="28" height="14" viewBox="0 0 28 14" aria-hidden="true">
         <rect x=".8" y="1" width="23.2" height="12" rx="3.25" fill="none" stroke="#111" stroke-width="1.5"/>
         <path d="M25.2 4.35c1.15.2 1.8.83 1.8 2v1.3c0 1.17-.65 1.8-1.8 2V4.35Z" fill="#111"/>
@@ -652,7 +643,6 @@ body{
     </div>
   </div>
 
-  <!-- HEADER -->
   <div class="chat-header">
 
     <div class="back-btn">
@@ -684,10 +674,8 @@ body{
 
   </div>
 
-  <!-- THREAD -->
   <main class="chat" id="thread"></main>
 
-  <!-- COMPOSER -->
   <div class="composer-area">
 
     <div class="composer-row">
@@ -715,17 +703,33 @@ body{
     </div>
   </div>
 
-  <!-- KEYBOARD -->
   <div class="keyboard">
 
     <div class="translation-bar" id="draftKr"></div>
 
     <div class="key-row">
-      <div class="key">Q</div><div class="key">W</div><div class="key">E</div><div class="key">R</div><div class="key">T</div><div class="key">Y</div><div class="key">U</div><div class="key">I</div><div class="key">O</div><div class="key">P</div>
+      <div class="key">Q</div>
+      <div class="key">W</div>
+      <div class="key">E</div>
+      <div class="key">R</div>
+      <div class="key">T</div>
+      <div class="key">Y</div>
+      <div class="key">U</div>
+      <div class="key">I</div>
+      <div class="key">O</div>
+      <div class="key">P</div>
     </div>
 
     <div class="key-row row-2">
-      <div class="key">A</div><div class="key">S</div><div class="key">D</div><div class="key">F</div><div class="key">G</div><div class="key">H</div><div class="key">J</div><div class="key">K</div><div class="key">L</div>
+      <div class="key">A</div>
+      <div class="key">S</div>
+      <div class="key">D</div>
+      <div class="key">F</div>
+      <div class="key">G</div>
+      <div class="key">H</div>
+      <div class="key">J</div>
+      <div class="key">K</div>
+      <div class="key">L</div>
     </div>
 
     <div class="key-row row-3">
@@ -736,7 +740,13 @@ body{
         </svg>
       </div>
 
-      <div class="key">Z</div><div class="key">X</div><div class="key">C</div><div class="key">V</div><div class="key">B</div><div class="key">N</div><div class="key">M</div>
+      <div class="key">Z</div>
+      <div class="key">X</div>
+      <div class="key">C</div>
+      <div class="key">V</div>
+      <div class="key">B</div>
+      <div class="key">N</div>
+      <div class="key">M</div>
 
       <div class="key">
         <svg width="23" height="18" viewBox="0 0 23 18" aria-hidden="true">
@@ -755,7 +765,6 @@ body{
 
     <div class="keyboard-footer">
 
-      <!-- Emoji -->
       <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true">
         <circle cx="12" cy="12" r="9.2" fill="none" stroke="#676a70" stroke-width="1.7"/>
         <circle cx="8.8" cy="9.2" r="1" fill="#676a70"/>
@@ -763,7 +772,6 @@ body{
         <path d="M7.8 14.1c1.2 2 2.7 3 4.2 3s3-1 4.2-3" fill="none" stroke="#676a70" stroke-width="1.6" stroke-linecap="round"/>
       </svg>
 
-      <!-- Microphone -->
       <svg width="22" height="30" viewBox="0 0 24 32" aria-hidden="true">
         <rect x="8" y="2" width="8" height="17" rx="4" fill="none" stroke="#676a70" stroke-width="2"/>
         <path d="M5 15.5V17c0 4 3.1 7 7 7s7-3 7-7v-1.5" fill="none" stroke="#676a70" stroke-width="2" stroke-linecap="round"/>
@@ -777,114 +785,295 @@ body{
 
 </div>
 
-
 <script>
 function esc(value){
   return String(value ?? "").replace(/[&<>"']/g, c => ({
-    "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+    "&":"&amp;",
+    "<":"&lt;",
+    ">":"&gt;",
+    '"':"&quot;",
+    "'":"&#39;"
   }[c]));
 }
 
 function initials(name){
   const s=String(name||"").trim();
+
   if(!s)return "?";
+
   const words=s.split(/\s+/).filter(Boolean);
-  return words.map(w=>w[0]||"").join("").slice(0,2).toUpperCase();
+
+  return words
+    .map(w=>w[0]||"")
+    .join("")
+    .slice(0,2)
+    .toUpperCase();
 }
 
 function parseBattery(value){
-  const n=parseInt(String(value||"").replace(/[^\d]/g,""),10);
-  return Number.isFinite(n) ? Math.max(0,Math.min(100,n)) : 75;
+  const n=parseInt(
+    String(value||"").replace(/[^\d]/g,""),
+    10
+  );
+
+  return Number.isFinite(n)
+    ? Math.max(0,Math.min(100,n))
+    : 75;
+}
+
+function normalizeDirection(value){
+  const v=String(value||"")
+    .trim()
+    .toLowerCase();
+
+  if([
+    "out",
+    "me",
+    "mine",
+    "self",
+    "user",
+    "u",
+    "right",
+    "sent",
+    "send",
+    "outgoing",
+    "나",
+    "내",
+    "본인",
+    "ⓤ",
+    "Ⓤ"
+  ].includes(v)){
+    return "out";
+  }
+
+  return "in";
 }
 
 function parseData(){
-  const raw=new URLSearchParams(location.search).get("data");
+  const raw=
+    new URLSearchParams(location.search)
+    .get("data");
+
   if(!raw)return null;
 
   const parts=raw.split("||");
+
   const owner=parts[0]||"--";
   const time=parts[1]||"--:--";
   const battery=parts[2]||"75";
   const contact=parts[3]||"Contact";
 
-  const tail=parts.slice(4).filter(v=>v!=="");
+  const tail=
+    parts
+      .slice(4)
+      .filter(v=>v!=="");
+
   let messageItems=[];
   let draftEn="";
   let draftKr="";
 
-  // Old format: one message field containing ~~ separated messages.
-  if(tail[0] && tail[0].includes("~~")){
-    messageItems=tail[0].split("~~").filter(Boolean);
+  if(
+    tail[0] &&
+    tail[0].includes("~~")
+  ){
+    messageItems=
+      tail[0]
+        .split("~~")
+        .filter(Boolean);
+
     draftEn=tail[1]||"";
     draftKr=tail[2]||"";
+
   }else{
-    // Current format: every message is its own || field.
-    // A valid message has ^^in^^ or ^^out^^ in the second slot.
+
     const leftovers=[];
+
     tail.forEach(item=>{
-      const f=String(item).split("^^");
-      const dir=(f[1]||"").toLowerCase();
-      if(dir==="in" || dir==="out"){
+
+      const f=
+        String(item)
+          .split("^^");
+
+      const rawDir=
+        String(f[1]||"")
+          .trim()
+          .toLowerCase();
+
+      const knownDirs=[
+        "in",
+        "out",
+        "me",
+        "mine",
+        "self",
+        "user",
+        "u",
+        "right",
+        "sent",
+        "send",
+        "outgoing",
+        "incoming",
+        "left",
+        "나",
+        "내",
+        "본인",
+        "상대",
+        "ⓤ",
+        "Ⓤ"
+      ];
+
+      if(
+        knownDirs.includes(rawDir)
+      ){
         messageItems.push(item);
       }else{
         leftovers.push(item);
       }
+
     });
+
     draftEn=leftovers[0]||"";
     draftKr=leftovers[1]||"";
   }
 
-  const messages=messageItems.map(item=>{
-    const f=String(item).split("^^");
-    return {
-      date:f[0]||"",
-      direction:(f[1]||"in").toLowerCase(),
-      en:f[2]||"",
-      kr:f[3]||"",
-      state:f[4]||""
-    };
-  }).slice(-8);
+  const messages=
+    messageItems
+      .map(item=>{
 
-  return {owner,time,battery,contact,messages,draftEn,draftKr};
+        const f=
+          String(item)
+            .split("^^");
+
+        return {
+          date:f[0]||"",
+          direction:
+            normalizeDirection(f[1]),
+          en:f[2]||"",
+          kr:f[3]||"",
+          state:f[4]||""
+        };
+
+      })
+      .slice(-8);
+
+  return {
+    owner,
+    time,
+    battery,
+    contact,
+    messages,
+    draftEn,
+    draftKr
+  };
 }
 
 function messageHTML(m){
-  const dir=m.direction==="out" ? "out" : "in";
-  const date=m.date ? `<div class="thread-date compact">${esc(m.date)}</div>` : "";
-  const state=(dir==="out" && m.state) ? `<div class="receipt">${esc(m.state)}</div>` : "";
-  return `${date}
+
+  const dir=
+    m.direction==="out"
+      ? "out"
+      : "in";
+
+  const date=
+    m.date
+      ? `<div class="thread-date compact">${esc(m.date)}</div>`
+      : "";
+
+  const state=
+    dir==="out" && m.state
+      ? `<div class="receipt">${esc(m.state)}</div>`
+      : "";
+
+  return `
+    ${date}
+
     <div class="message ${dir}">
       <div class="bubble">
-        <div class="bubble-en">${esc(m.en)}</div>
-        ${m.kr ? `<div class="bubble-kr">${esc(m.kr)}</div>` : ""}
+
+        <div class="bubble-en">
+          ${esc(m.en)}
+        </div>
+
+        ${
+          m.kr
+            ? `<div class="bubble-kr">${esc(m.kr)}</div>`
+            : ""
+        }
+
       </div>
+
       ${state}
-    </div>`;
+
+    </div>
+  `;
 }
 
 function render(data){
-  document.getElementById("ownerInitials").textContent=String(data.owner||"--").slice(0,3).toUpperCase();
-  document.getElementById("statusTime").textContent=data.time||"--:--";
-  document.getElementById("contactName").textContent=data.contact||"Contact";
-  document.getElementById("contactAvatar").textContent=initials(data.contact).slice(0,1);
 
-  const pct=parseBattery(data.battery);
-  document.getElementById("batteryFill").setAttribute("width", String(16.8*pct/100));
+  document
+    .getElementById("ownerInitials")
+    .textContent=
+      String(data.owner||"--")
+        .slice(0,3)
+        .toUpperCase();
 
-  const thread=document.getElementById("thread");
-  thread.innerHTML=data.messages.length
-    ? data.messages.map(messageHTML).join("")
-    : `<div class="thread-date">iMessage</div>`;
+  document
+    .getElementById("statusTime")
+    .textContent=
+      data.time||"--:--";
 
-  const draft=document.getElementById("draftEn");
-  draft.innerHTML=`${esc(data.draftEn)}<span class="cursor"></span>`;
-  document.getElementById("draftKr").textContent=data.draftKr||"";
+  document
+    .getElementById("contactName")
+    .textContent=
+      data.contact||"Contact";
+
+  document
+    .getElementById("contactAvatar")
+    .textContent=
+      initials(data.contact)
+        .slice(0,1);
+
+  const pct=
+    parseBattery(data.battery);
+
+  document
+    .getElementById("batteryFill")
+    .setAttribute(
+      "width",
+      String(16.8*pct/100)
+    );
+
+  const thread=
+    document
+      .getElementById("thread");
+
+  thread.innerHTML=
+    data.messages.length
+      ? data.messages
+          .map(messageHTML)
+          .join("")
+      : `<div class="thread-date">iMessage</div>`;
+
+  const draft=
+    document
+      .getElementById("draftEn");
+
+  draft.innerHTML=
+    `${esc(data.draftEn)}<span class="cursor"></span>`;
+
+  document
+    .getElementById("draftKr")
+    .textContent=
+      data.draftKr||"";
 }
 
 const data=parseData();
+
 if(data){
+
   render(data);
+
 }else{
+
   render({
     owner:"--",
     time:"--:--",
@@ -894,6 +1083,7 @@ if(data){
     draftEn:"",
     draftKr:""
   });
+
 }
 </script>
 
