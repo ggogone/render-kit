@@ -21,6 +21,7 @@ href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretend
 }
 
 *{box-sizing:border-box}
+
 html,body{
   margin:0;
   padding:0;
@@ -266,8 +267,13 @@ body{
   margin-bottom:10px;
 }
 
-.message.in{align-items:flex-start}
-.message.out{align-items:flex-end}
+.message.in{
+  align-items:flex-start;
+}
+
+.message.out{
+  align-items:flex-end;
+}
 
 .bubble{
   position:relative;
@@ -315,8 +321,13 @@ body{
   overflow-wrap:anywhere;
 }
 
-.message.in .bubble-kr{color:#7b7b81}
-.message.out .bubble-kr{color:rgba(255,255,255,.74)}
+.message.in .bubble-kr{
+  color:#7b7b81;
+}
+
+.message.out .bubble-kr{
+  color:rgba(255,255,255,.74);
+}
 
 .receipt{
   margin-top:3px;
@@ -487,7 +498,9 @@ body{
   box-shadow:0 1px 0 rgba(0,0,0,.28);
 }
 
-.row-2{padding:0 17px}
+.row-2{
+  padding:0 17px;
+}
 
 .row-3 .key:first-child,
 .row-3 .key:last-child{
@@ -551,7 +564,7 @@ body{
   transform:none;
 }
 
-/* optical alignment */
+/* v15 final optical alignment */
 
 .owner-island span{
   display:block;
@@ -564,6 +577,14 @@ body{
   place-items:center !important;
   padding:0 !important;
   line-height:0 !important;
+}
+
+.plus-btn .plus-icon{
+  display:block;
+  width:20px;
+  height:20px;
+  margin:0;
+  transform:none;
 }
 
 .send-btn{
@@ -612,6 +633,7 @@ body{
 
 <div class="phone">
 
+  <!-- STATUS -->
   <div class="statusbar">
 
     <div class="status-left">
@@ -643,46 +665,68 @@ body{
     </div>
   </div>
 
+  <!-- HEADER -->
   <div class="chat-header">
 
     <div class="back-btn">
       <svg class="back-icon" width="14" height="26" viewBox="0 0 14 26" aria-hidden="true">
         <path d="M12 2 2 13l10 11"
-          fill="none" stroke="#0a84ff" stroke-width="3"
-          stroke-linecap="round" stroke-linejoin="round"/>
+          fill="none"
+          stroke="#0a84ff"
+          stroke-width="3"
+          stroke-linecap="round"
+          stroke-linejoin="round"/>
       </svg>
     </div>
 
     <div class="contact">
+
       <div class="contact-avatar" id="contactAvatar">?</div>
 
       <div class="contact-name">
         <span id="contactName">Contact</span>
+
         <svg width="5" height="9" viewBox="0 0 5 9" aria-hidden="true">
-          <path d="m1 1 3 3.5L1 8" fill="none" stroke="#b5b5ba" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="m1 1 3 3.5L1 8"
+            fill="none"
+            stroke="#b5b5ba"
+            stroke-width="1.3"
+            stroke-linecap="round"
+            stroke-linejoin="round"/>
         </svg>
       </div>
+
     </div>
 
     <div class="facetime-btn">
       <svg class="facetime-icon" width="30" height="22" viewBox="0 0 30 22" aria-hidden="true">
         <rect x="1.6" y="3.1" width="18.8" height="15.8" rx="4.1"
-          fill="none" stroke="#0a84ff" stroke-width="2"/>
-        <path d="M21.4 8.25 27.6 5.2v11.6l-6.2-3.05Z" fill="#0a84ff"/>
+          fill="none"
+          stroke="#0a84ff"
+          stroke-width="2"/>
+
+        <path d="M21.4 8.25 27.6 5.2v11.6l-6.2-3.05Z"
+          fill="#0a84ff"/>
       </svg>
     </div>
 
   </div>
 
+  <!-- THREAD -->
   <main class="chat" id="thread"></main>
 
+  <!-- COMPOSER -->
   <div class="composer-area">
 
     <div class="composer-row">
 
       <div class="plus-btn" aria-hidden="true">
         <svg class="plus-icon" viewBox="0 0 24 24">
-          <path d="M12 6V18M6 12H18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          <path d="M12 6V18M6 12H18"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+            stroke-linecap="round"/>
         </svg>
       </div>
 
@@ -693,8 +737,11 @@ body{
         <div class="send-btn">
           <svg class="send-icon" width="15" height="18" viewBox="0 0 15 18" aria-hidden="true">
             <path d="M7.5 15.8V3.1M2.7 7.8 7.5 3l4.8 4.8"
-              fill="none" stroke="#fff" stroke-width="2"
-              stroke-linecap="round" stroke-linejoin="round"/>
+              fill="none"
+              stroke="#fff"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"/>
           </svg>
         </div>
 
@@ -703,55 +750,45 @@ body{
     </div>
   </div>
 
+  <!-- KEYBOARD -->
   <div class="keyboard">
 
     <div class="translation-bar" id="draftKr"></div>
 
     <div class="key-row">
-      <div class="key">Q</div>
-      <div class="key">W</div>
-      <div class="key">E</div>
-      <div class="key">R</div>
-      <div class="key">T</div>
-      <div class="key">Y</div>
-      <div class="key">U</div>
-      <div class="key">I</div>
-      <div class="key">O</div>
-      <div class="key">P</div>
+      <div class="key">Q</div><div class="key">W</div><div class="key">E</div><div class="key">R</div><div class="key">T</div><div class="key">Y</div><div class="key">U</div><div class="key">I</div><div class="key">O</div><div class="key">P</div>
     </div>
 
     <div class="key-row row-2">
-      <div class="key">A</div>
-      <div class="key">S</div>
-      <div class="key">D</div>
-      <div class="key">F</div>
-      <div class="key">G</div>
-      <div class="key">H</div>
-      <div class="key">J</div>
-      <div class="key">K</div>
-      <div class="key">L</div>
+      <div class="key">A</div><div class="key">S</div><div class="key">D</div><div class="key">F</div><div class="key">G</div><div class="key">H</div><div class="key">J</div><div class="key">K</div><div class="key">L</div>
     </div>
 
     <div class="key-row row-3">
 
       <div class="key">
         <svg width="19" height="20" viewBox="0 0 19 20" aria-hidden="true">
-          <path d="M9.5 2 2 10h4v6h7v-6h4L9.5 2Z" fill="none" stroke="#151515" stroke-width="1.8" stroke-linejoin="round"/>
+          <path d="M9.5 2 2 10h4v6h7v-6h4L9.5 2Z"
+            fill="none"
+            stroke="#151515"
+            stroke-width="1.8"
+            stroke-linejoin="round"/>
         </svg>
       </div>
 
-      <div class="key">Z</div>
-      <div class="key">X</div>
-      <div class="key">C</div>
-      <div class="key">V</div>
-      <div class="key">B</div>
-      <div class="key">N</div>
-      <div class="key">M</div>
+      <div class="key">Z</div><div class="key">X</div><div class="key">C</div><div class="key">V</div><div class="key">B</div><div class="key">N</div><div class="key">M</div>
 
       <div class="key">
         <svg width="23" height="18" viewBox="0 0 23 18" aria-hidden="true">
-          <path d="M8 2h12v14H8L2 9l6-7Z" fill="none" stroke="#151515" stroke-width="1.6" stroke-linejoin="round"/>
-          <path d="m11 6 5 6m0-6-5 6" stroke="#151515" stroke-width="1.4" stroke-linecap="round"/>
+          <path d="M8 2h12v14H8L2 9l6-7Z"
+            fill="none"
+            stroke="#151515"
+            stroke-width="1.6"
+            stroke-linejoin="round"/>
+
+          <path d="m11 6 5 6m0-6-5 6"
+            stroke="#151515"
+            stroke-width="1.4"
+            stroke-linecap="round"/>
         </svg>
       </div>
 
@@ -766,21 +803,44 @@ body{
     <div class="keyboard-footer">
 
       <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true">
-        <circle cx="12" cy="12" r="9.2" fill="none" stroke="#676a70" stroke-width="1.7"/>
+        <circle cx="12" cy="12" r="9.2"
+          fill="none"
+          stroke="#676a70"
+          stroke-width="1.7"/>
+
         <circle cx="8.8" cy="9.2" r="1" fill="#676a70"/>
         <circle cx="15.2" cy="9.2" r="1" fill="#676a70"/>
-        <path d="M7.8 14.1c1.2 2 2.7 3 4.2 3s3-1 4.2-3" fill="none" stroke="#676a70" stroke-width="1.6" stroke-linecap="round"/>
+
+        <path d="M7.8 14.1c1.2 2 2.7 3 4.2 3s3-1 4.2-3"
+          fill="none"
+          stroke="#676a70"
+          stroke-width="1.6"
+          stroke-linecap="round"/>
       </svg>
 
       <svg width="22" height="30" viewBox="0 0 24 32" aria-hidden="true">
-        <rect x="8" y="2" width="8" height="17" rx="4" fill="none" stroke="#676a70" stroke-width="2"/>
-        <path d="M5 15.5V17c0 4 3.1 7 7 7s7-3 7-7v-1.5" fill="none" stroke="#676a70" stroke-width="2" stroke-linecap="round"/>
-        <path d="M12 24v5M8.5 29h7" fill="none" stroke="#676a70" stroke-width="2" stroke-linecap="round"/>
+        <rect x="8" y="2" width="8" height="17" rx="4"
+          fill="none"
+          stroke="#676a70"
+          stroke-width="2"/>
+
+        <path d="M5 15.5V17c0 4 3.1 7 7 7s7-3 7-7v-1.5"
+          fill="none"
+          stroke="#676a70"
+          stroke-width="2"
+          stroke-linecap="round"/>
+
+        <path d="M12 24v5M8.5 29h7"
+          fill="none"
+          stroke="#676a70"
+          stroke-width="2"
+          stroke-linecap="round"/>
       </svg>
 
     </div>
 
     <div class="home-indicator"></div>
+
   </div>
 
 </div>
@@ -798,7 +858,6 @@ function esc(value){
 
 function initials(name){
   const s=String(name||"").trim();
-
   if(!s)return "?";
 
   const words=s.split(/\s+/).filter(Boolean);
@@ -852,7 +911,7 @@ function normalizeDirection(value){
 function parseData(){
   const raw=
     new URLSearchParams(location.search)
-    .get("data");
+      .get("data");
 
   if(!raw)return null;
 
@@ -872,10 +931,10 @@ function parseData(){
   let draftEn="";
   let draftKr="";
 
-  if(
-    tail[0] &&
-    tail[0].includes("~~")
-  ){
+  /* Old format:
+     one message field containing ~~ separated messages */
+  if(tail[0] && tail[0].includes("~~")){
+
     messageItems=
       tail[0]
         .split("~~")
@@ -885,6 +944,9 @@ function parseData(){
     draftKr=tail[2]||"";
 
   }else{
+
+    /* Current format:
+       every message is its own || field */
 
     const leftovers=[];
 
@@ -921,9 +983,7 @@ function parseData(){
         "Ⓤ"
       ];
 
-      if(
-        knownDirs.includes(rawDir)
-      ){
+      if(knownDirs.includes(rawDir)){
         messageItems.push(item);
       }else{
         leftovers.push(item);
@@ -945,8 +1005,7 @@ function parseData(){
 
         return {
           date:f[0]||"",
-          direction:
-            normalizeDirection(f[1]),
+          direction:normalizeDirection(f[1]),
           en:f[2]||"",
           kr:f[3]||"",
           state:f[4]||""
@@ -967,44 +1026,18 @@ function parseData(){
 }
 
 function messageHTML(m){
+  const dir=m.direction==="out" ? "out" : "in";
+  const date=m.date ? `<div class="thread-date compact">${esc(m.date)}</div>` : "";
+  const state=(dir==="out" && m.state) ? `<div class="receipt">${esc(m.state)}</div>` : "";
 
-  const dir=
-    m.direction==="out"
-      ? "out"
-      : "in";
-
-  const date=
-    m.date
-      ? `<div class="thread-date compact">${esc(m.date)}</div>`
-      : "";
-
-  const state=
-    dir==="out" && m.state
-      ? `<div class="receipt">${esc(m.state)}</div>`
-      : "";
-
-  return `
-    ${date}
-
+  return `${date}
     <div class="message ${dir}">
       <div class="bubble">
-
-        <div class="bubble-en">
-          ${esc(m.en)}
-        </div>
-
-        ${
-          m.kr
-            ? `<div class="bubble-kr">${esc(m.kr)}</div>`
-            : ""
-        }
-
+        <div class="bubble-en">${esc(m.en)}</div>
+        ${m.kr ? `<div class="bubble-kr">${esc(m.kr)}</div>` : ""}
       </div>
-
       ${state}
-
-    </div>
-  `;
+    </div>`;
 }
 
 function render(data){
@@ -1032,8 +1065,7 @@ function render(data){
       initials(data.contact)
         .slice(0,1);
 
-  const pct=
-    parseBattery(data.battery);
+  const pct=parseBattery(data.battery);
 
   document
     .getElementById("batteryFill")
