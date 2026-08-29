@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>NMT NET</title>
+
+<link rel="stylesheet" as="style" crossorigin
+href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+
+<style>
+:root{
+  --ink:#1c232c;
+  --muted:#8b95a1;
+  --line:#e3e8ed;
+  --soft:#f4f6f8;
+  --chip:#eef1f4;
+
+  --slate:#34414d;
+  --slate-dark:#28333d;
+  --bluegray:#66788a;
+  --accent:#e66f2d;
+
+  --bg:#f2f4f6;
+  --paper:#ffffff;
+}
+
+*{box-sizing:border-box}
+
+html,body{
+  margin:0;
+  padding:0;
+  background:transparent;
+  color:var(--ink);
+  font-family:Pretendard,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+}
+
+.wrap{
+  width:760px;
+  margin:0 auto;
+  background:var(--paper);
+}
+
+.header{
+  padding:25px 34px 18px;
+  border-bottom:1px solid var(--line);
+  background:#fff;
+}
+
+.top{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:22px;
+}
+
+.brand{
+  min-width:215px;
+}
+
+.logo{
+  font-size:30px;
+  line-height:1;
+  font-weight:900;
+  letter-spacing:.025em;
+  color:var(--slate-dark);
+}
+
+.tagline{
+  margin-top:7px;
+  font-size:12px;
+  font-weight:550;
+  letter-spacing:.015em;
+  color:var(--muted);
+}
+
+.search{
+  flex:1;
+  height:41px;
+  border:1px solid #dfe4e9;
+  border-radius:22px;
+  display:flex;
+  align-items:center;
+  padding:0 15px;
+  color:#9ca4ae;
+  font-size:12px;
+  font-weight:500;
+}
+
+.actions{
+  display:flex;
+  gap:9px;
+}
+
+.circle{
+  width:37px;
+  height:37px;
+  display:grid;
+  place-items:center;
+  border-radius:50%;
+  background:var(--soft);
+  color:#697480;
+  font-size:14px;
+}
+
+.write{
+  height:37px;
+  padding:0 15px;
+  border-radius:19px;
+  background:var(--slate);
+  color:#fff;
+  display:flex;
+  align-items:center;
+  font-size:12px;
+  font-weight:750;
+}
+
+.nav{
+  display:flex;
+  gap:30px;
+  padding:19px 34px 12px;
+  font-size:12px;
+  font-weight:750;
+  letter-spacing:.035em;
+  color:#55606d;
+}
+
+.nav .active{
+  color:var(--slate-dark);
+}
+
+.categories{
+  display:flex;
+  gap:8px;
+  padding:17px 34px;
+  border-top:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+  overflow:hidden;
+}
+
+.chip{
+  padding:8px 14px;
+  border-radius:17px;
+  background:var(--chip);
+  color:#55606b;
+  font-size:11px;
+  font-weight:550;
+  white-space:nowrap;
+}
+
+.chip.active{
+  background:var(--slate);
+  color:#fff;
+  font-weight:750;
+}
+
+.feed{
+  padding:18px 34px 30px;
+}
+
+.post{
+  border:0;
+  border-radius:0;
+  overflow:visible;
+  margin-bottom:0;
+  background:#fff;
+  box-shadow:none;
+}
+
+.post + .post{
+  position:relative;
+  margin-top:29px;
+  padding-top:29px;
+}
+
+.post + .post::before{
+  content:"";
+  position:absolute;
+  top:0;
+  left:46px;
+  right:46px;
+  height:1px;
+  background:var(--line);
+}
+
+.post-main{
+  padding:19px 22px 17px;
+}
+
+.post-top{
+  display:flex;
+  gap:8px;
+  align-items:center;
+  font-size:11px;
+  font-weight:550;
+  color:var(--muted);
+  margin-bottom:11px;
+}
+
+.category{
+  color:var(--bluegray);
+  font-weight:800;
+}
+
+.category.hot{
+  color:var(--accent);
+}
+
+.post-title{
+  font-size:20px;
+  line-height:1.38;
+  font-weight:820;
+  margin-bottom:8px;
+  letter-spacing:-.015em;
+}
+
+.author{
+  font-size:11px;
+  font-weight:550;
+  color:var(--muted);
+  margin-bottom:14px;
+}
+
+.author .unit{
+  color:#687480;
+  font-weight:700;
+}
+
+.body{
+  font-size:13px;
+  line-height:1.72;
+  font-weight:500;
+  white-space:pre-line;
+  color:#2b333c;
+}
+
+.stats{
+  display:flex;
+  gap:23px;
+  margin-top:16px;
+  color:#7f8996;
+  font-size:11px;
+  font-weight:550;
+}
+
+.stats .hot{
+  color:var(--accent);
+  font-weight:700;
+}
+
+.comments{
+  border-top:1px solid var(--line);
+  padding:0 22px;
+}
+
+.comment{
+  display:grid;
+  grid-template-columns:34px minmax(0,1fr) auto;
+  gap:10px;
+  align-items:center;
+  padding:12px 0;
+  border-bottom:1px solid #edf0f3;
+}
+
+.comment:last-child{
+  border-bottom:0;
+}
+
+.avatar{
+  width:29px;
+  height:29px;
+  border-radius:50%;
+  background:#eef1f4;
+  display:grid;
+  place-items:center;
+  color:#8e98a3;
+  font-size:10px;
+  font-weight:800;
+}
+
+.comment-head{
+  display:flex;
+  gap:8px;
+  margin-bottom:4px;
+}
+
+.comment-user{
+  font-size:11px;
+  font-weight:800;
+}
+
+.comment-time{
+  font-size:10px;
+  font-weight:500;
+  color:var(--muted);
+}
+
+.comment-text{
+  font-size:12px;
+  font-weight:500;
+  line-height:1.5;
+}
+
+.comment-like{
+  font-size:10px;
+  font-weight:550;
+  color:#808a96;
+}
+
+.empty{
+  padding:20px;
+  color:#a0a7b0;
+  font-size:11px;
+  font-weight:500;
+}
+
+.footer{
+  text-align:center;
+  padding:9px 0 17px;
+  font-size:9px;
+  font-weight:600;
+  letter-spacing:.09em;
+  color:#9da5ae;
+}
+
+@media(max-width:760px){
+  body,.wrap{
+    width:760px;
+    max-width:760px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="wrap">
+
+<header class="header">
+
+<div class="top">
+
+<div class="brand">
+  <div class="logo">NMT NET</div>
+  <div class="tagline">Internal personnel network.</div>
+</div>
+
+<div class="search">⌕&nbsp;&nbsp; 게시글, 키워드 검색</div>
+
+<div class="actions">
+  <div class="circle">●</div>
+  <div class="circle">◇</div>
+  <div class="write">＋ 글쓰기</div>
+</div>
+
+</div>
+
+<nav class="nav">
+  <span class="active">HOME</span>
+  <span>TRENDING</span>
+  <span>BOARDS</span>
+  <span>FIELD</span>
+  <span>OFF-DUTY</span>
+</nav>
+
+</header>
+
+<div class="categories">
+  <span class="chip active">전체</span>
+  <span class="chip">자유</span>
+  <span class="chip">작전</span>
+  <span class="chip">장비</span>
+  <span class="chip">NODE</span>
+  <span class="chip">의료</span>
+  <span class="chip">교대</span>
+  <span class="chip">식당</span>
+  <span class="chip">분실물</span>
+</div>
+
+<main class="feed" id="feed"></main>
+
+<div class="footer">NMT INTERNAL COMMUNITY · AUTHORIZED PERSONNEL ONLY</div>
+
+</div>
+
+<script>
+function esc(v){
+  return String(v??"").replace(/[&<>"']/g,c=>({
+    "&":"&amp;",
+    "<":"&lt;",
+    ">":"&gt;",
+    '"':"&quot;",
+    "'":"&#39;"
+  }[c]))
+}
+
+function parseComment(i){
+  const[u="익명",t="",x="",l="0"]=String(i).split("^^");
+  return{u,t,x,l}
+}
+
+function parsePost(r){
+  const[
+    c="자유",
+    t="",
+    title="",
+    u="익명",
+    g="",
+    b="",
+    v="0",
+    l="0",
+    cc="0",
+    cr=""
+  ]=String(r).split("::");
+
+  return{
+    c,
+    t,
+    title,
+    u,
+    g,
+    b,
+    v,
+    l,
+    cc,
+    comments:cr
+      ?cr.split("~~").filter(Boolean).slice(0,5).map(parseComment)
+      :[]
+  }
+}
+
+function parseData(){
+  const r=new URLSearchParams(location.search).get("data");
+
+  return r
+    ?r.split("||").filter(Boolean).slice(0,2).map(parsePost)
+    :[]
+}
+
+function commentHTML(c){
+  return `
+    <div class="comment">
+      <div class="avatar">N</div>
+
+      <div>
+        <div class="comment-head">
+          <span class="comment-user">${esc(c.u)}</span>
+          <span class="comment-time">${esc(c.t)}</span>
+        </div>
+
+        <div class="comment-text">${esc(c.x)}</div>
+      </div>
+
+      <div class="comment-like">♡ ${esc(c.l)}</div>
+    </div>
+  `
+}
+
+function postHTML(p){
+  const hotClass=(p.c==="소문"||p.c==="작전") ? " hot" : "";
+
+  return `
+    <article class="post">
+
+      <div class="post-main">
+
+        <div class="post-top">
+          <span class="category${hotClass}">${esc(p.c)}</span>
+          <span>·</span>
+          <span>${esc(p.t)}</span>
+        </div>
+
+        <div class="post-title">${esc(p.title)}</div>
+
+        <div class="author">
+          ${esc(p.u)}
+          ${p.g?` · <span class="unit">${esc(p.g)}</span>`:""}
+        </div>
+
+        <div class="body">${esc(p.b)}</div>
+
+        <div class="stats">
+          <span>◉ 조회 ${esc(p.v)}</span>
+          <span class="${Number(p.l)>=30?"hot":""}">♡ 좋아요 ${esc(p.l)}</span>
+          <span>◯ 댓글 ${esc(p.cc)}</span>
+        </div>
+
+      </div>
+
+      <div class="comments">
+        ${
+          p.comments.length
+            ?p.comments.map(commentHTML).join("")
+            :'<div class="empty">댓글 없음</div>'
+        }
+      </div>
+
+    </article>
+  `
+}
+
+const exampleData=[
+  {
+    c:"장비",
+    t:"14:17",
+    title:"아까 C구역에서 본 새 장비 실물 꽤 괜찮던데",
+    u:"익명",
+    g:"NODE-3",
+    b:"오전에 브리핑 끝나고 장비 테스트하는 거 잠깐 봤는데,\n팔 쪽에 뭐가 두 덩이 달려 있더라.\n무게는 좀 있어 보이는데 움직임은 생각보다 괜찮아 보였음.\n정식 배치인지 시제품인지 아는 사람?",
+    v:"583",
+    l:"32",
+    cc:"4",
+    comments:[
+      {u:"익명",t:"14:21",x:"DE-2291 후속 대응장비라는 얘기 있던데 확정은 아님",l:"7"},
+      {u:"익명",t:"14:22",x:"나도 봄. 방패처럼 접히는 부분 있더라",l:"5"},
+      {u:"익명",t:"14:24",x:"개발실 사람들 표정 보면 아직 테스트 단계 같음",l:"3"},
+      {u:"익명",t:"14:26",x:"누가 만졌다가 바로 손 떼라 소리 들었다던데 ㅋㅋ",l:"4"}
+    ]
+  },
+  {
+    c:"소문",
+    t:"13:02",
+    title:"Montoro랑 Blackthorn 또 같이 내려가던데",
+    u:"익명",
+    g:"LOG-1",
+    b:"회의 끝나고 둘이 같이 내려가는 거 봄.\n작전에서도 자주 묶이던데 그냥 호흡이 잘 맞는 건가.\n둘 성격 보면 안 맞을 것 같은데 이상하게 붙이면 잘 굴러가긴 함.",
+    v:"721",
+    l:"41",
+    cc:"5",
+    comments:[
+      {u:"익명",t:"13:05",x:"둘 다 성깔 있어서 오히려 말 안 늘어지는 조합임",l:"8"},
+      {u:"익명",t:"13:07",x:"Montoro가 밀고 Blackthorn이 정리하는 느낌",l:"6"},
+      {u:"익명",t:"13:08",x:"근데 둘이 붙어 있으면 주변이 더 시끄러움 ㅋㅋ",l:"12"},
+      {u:"익명",t:"13:10",x:"소문 퍼뜨리지 마라 얘들아",l:"4"},
+      {u:"익명",t:"13:11",x:"다음 교대표에도 둘 같이 잡혀있던데?",l:"3"}
+    ]
+  }
+];
+
+function examplePostToHTML(p){
+  return postHTML(p);
+}
+
+const posts=parseData();
+const feed=document.getElementById("feed");
+
+feed.innerHTML=
+  posts.length
+    ?posts.map(postHTML).join("")
+    :exampleData.map(examplePostToHTML).join("");
+</script>
+
+</body>
+</html>
