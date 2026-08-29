@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NMT Operation Brief</title>
+<link rel="stylesheet" crossorigin
+href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+<style>
+:root{
+  --bg:#111922;
+  --bg-deep:#0d141c;
+  --text:#e7edf2;
+  --text-soft:#c2cbd3;
+  --muted:#88939d;
+  --line:#46525d;
+  --line-soft:#2f3a44;
+  --accent:#f06f22;
+  --accent-soft:#c96026;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:transparent}
+body{
+  font-family:Pretendard,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  color:var(--text);
+}
+.scene{
+  width:1080px;
+  min-height:1400px;
+  margin:0;
+  padding:34px 38px 30px;
+  background:linear-gradient(180deg,#121b25 0%,#111922 48%,#101820 100%);
+  position:relative;
+  overflow:hidden;
+}
+.scene::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background:
+    radial-gradient(circle at 18% 20%,rgba(255,255,255,.018),transparent 28%),
+    radial-gradient(circle at 80% 68%,rgba(255,255,255,.012),transparent 30%);
+  opacity:.8;
+}
+.content{position:relative;z-index:1}
+.topbar{
+  display:grid;
+  grid-template-columns:1fr auto;
+  align-items:start;
+  gap:30px;
+  padding-bottom:17px;
+  border-bottom:1px solid var(--line);
+}
+.brand{font-size:21px;line-height:1;font-weight:650;letter-spacing:.045em}
+.doc-meta{
+  display:grid;
+  grid-template-columns:auto auto;
+  column-gap:17px;
+  row-gap:8px;
+  font-size:14px;
+  line-height:1.25;
+}
+.meta-label{color:var(--muted);font-weight:650;letter-spacing:.08em}
+.meta-value{color:var(--text-soft);min-width:200px}
+.operation-head{padding:29px 8px 26px}
+.info-line{
+  display:grid;
+  grid-template-columns:132px 18px 1fr;
+  align-items:baseline;
+  margin-bottom:12px;
+}
+.info-label{color:#aeb8c1;font-size:18px;font-weight:500;letter-spacing:.045em}
+.info-pipe{color:#727e88;font-size:20px;text-align:center}
+.info-value{color:var(--text);font-size:20px;font-weight:500}
+.info-line.operation .info-value{font-size:35px;font-weight:650;letter-spacing:.03em}
+.info-line.mission .info-value{font-size:20px}
+.rank-value{color:var(--accent);font-weight:650}
+.divergence-zone{
+  position:relative;
+  min-height:390px;
+  padding:18px 12px 24px;
+  border-top:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+}
+.divergence-grid{
+  display:grid;
+  grid-template-columns:1fr 400px 1fr;
+  align-items:center;
+  gap:18px;
+  min-height:345px;
+}
+.side-stack{
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  height:250px;
+}
+.sensor-item{position:relative;min-height:74px}
+.sensor-item.left{padding-right:34px;text-align:left}
+.sensor-item.right{padding-left:34px;text-align:left}
+.sensor-label{color:#9ca7b1;font-size:13px;line-height:1;font-weight:650;letter-spacing:.08em;margin-bottom:10px}
+.sensor-main{color:var(--text);font-size:21px;line-height:1.25;font-weight:500}
+.sensor-main.accent{color:var(--accent);font-weight:650}
+.sensor-sub{margin-top:5px;color:var(--muted);font-size:14px;line-height:1.35}
+.sensor-item.left::after,.sensor-item.right::before{
+  content:"";position:absolute;top:29px;width:56px;height:1px;background:var(--line)
+}
+.sensor-item.left::after{right:-27px}
+.sensor-item.right::before{left:-27px}
+.sensor-item.left::before,.sensor-item.right::after{
+  content:"";position:absolute;top:26px;width:7px;height:7px;border-radius:50%;background:#aeb7be
+}
+.sensor-item.left::before{right:-31px}
+.sensor-item.right::after{left:-31px}
+.scan-wrap{width:360px;height:360px;margin:auto;position:relative}
+.scan-wrap svg{width:100%;height:100%;display:block}
+.scan-ring{fill:none;stroke:#6f7a84;stroke-width:1.1}
+.scan-ring-soft{fill:none;stroke:#3f4b55;stroke-width:.8;stroke-dasharray:3 5}
+.scan-grid-line{stroke:#26313a;stroke-width:.7}
+.scan-axis{stroke:#88929a;stroke-width:1}
+.crack-main{fill:none;stroke:#d6dde2;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.crack-secondary{fill:none;stroke:#7f8b94;stroke-width:.9;stroke-linecap:round;stroke-linejoin:round}
+.scan-point{fill:#dfe5e9}
+.scan-core{fill:#dfe5e9}
+.scan-core-ring{fill:none;stroke:#8e99a2;stroke-width:1}
+.scan-cross{stroke:#bcc4ca;stroke-width:1}
+.core-overlay{
+  position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+  width:165px;text-align:center;pointer-events:none
+}
+.core-label{color:#8f9aa3;font-size:11px;font-weight:650;letter-spacing:.12em}
+.core-id{margin-top:4px;color:#e7edf2;font-size:16px;font-weight:600;letter-spacing:.04em}
+.brief-section{
+  display:grid;
+  grid-template-columns:165px 1fr;
+  gap:26px;
+  padding:22px 18px 21px;
+  border-bottom:1px solid var(--line-soft);
+}
+.brief-section:last-child{border-bottom:0}
+.section-index{padding-top:1px;padding-right:18px;border-right:1px solid var(--line)}
+.section-number{color:#b7c0c8;font-size:28px;line-height:1;font-weight:650;letter-spacing:.035em}
+.section-name{margin-top:8px;color:#9ca7b1;font-size:14px;font-weight:650;letter-spacing:.08em}
+.section-body{min-width:0;color:var(--text-soft);font-size:17px;line-height:1.55}
+.situation-text{max-width:760px}
+.list{margin:0;padding:0;list-style:none}
+.list li{position:relative;padding-left:21px;margin:0}
+.list li + li{margin-top:5px}
+.list li::before{content:"—";position:absolute;left:0;color:#9ca6ae}
+.list.caution li{color:#d4dbe0}
+.list.caution li.critical{color:var(--accent)}
+.deploy-list{width:100%}
+.deploy-row{
+  display:grid;
+  grid-template-columns:112px minmax(0,1fr) minmax(0,1.1fr);
+  align-items:baseline;
+  min-height:37px;
+}
+.deploy-row + .deploy-row{border-top:1px solid rgba(70,82,93,.55)}
+.deploy-role{padding:8px 12px 8px 0;color:#aeb8c1;font-size:14px;font-weight:650;letter-spacing:.06em}
+.deploy-names{padding:8px 15px;border-left:1px solid var(--line);border-right:1px solid var(--line);color:#e0e6ea}
+.deploy-job{padding:8px 15px;color:#aeb7bf}
+.note-row{display:flex;align-items:center;gap:11px;flex-wrap:wrap}
+.limit{margin-left:auto;display:flex;align-items:center;gap:11px}
+.limit-label{color:#8f9aa3;font-size:12px;font-weight:650;letter-spacing:.08em}
+.limit-value{color:var(--accent);font-size:18px;font-weight:650}
+[data-empty="true"]{display:none !important}
+@media(max-width:1080px){body{width:1080px}}
+</style>
+</head>
+<body>
+<div class="scene">
+<div class="content">
+  <header class="topbar">
+    <div class="brand">NMT / OPERATION BRIEF</div>
+    <div class="doc-meta">
+      <div class="meta-label">DOC NO.</div>
+      <div class="meta-value" id="docNo"></div>
+      <div class="meta-label">DATE</div>
+      <div class="meta-value" id="docDate"></div>
+    </div>
+  </header>
+
+  <section class="operation-head">
+    <div class="info-line operation">
+      <div class="info-label">OPERATION</div><div class="info-pipe">│</div>
+      <div class="info-value" id="operation"></div>
+    </div>
+    <div class="info-line mission">
+      <div class="info-label">MISSION</div><div class="info-pipe">│</div>
+      <div class="info-value" id="mission"></div>
+    </div>
+  </section>
+
+  <section class="divergence-zone">
+    <div class="divergence-grid">
+      <div class="side-stack">
+        <div class="sensor-item left">
+          <div class="sensor-label">RANK</div>
+          <div class="sensor-main accent" id="rank"></div>
+          <div class="sensor-sub" id="rankSub"></div>
+        </div>
+        <div class="sensor-item left">
+          <div class="sensor-label">TYPE</div>
+          <div class="sensor-main" id="type"></div>
+          <div class="sensor-sub" id="typeSub"></div>
+        </div>
+      </div>
+
+      <div class="scan-wrap">
+        <svg viewBox="0 0 360 360" aria-hidden="true">
+          <g>
+            <line class="scan-grid-line" x1="60" y1="180" x2="300" y2="180"/>
+            <line class="scan-grid-line" x1="180" y1="60" x2="180" y2="300"/>
+            <line class="scan-grid-line" x1="95" y1="95" x2="265" y2="265"/>
+            <line class="scan-grid-line" x1="265" y1="95" x2="95" y2="265"/>
+          </g>
+          <circle class="scan-ring" cx="180" cy="180" r="145"/>
+          <circle class="scan-ring-soft" cx="180" cy="180" r="126"/>
+          <circle class="scan-ring-soft" cx="180" cy="180" r="94"/>
+          <circle class="scan-ring-soft" cx="180" cy="180" r="61"/>
+          <line class="scan-axis" x1="180" y1="25" x2="180" y2="47"/>
+          <line class="scan-axis" x1="180" y1="313" x2="180" y2="335"/>
+          <line class="scan-axis" x1="25" y1="180" x2="47" y2="180"/>
+          <line class="scan-axis" x1="313" y1="180" x2="335" y2="180"/>
+
+          <g>
+            <path class="crack-main" d="M180 180 L168 160 L173 141 L160 126 L166 108 L153 92 L158 72"/>
+            <path class="crack-main" d="M180 180 L194 164 L190 147 L207 133 L203 115 L219 101 L216 82"/>
+            <path class="crack-main" d="M180 180 L159 184 L145 198 L126 194 L111 211 L92 207 L78 221"/>
+            <path class="crack-main" d="M180 180 L199 189 L214 183 L230 197 L248 194 L262 209 L280 206"/>
+            <path class="crack-main" d="M180 180 L183 200 L173 216 L180 234 L170 251 L176 271 L169 289"/>
+            <path class="crack-secondary" d="M168 160 L149 154 L139 142"/>
+            <path class="crack-secondary" d="M160 126 L143 120 L135 106"/>
+            <path class="crack-secondary" d="M194 164 L211 157 L220 144"/>
+            <path class="crack-secondary" d="M207 133 L225 128 L235 114"/>
+            <path class="crack-secondary" d="M145 198 L136 215 L122 223"/>
+            <path class="crack-secondary" d="M126 194 L116 181 L100 178"/>
+            <path class="crack-secondary" d="M214 183 L226 170 L244 168"/>
+            <path class="crack-secondary" d="M230 197 L238 216 L255 223"/>
+            <path class="crack-secondary" d="M173 216 L157 224 L148 239"/>
+            <path class="crack-secondary" d="M180 234 L196 244 L202 259"/>
+            <path class="crack-secondary" d="M173 141 L183 130 L181 116"/>
+            <path class="crack-secondary" d="M190 147 L183 134 L188 121"/>
+          </g>
+
+          <circle class="scan-point" cx="168" cy="160" r="2.5"/>
+          <circle class="scan-point" cx="194" cy="164" r="2.5"/>
+          <circle class="scan-point" cx="145" cy="198" r="2.5"/>
+          <circle class="scan-point" cx="214" cy="183" r="2.5"/>
+          <circle class="scan-point" cx="173" cy="216" r="2.5"/>
+          <circle class="scan-core-ring" cx="180" cy="180" r="15"/>
+          <circle class="scan-core" cx="180" cy="180" r="5"/>
+          <line class="scan-cross" x1="165" y1="180" x2="195" y2="180"/>
+          <line class="scan-cross" x1="180" y1="165" x2="180" y2="195"/>
+        </svg>
+
+        <div class="core-overlay">
+          <div class="core-label">CORE ID</div>
+          <div class="core-id" id="coreId"></div>
+        </div>
+      </div>
+
+      <div class="side-stack">
+        <div class="sensor-item right">
+          <div class="sensor-label">LOCATION</div>
+          <div class="sensor-main" id="location"></div>
+          <div class="sensor-sub" id="locationSub"></div>
+        </div>
+        <div class="sensor-item right">
+          <div class="sensor-label">STATUS</div>
+          <div class="sensor-main" id="status"></div>
+          <div class="sensor-sub" id="statusSub"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="brief-section">
+    <div class="section-index"><div class="section-number">01</div><div class="section-name">SITUATION</div></div>
+    <div class="section-body situation-text" id="situation"></div>
+  </section>
+
+  <section class="brief-section">
+    <div class="section-index"><div class="section-number">02</div><div class="section-name">OBJECTIVE</div></div>
+    <div class="section-body"><ul class="list" id="objectives"></ul></div>
+  </section>
+
+  <section class="brief-section">
+    <div class="section-index"><div class="section-number">03</div><div class="section-name">CAUTION</div></div>
+    <div class="section-body"><ul class="list caution" id="cautions"></ul></div>
+  </section>
+
+  <section class="brief-section">
+    <div class="section-index"><div class="section-number">04</div><div class="section-name">DEPLOYMENT</div></div>
+    <div class="section-body">
+      <div class="deploy-list">
+        <div class="deploy-row" id="fieldRow"><div class="deploy-role">FIELD</div><div class="deploy-names" id="fieldNames"></div><div class="deploy-job" id="fieldJob"></div></div>
+        <div class="deploy-row" id="standbyRow"><div class="deploy-role">STANDBY</div><div class="deploy-names" id="standbyNames"></div><div class="deploy-job" id="standbyJob"></div></div>
+        <div class="deploy-row" id="supportRow"><div class="deploy-role">SUPPORT</div><div class="deploy-names" id="supportNames"></div><div class="deploy-job" id="supportJob"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="brief-section">
+    <div class="section-index"><div class="section-number">05</div><div class="section-name">OPERATION NOTE</div></div>
+    <div class="section-body note-row">
+      <span id="note"></span>
+      <div class="limit" id="limitBox"><span class="limit-label">LIMITED TIME</span><span class="limit-value" id="limit"></span></div>
+    </div>
+  </section>
+</div>
+</div>
+
+<script>
+function esc(value){
+  return String(value ?? "").replace(/[&<>"']/g, c => ({
+    "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+  }[c]));
+}
+function splitList(value){
+  return String(value || "").split("~~").map(v => v.trim()).filter(Boolean);
+}
+function setText(id,value){
+  document.getElementById(id).textContent = value || "";
+}
+function renderList(id,items,critical=false){
+  const el=document.getElementById(id);
+  el.innerHTML=items.map((item,i)=>{
+    const cls=critical && i===0 ? ` class="critical"` : "";
+    return `<li${cls}>${esc(item)}</li>`;
+  }).join("");
+}
+function parsePair(value){
+  const parts=String(value||"").split("^^");
+  return {names:parts[0]||"",job:parts.slice(1).join("^^")||""};
+}
+function parseData(){
+  const raw=new URLSearchParams(location.search).get("data");
+  if(!raw)return null;
+  const p=raw.split("||");
+  return {
+    operation:p[0]||"", mission:p[1]||"", rank:p[2]||"", rankSub:p[3]||"",
+    type:p[4]||"", typeSub:p[5]||"", location:p[6]||"", locationSub:p[7]||"",
+    coreId:p[8]||"", status:p[9]||"", statusSub:p[10]||"", situation:p[11]||"",
+    objectives:splitList(p[12]), cautions:splitList(p[13]),
+    field:parsePair(p[14]), standby:parsePair(p[15]), support:parsePair(p[16]),
+    note:p[17]||"", limit:p[18]||"", docNo:p[19]||"", docDate:p[20]||""
+  };
+}
+function render(data){
+  setText("operation",data.operation); setText("mission",data.mission);
+  setText("rank",data.rank); setText("rankSub",data.rankSub);
+  setText("type",data.type); setText("typeSub",data.typeSub);
+  setText("location",data.location); setText("locationSub",data.locationSub);
+  setText("coreId",data.coreId); setText("status",data.status); setText("statusSub",data.statusSub);
+  setText("situation",data.situation);
+  renderList("objectives",data.objectives);
+  renderList("cautions",data.cautions,true);
+  setText("fieldNames",data.field.names); setText("fieldJob",data.field.job);
+  setText("standbyNames",data.standby.names); setText("standbyJob",data.standby.job);
+  setText("supportNames",data.support.names); setText("supportJob",data.support.job);
+  setText("note",data.note); setText("limit",data.limit);
+  setText("docNo",data.docNo); setText("docDate",data.docDate);
+
+  document.getElementById("limitBox").dataset.empty=data.limit ? "false" : "true";
+  document.getElementById("fieldRow").dataset.empty=data.field.names ? "false" : "true";
+  document.getElementById("standbyRow").dataset.empty=data.standby.names ? "false" : "true";
+  document.getElementById("supportRow").dataset.empty=data.support.names ? "false" : "true";
+}
+
+const data=parseData();
+if(data){
+  render(data);
+}else{
+  render({
+    operation:"HOLLOW TIDE",
+    mission:"Pier 47 지하 잔류 균열 재활성 대응",
+    rank:"BREACH",
+    rankSub:"고위험 등급",
+    type:"잔류 코어 재활성",
+    typeSub:"공간 이상 / 재수렴 진행 중",
+    location:"Pier 47 하부 지하망",
+    locationSub:"C구역 배수로",
+    coreId:"DE-2291",
+    status:"재수렴 · 미세 증식",
+    statusSub:"국소 이상 반응 감지",
+    situation:"오전 봉인된 DE-2291 균열의 잔류 파장이 지하 배수로에서 재수렴 중. 회수반 센서가 12시간 이내 재개구 확률 61%를 보고했으며, 코어 본체는 제거됐으나 뿌리 절단면에서 미세 증식이 확인됨. 현재 이상 반응은 오전 절단 지점을 중심으로 국소 발생 중이나, 배수로 수위 변화와 함께 확산 범위가 넓어질 가능성이 있음.",
+    objectives:[
+      "오전 절단면 잔류 조직 완전 소멸",
+      "DE-2291 재개구 차단",
+      "C구역 추가 증식 여부 확인",
+      "종료 후 현장 안정성 재확인"
+    ],
+    cautions:[
+      "폐쇄공간 작전",
+      "배수로 수위 상승 가능",
+      "오전 절단 지점 직접 접촉 금지",
+      "잔류 파장 재수렴 지점 접근 시 현장 계측 우선"
+    ],
+    field:{names:"Dégé Varek · Darío Montoro · Valric Torsten",job:"현장 진입 · 잔류 코어 확인 및 제거"},
+    standby:{names:"Fintan Blackthorn",job:"지상 통제 · 현장 연락 · 예비 대응"},
+    support:{names:"Timéo Renard",job:"의료 지원 · 지상 대기"},
+    note:"민간 노출 0 유지 · 가이드 미배정 · Halo 의료본부 지원 대기",
+    limit:"T − 11:43:21",
+    docNo:"NMT-251004-1426",
+    docDate:"2025.10.04 / 14:26"
+  });
+}
+</script>
+</body>
+</html>
