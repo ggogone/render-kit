@@ -20,90 +20,517 @@ href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretend
   --accent:#ec7427;
   --green:#53b985;
 }
+
 *{box-sizing:border-box}
+
 html,body{
-  margin:0;padding:0;background:transparent;
+  margin:0;
+  padding:0;
+  background:transparent;
   font-family:Pretendard,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-  color:var(--ink)
+  color:var(--ink);
 }
-.scene{width:900px;margin:0;background:#fff}
+
+.scene{
+  width:900px;
+  margin:0;
+  background:#fff;
+}
+
+/* TOP */
 .topbar{
-  height:84px;padding:0 30px;display:flex;align-items:center;justify-content:space-between;
-  background:linear-gradient(180deg,#0e1826 0%,#111d2c 100%);color:#fff
+  height:84px;
+  padding:0 28px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  background:linear-gradient(180deg,#0e1826 0%,#111d2c 100%);
+  color:#fff;
 }
-.brand{display:flex;align-items:center;gap:12px}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:11px;
+}
+
 .brand-mark{
-  width:38px;height:38px;border:2px solid rgba(255,255,255,.88);
-  transform:rotate(45deg);position:relative;opacity:.9
+  position:relative;
+  width:38px;
+  height:38px;
+  flex:0 0 38px;
 }
-.brand-mark::before,.brand-mark::after{content:"";position:absolute;background:#fff;opacity:.85}
-.brand-mark::before{width:2px;height:24px;left:17px;top:5px}
-.brand-mark::after{width:24px;height:2px;left:5px;top:17px}
-.brand-title{font-size:18px;line-height:1;font-weight:850;letter-spacing:.04em}
-.brand-sub{margin-top:4px;font-size:10px;color:#aeb8c4;letter-spacing:.08em}
-.topnav{display:flex;align-items:center;gap:38px;font-size:12px;color:#c5ccd4;font-weight:650}
-.topnav .active{color:#fff;position:relative}
-.topnav .active::after{content:"";position:absolute;left:0;right:0;bottom:-16px;height:2px;background:#fff}
-.account{display:flex;align-items:center;gap:18px;font-size:10px;color:#d1d6dc}
-.account b{color:#fff;font-weight:700}
-.dot{width:8px;height:8px;border-radius:50%;background:var(--accent);display:inline-block;margin-left:5px}
-.profile{width:34px;height:34px;border:1px solid #8b98a6;border-radius:50%;display:grid;place-items:center;color:#b9c2cc;font-size:15px}
-.paper{margin:0;background:#fff;padding:36px 26px 0}
-.head{padding:0 24px 26px;border-bottom:1px solid var(--line);display:flex;align-items:flex-end;justify-content:space-between}
-.head h1{margin:0;font-size:42px;line-height:1;letter-spacing:-.02em;color:#101827}
-.head p{margin:12px 0 0;color:#4d5865;font-size:14px;font-weight:550}
-.watermark{font-size:54px;font-weight:900;color:#eef1f4;letter-spacing:-.04em;user-select:none}
-.tools{padding:18px 24px 14px;display:flex;align-items:center;justify-content:space-between}
-.tabs{display:flex;gap:32px;font-size:12px;color:#596473;font-weight:650}
-.tabs span{padding:7px 0}
-.tabs .active{color:#18202a;border-bottom:2px solid var(--accent)}
-.search{width:250px;height:34px;border:1px solid #d9dee5;border-radius:5px;display:flex;align-items:center;justify-content:space-between;padding:0 12px;font-size:11px;color:#9ba3ad}
 
-/* list */
-.notice-list{margin:0 24px;border-top:1px solid var(--line-2);border-bottom:1px solid var(--line-2)}
-.notice-head,.notice-row{display:grid;grid-template-columns:68px minmax(0,1fr) 110px 150px 72px;align-items:center}
-.notice-head{min-height:42px;padding:0 10px;background:var(--navy);color:#fff;font-size:11px;font-weight:750}
-.notice-row{min-height:46px;padding:5px 10px;border-bottom:1px solid var(--line);font-size:12px}
-.notice-row:last-child{border-bottom:0}
-.notice-row.selected{background:linear-gradient(90deg,#f6f8fb 0%,#fbfcfd 100%);box-shadow:inset 3px 0 0 var(--accent)}
-.no{color:#677280;text-align:center}
-.title-cell{min-width:0;display:flex;align-items:center;gap:9px}
-.badge{flex:0 0 auto;padding:3px 7px;border-radius:4px;border:1px solid #d7dde4;color:#65717e;font-size:10px;font-weight:750;background:#fff}
-.badge.accent{color:var(--accent);border-color:#efb790;background:#fffaf7}
-.notice-title{min-width:0;font-weight:700;color:#1c2530;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.new{margin-left:2px;border:1px solid #f0a671;border-radius:3px;padding:2px 4px;color:var(--accent);font-size:8px;font-weight:850}
-.kind,.date,.views{color:#6c7683}
-.views{text-align:right;padding-right:5px}
+.brand-mark::before{
+  content:"";
+  position:absolute;
+  inset:2px;
+  background:#f4f6f8;
+  clip-path:polygon(
+    0 4%,
+    44% 15%,
+    50% 36%,
+    56% 15%,
+    100% 4%,
+    79% 34%,
+    64% 44%,
+    59% 92%,
+    50% 100%,
+    41% 92%,
+    36% 44%,
+    21% 34%
+  );
+  opacity:.95;
+}
 
-/* article */
-.article{margin:20px 24px 0;padding:26px 28px 30px;border:1px solid var(--line);border-radius:9px;background:#fff}
-.article-title-row{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-bottom:10px}
-.article-title-wrap{display:flex;align-items:center;gap:12px;min-width:0}
-.article-title{margin:0;font-size:24px;line-height:1.35;font-weight:800;letter-spacing:-.02em}
-.registered{flex:0 0 auto;color:#7a8490;font-size:11px;white-space:nowrap}
-.meta{display:flex;flex-wrap:wrap;gap:10px 14px;padding-bottom:18px;border-bottom:1px solid var(--line);font-size:11px;color:#626d79}
-.meta span + span::before{content:"│";margin-right:14px;color:#c1c7ce}
-.article-body{padding-top:22px;font-size:14px;line-height:1.78;font-weight:500;color:#242c35;white-space:pre-line}
-.signature{margin-top:20px}
+.brand-title{
+  font-size:18px;
+  line-height:1;
+  font-weight:850;
+  letter-spacing:.04em;
+}
 
-/* security */
-.security{margin-top:26px;padding-top:20px;border-top:1px solid var(--line)}
-.security-title{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:800;color:#28313b;margin-bottom:10px}
-.lock{width:18px;height:18px;border-radius:4px;display:grid;place-items:center;background:var(--navy);color:#fff;font-size:10px}
-.security-body{font-size:12px;line-height:1.7;color:#4d5864;white-space:pre-line}
+.brand-sub{
+  margin-top:4px;
+  font-size:9px;
+  color:#aeb8c4;
+  letter-spacing:.08em;
+  white-space:nowrap;
+}
 
-/* footer */
-.footer{margin-top:24px;min-height:80px;padding:0 36px;display:grid;grid-template-columns:1fr 1fr 1fr 1.25fr;align-items:center;background:linear-gradient(180deg,#132237 0%,#0f1b2b 100%);color:#fff}
-.footer-item{min-height:42px;padding:4px 22px;border-right:1px solid rgba(255,255,255,.12)}
-.footer-item:first-child{padding-left:0}
-.footer-item:last-child{border-right:0}
-.footer-label{font-size:9px;color:#9eabb8;letter-spacing:.06em;margin-bottom:7px}
-.footer-value{font-size:11px;color:#e5e9ee}
-.green{color:var(--green)}
-.footer-brand{display:flex;justify-content:flex-end;align-items:center;gap:12px;color:#9da8b4;font-size:13px;font-weight:750}
-.footer-brand small{display:block;margin-top:2px;font-size:8px;font-weight:550;letter-spacing:.05em}
-[data-empty="true"]{display:none!important}
-@media(max-width:900px){body,.scene{width:900px;max-width:900px}}
+.topnav{
+  display:flex;
+  align-items:center;
+  gap:34px;
+  font-size:12px;
+  color:#c5ccd4;
+  font-weight:650;
+}
+
+.topnav .active{
+  color:#fff;
+  position:relative;
+}
+
+.topnav .active::after{
+  content:"";
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:-16px;
+  height:2px;
+  background:#fff;
+}
+
+.account{
+  display:flex;
+  align-items:center;
+  gap:18px;
+  font-size:10px;
+  color:#d1d6dc;
+}
+
+.account b{
+  color:#fff;
+  font-weight:700;
+}
+
+.dot{
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  background:var(--accent);
+  display:inline-block;
+  margin-left:5px;
+}
+
+.profile{
+  width:34px;
+  height:34px;
+  border:1px solid #8b98a6;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  color:#b9c2cc;
+  font-size:15px;
+}
+
+/* PAGE */
+.paper{
+  margin:0;
+  background:#fff;
+  padding:36px 18px 0;
+}
+
+.head{
+  padding:0 20px 26px;
+  border-bottom:1px solid var(--line);
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+}
+
+.head h1{
+  margin:0;
+  font-size:42px;
+  line-height:1;
+  letter-spacing:-.02em;
+  color:#101827;
+}
+
+.head p{
+  margin:12px 0 0;
+  color:#4d5865;
+  font-size:14px;
+  font-weight:550;
+}
+
+.watermark{
+  font-size:54px;
+  font-weight:900;
+  color:#eef1f4;
+  letter-spacing:-.04em;
+  user-select:none;
+}
+
+.tools{
+  padding:18px 20px 14px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+
+.tabs{
+  display:flex;
+  gap:30px;
+  font-size:12px;
+  color:#596473;
+  font-weight:650;
+}
+
+.tabs span{
+  padding:7px 0;
+}
+
+.tabs .active{
+  color:#18202a;
+  border-bottom:2px solid var(--accent);
+}
+
+.search{
+  width:250px;
+  height:34px;
+  border:1px solid #d9dee5;
+  border-radius:5px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 12px;
+  font-size:11px;
+  color:#9ba3ad;
+}
+
+/* NOTICE LIST */
+.notice-list{
+  margin:0 20px;
+  border-top:1px solid var(--line-2);
+  border-bottom:1px solid var(--line-2);
+}
+
+.notice-head,
+.notice-row{
+  display:grid;
+  grid-template-columns:96px minmax(0,1fr) 132px 56px;
+  align-items:center;
+}
+
+.notice-head{
+  min-height:42px;
+  padding:0 10px;
+  background:var(--navy);
+  color:#fff;
+  font-size:11px;
+  font-weight:750;
+}
+
+.notice-row{
+  min-height:46px;
+  padding:5px 10px;
+  border-bottom:1px solid var(--line);
+  font-size:12px;
+}
+
+.notice-row:last-child{
+  border-bottom:0;
+}
+
+.notice-row.selected{
+  background:linear-gradient(90deg,#f6f8fb 0%,#fbfcfd 100%);
+  box-shadow:inset 3px 0 0 var(--accent);
+}
+
+.no{
+  color:#677280;
+  padding-left:2px;
+  white-space:nowrap;
+  font-variant-numeric:tabular-nums;
+}
+
+.title-cell{
+  min-width:0;
+  display:flex;
+  align-items:center;
+  gap:8px;
+  padding-right:14px;
+}
+
+.badge{
+  flex:0 0 auto;
+  padding:3px 7px;
+  border-radius:4px;
+  border:1px solid #d7dde4;
+  color:#65717e;
+  font-size:10px;
+  font-weight:750;
+  background:#fff;
+  white-space:nowrap;
+}
+
+.badge.accent{
+  color:var(--accent);
+  border-color:#efb790;
+  background:#fffaf7;
+}
+
+.notice-title{
+  min-width:0;
+  font-weight:700;
+  color:#1c2530;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+.new{
+  flex:0 0 auto;
+  border:1px solid #f0a671;
+  border-radius:3px;
+  padding:2px 4px;
+  color:var(--accent);
+  font-size:8px;
+  line-height:1;
+  font-weight:850;
+  white-space:nowrap;
+}
+
+.date,
+.views{
+  color:#6c7683;
+  white-space:nowrap;
+}
+
+.date{
+  font-variant-numeric:tabular-nums;
+}
+
+.views{
+  text-align:right;
+  padding-right:5px;
+}
+
+/* ARTICLE */
+.article{
+  margin:20px 8px 0;
+  padding:28px 30px 32px;
+  border:1px solid var(--line);
+  border-radius:9px;
+  background:#fff;
+}
+
+.article-title-row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:18px;
+  margin-bottom:10px;
+}
+
+.article-title-wrap{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  min-width:0;
+}
+
+.article-title{
+  margin:0;
+  font-size:24px;
+  line-height:1.35;
+  font-weight:800;
+  letter-spacing:-.02em;
+}
+
+.registered{
+  flex:0 0 auto;
+  color:#7a8490;
+  font-size:11px;
+  white-space:nowrap;
+}
+
+.meta{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px 14px;
+  padding-bottom:18px;
+  border-bottom:1px solid var(--line);
+  font-size:11px;
+  color:#626d79;
+}
+
+.meta span + span::before{
+  content:"│";
+  margin-right:14px;
+  color:#c1c7ce;
+}
+
+.article-body{
+  padding-top:22px;
+  font-size:14px;
+  line-height:1.78;
+  font-weight:500;
+  color:#242c35;
+  white-space:pre-line;
+}
+
+.signature{
+  margin-top:20px;
+}
+
+/* SECURITY */
+.security{
+  margin-top:26px;
+  padding-top:20px;
+  border-top:1px solid var(--line);
+}
+
+.security-title{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  font-size:13px;
+  font-weight:800;
+  color:#28313b;
+  margin-bottom:10px;
+}
+
+.lock{
+  width:18px;
+  height:18px;
+  border-radius:4px;
+  display:grid;
+  place-items:center;
+  background:var(--navy);
+  color:#fff;
+  font-size:10px;
+}
+
+.security-body{
+  font-size:12px;
+  line-height:1.7;
+  color:#4d5864;
+  white-space:pre-line;
+}
+
+/* FOOTER */
+.footer{
+  margin-top:24px;
+  min-height:80px;
+  padding:0 36px;
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr 1.25fr;
+  align-items:center;
+  background:linear-gradient(180deg,#132237 0%,#0f1b2b 100%);
+  color:#fff;
+}
+
+.footer-item{
+  min-height:42px;
+  padding:4px 22px;
+  border-right:1px solid rgba(255,255,255,.12);
+}
+
+.footer-item:first-child{
+  padding-left:0;
+}
+
+.footer-item:last-child{
+  border-right:0;
+}
+
+.footer-label{
+  font-size:9px;
+  color:#9eabb8;
+  letter-spacing:.06em;
+  margin-bottom:7px;
+}
+
+.footer-value{
+  font-size:11px;
+  color:#e5e9ee;
+}
+
+.green{
+  color:var(--green);
+}
+
+.footer-brand{
+  display:flex;
+  justify-content:flex-end;
+  align-items:center;
+  gap:10px;
+  color:#9da8b4;
+  font-size:13px;
+  font-weight:750;
+}
+
+.footer-brand-mark{
+  width:28px;
+  height:28px;
+  background:#8491a0;
+  clip-path:polygon(
+    0 4%,
+    44% 15%,
+    50% 36%,
+    56% 15%,
+    100% 4%,
+    79% 34%,
+    64% 44%,
+    59% 92%,
+    50% 100%,
+    41% 92%,
+    36% 44%,
+    21% 34%
+  );
+}
+
+.footer-brand small{
+  display:block;
+  margin-top:2px;
+  font-size:8px;
+  font-weight:550;
+  letter-spacing:.05em;
+}
+
+[data-empty="true"]{
+  display:none!important;
+}
+
+@media(max-width:900px){
+  body,.scene{
+    width:900px;
+    max-width:900px;
+  }
+}
 </style>
 </head>
 
@@ -115,16 +542,23 @@ html,body{
     <div class="brand-mark"></div>
     <div>
       <div class="brand-title">NMT NET</div>
-      <div class="brand-sub">NEURAL MANAGEMENT & TACTICS</div>
+      <div class="brand-sub">NEURAL MANAGEMENT &amp; TACTICS</div>
     </div>
   </div>
 
   <nav class="topnav">
-    <span>HOME</span><span>TRENDING</span><span class="active">NOTICE</span><span>FIELD</span><span>DOCUMENT</span>
+    <span>HOME</span>
+    <span>TRENDING</span>
+    <span class="active">NOTICE</span>
+    <span>FIELD</span>
+    <span>DOCUMENT</span>
   </nav>
 
   <div class="account">
-    <div>접속자 <b>4,207명</b><br>보안등급 INTERNAL B <span class="dot"></span></div>
+    <div>
+      접속자 <b>4,207명</b><br>
+      보안등급 INTERNAL B <span class="dot"></span>
+    </div>
     <div class="profile">○</div>
   </div>
 </header>
@@ -141,24 +575,41 @@ html,body{
 
 <section class="tools">
   <div class="tabs">
-    <span class="active">전체</span><span>업무공지</span><span>보안알림</span><span>행정안내</span><span>네트워크</span><span>기타</span>
+    <span class="active">전체</span>
+    <span>업무공지</span>
+    <span>보안알림</span>
+    <span>행정안내</span>
+    <span>네트워크</span>
+    <span>기타</span>
   </div>
-  <div class="search"><span>제목, 내용 검색</span><span>⌕</span></div>
+
+  <div class="search">
+    <span>제목, 내용 검색</span>
+    <span>⌕</span>
+  </div>
 </section>
 
 <section class="notice-list">
+
   <div class="notice-head">
-    <div>번호</div><div>제목</div><div>분류</div><div>작성일</div><div style="text-align:right;padding-right:5px">조회</div>
+    <div>번호</div>
+    <div>제목</div>
+    <div>작성일</div>
+    <div style="text-align:right;padding-right:5px">조회</div>
   </div>
+
   <div id="noticeRows"></div>
+
 </section>
 
 <article class="article">
+
   <div class="article-title-row">
     <div class="article-title-wrap">
       <span class="badge accent" id="articleBadge"></span>
       <h2 class="article-title" id="articleTitle"></h2>
     </div>
+
     <div class="registered" id="articleDate"></div>
   </div>
 
@@ -169,6 +620,7 @@ html,body{
   </div>
 
   <div class="article-body">
+
     <div id="articleBody"></div>
     <div class="signature" id="articleSignature"></div>
 
@@ -177,29 +629,45 @@ html,body{
         <span class="lock">■</span>
         <span>보안 관련 안내</span>
       </div>
+
       <div class="security-body" id="securityBody"></div>
     </div>
+
   </div>
 </article>
 
 </main>
 
 <footer class="footer">
+
   <div class="footer-item">
     <div class="footer-label">SYSTEM STATUS</div>
-    <div class="footer-value">정상 <span class="green">●</span></div>
+    <div class="footer-value">
+      정상 <span class="green">●</span>
+    </div>
   </div>
+
   <div class="footer-item">
     <div class="footer-label">NETWORK</div>
-    <div class="footer-value">보안 연결 상태 <span class="green">●</span></div>
+    <div class="footer-value">
+      보안 연결 상태 <span class="green">●</span>
+    </div>
   </div>
+
   <div class="footer-item">
     <div class="footer-label">TIME</div>
     <div class="footer-value" id="footerTime"></div>
   </div>
+
   <div class="footer-item footer-brand">
-    <div>NMT NET<small>INTERNAL NETWORK SYSTEM</small></div>
+    <div class="footer-brand-mark"></div>
+
+    <div>
+      NMT NET
+      <small>INTERNAL NETWORK SYSTEM</small>
+    </div>
   </div>
+
 </footer>
 
 </div>
@@ -207,38 +675,67 @@ html,body{
 <script>
 function esc(v){
   return String(v??"").replace(/[&<>"']/g,c=>({
-    "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
-  }[c]))
+    "&":"&amp;",
+    "<":"&lt;",
+    ">":"&gt;",
+    '"':"&quot;",
+    "'":"&#39;"
+  }[c]));
 }
 
 function parseListItem(raw){
-  const [no="", category="", title="", date="", views="0", isNew="0"] = String(raw||"").split("^^");
-  return { no, category, title, date, views, isNew };
+  const [
+    no="",
+    category="",
+    title="",
+    date="",
+    views="0",
+    isNew="0"
+  ] = String(raw||"").split("^^");
+
+  return {
+    no,
+    category,
+    title,
+    date,
+    views,
+    isNew
+  };
 }
 
 function parseData(){
-  const raw = new URLSearchParams(location.search).get("data");
+
+  const raw =
+    new URLSearchParams(location.search).get("data");
+
   if(!raw) return null;
 
   const p = raw.split("||");
 
   return {
-    selectedNo: p[0] || "",
-    category: p[1] || "업무공지",
-    title: p[2] || "",
-    date: p[3] || "",
-    views: p[4] || "0",
-    sender: p[5] || "",
-    security: p[6] || "",
-    body: p[7] || "",
-    securityNote: p[8] || "",
-    list: String(p[9] || "").split("~~").filter(Boolean).slice(0,4).map(parseListItem),
-    footerTime: p[10] || "",
-    signature: p[11] || ""
+    selectedNo:p[0] || "",
+    category:p[1] || "업무공지",
+    title:p[2] || "",
+    date:p[3] || "",
+    views:p[4] || "0",
+    sender:p[5] || "",
+    security:p[6] || "",
+    body:p[7] || "",
+    securityNote:p[8] || "",
+
+    list:String(p[9] || "")
+      .split("~~")
+      .filter(Boolean)
+      .slice(0,4)
+      .map(parseListItem),
+
+    footerTime:p[10] || "",
+    signature:p[11] || ""
   };
 }
 
 function renderRows(data){
+
   const selected = {
     no:data.selectedNo,
     category:data.category,
@@ -248,60 +745,133 @@ function renderRows(data){
     isNew:"1"
   };
 
-  const rows = [selected, ...data.list].slice(0,5);
+  const rows =
+    [selected,...data.list].slice(0,5);
 
-  document.getElementById("noticeRows").innerHTML = rows.map((r,i)=>{
-    const selectedClass = i===0 ? " selected" : "";
-    const accentClass = i===0 ? " accent" : "";
-    const newTag = String(r.isNew)==="1" ? `<span class="new">NEW</span>` : "";
+  document.getElementById("noticeRows").innerHTML =
+    rows.map((r,i)=>{
 
-    return `
-      <div class="notice-row${selectedClass}">
-        <div class="no">${esc(r.no)}</div>
+      const selectedClass =
+        i===0 ? " selected" : "";
 
-        <div class="title-cell">
-          <span class="badge${accentClass}">${esc(r.category)}</span>
-          <span class="notice-title">${esc(r.title)}</span>
-          ${newTag}
+      const accentClass =
+        i===0 ? " accent" : "";
+
+      const newTag =
+        String(r.isNew)==="1"
+          ? `<span class="new">NEW</span>`
+          : "";
+
+      return `
+        <div class="notice-row${selectedClass}">
+
+          <div class="no">
+            ${esc(r.no)}
+          </div>
+
+          <div class="title-cell">
+
+            <span class="badge${accentClass}">
+              ${esc(r.category)}
+            </span>
+
+            <span class="notice-title">
+              ${esc(r.title)}
+            </span>
+
+            ${newTag}
+
+          </div>
+
+          <div class="date">
+            ${esc(r.date)}
+          </div>
+
+          <div class="views">
+            ${esc(r.views)}
+          </div>
+
         </div>
+      `;
 
-        <div class="kind">${esc(r.category)}</div>
-        <div class="date">${esc(r.date)}</div>
-        <div class="views">${esc(r.views)}</div>
-      </div>
-    `;
-  }).join("");
+    }).join("");
 }
 
 function render(data){
+
   renderRows(data);
 
-  document.getElementById("articleBadge").textContent = data.category;
-  document.getElementById("articleTitle").textContent = data.title;
-  document.getElementById("articleDate").textContent = data.date ? "등록일  " + data.date : "";
-  document.getElementById("articleSender").textContent = data.sender ? "발신: " + data.sender : "";
-  document.getElementById("articleCategory").textContent = "분류: " + data.category;
-  document.getElementById("articleSecurity").textContent = data.security ? "보안등급: " + data.security : "";
-  document.getElementById("articleBody").textContent = String(data.body||"").replace(/↵/g,"\n");
-  document.getElementById("securityBody").textContent = String(data.securityNote||"").replace(/↵/g,"\n");
-  document.getElementById("securityBox").dataset.empty = data.securityNote ? "false" : "true";
-  document.getElementById("footerTime").textContent = data.footerTime;
-  document.getElementById("articleSignature").textContent = data.signature ? "– " + data.signature + " –" : "";
+  document.getElementById("articleBadge").textContent =
+    data.category;
+
+  document.getElementById("articleTitle").textContent =
+    data.title;
+
+  document.getElementById("articleDate").textContent =
+    data.date
+      ? "등록일  " + data.date
+      : "";
+
+  document.getElementById("articleSender").textContent =
+    data.sender
+      ? "발신: " + data.sender
+      : "";
+
+  document.getElementById("articleCategory").textContent =
+    "분류: " + data.category;
+
+  document.getElementById("articleSecurity").textContent =
+    data.security
+      ? "보안등급: " + data.security
+      : "";
+
+  document.getElementById("articleBody").textContent =
+    String(data.body||"")
+      .replace(/↵/g,"\n");
+
+  document.getElementById("securityBody").textContent =
+    String(data.securityNote||"")
+      .replace(/↵/g,"\n");
+
+  document.getElementById("securityBox").dataset.empty =
+    data.securityNote
+      ? "false"
+      : "true";
+
+  document.getElementById("footerTime").textContent =
+    data.footerTime;
+
+  document.getElementById("articleSignature").textContent =
+    data.signature
+      ? "– " + data.signature + " –"
+      : "";
 }
 
 const data = parseData();
 
 if(data){
+
   render(data);
+
 }else{
+
   render({
+
     selectedNo:"2476",
+
     category:"업무공지",
-    title:"7/27(일) VALMERE BAY NODE-3 합동작전 관련 안내",
+
+    title:
+    "7/27(일) VALMERE BAY NODE-3 합동작전 관련 안내",
+
     date:"2025.07.24 09:12",
+
     views:"812",
+
     sender:"NMT Operations HQ",
+
     security:"INTERNAL B등급",
+
     body:
 `VALMERE BAY NODE-3 합동작전이 다음과 같이 진행될 예정입니다.
 관련 인원은 아래 내용을 숙지하고 각 팀은 임무 준비 및 장비 점검을 완료해 주시기 바랍니다.
@@ -316,21 +886,55 @@ if(data){
 8. 임무 종료 후 장비 반납 및 보고 절차는 각 부대별 지시에 따릅니다.
 
 작전의 성공을 위해 각 팀의 협조와 철저한 준비를 당부드립니다.`,
+
     securityNote:
 `- 본 공지는 NMT 내부 보안 등급 B 정보입니다.
 - 관련 내용은 NMT 내부 인원에게만 공유되며, 외부 유출 및 무단 복제·전송을 금합니다.
 - 위반 시 NMT 보안 규정에 따라 징계 및 법적 조치가 진행될 수 있습니다.
 - 의심되는 정보 유출 정황 발견 시 즉시 보안팀(SO)으로 보고해 주시기 바랍니다.`,
+
     list:[
-      {no:"2475",category:"일반공지",title:"10월 내부 정비의 날 운영 안내 (10.02)",date:"2025.07.24 08:45",views:"1,245",isNew:"0"},
-      {no:"2474",category:"일반공지",title:"임시 식당 운영 시간 변경 안내 (07.25~)",date:"2025.07.23 18:20",views:"542",isNew:"0"},
-      {no:"2473",category:"일반공지",title:"사내 헬스장 이용 수칙 및 점검 일정 안내",date:"2025.07.23 16:05",views:"621",isNew:"0"},
-      {no:"2472",category:"일반공지",title:"여름철 폭염 대비 건강관리 수칙 안내",date:"2025.07.23 13:40",views:"1,102",isNew:"0"}
+      {
+        no:"2475",
+        category:"일반공지",
+        title:"10월 내부 정비의 날 운영 안내 (10.02)",
+        date:"2025.07.24 08:45",
+        views:"1,245",
+        isNew:"0"
+      },
+      {
+        no:"2474",
+        category:"일반공지",
+        title:"임시 식당 운영 시간 변경 안내 (07.25~)",
+        date:"2025.07.23 18:20",
+        views:"542",
+        isNew:"0"
+      },
+      {
+        no:"2473",
+        category:"일반공지",
+        title:"사내 헬스장 이용 수칙 및 점검 일정 안내",
+        date:"2025.07.23 16:05",
+        views:"621",
+        isNew:"0"
+      },
+      {
+        no:"2472",
+        category:"일반공지",
+        title:"여름철 폭염 대비 건강관리 수칙 안내",
+        date:"2025.07.23 13:40",
+        views:"1,102",
+        isNew:"0"
+      }
     ],
+
     footerTime:"2025.07.24 14:32:11",
+
     signature:"NMT Operations HQ"
+
   });
 }
 </script>
+
 </body>
 </html>
