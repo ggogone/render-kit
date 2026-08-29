@@ -26,7 +26,7 @@ html,body{
   font-family:Pretendard,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
   color:var(--ink)
 }
-.scene{width:1080px;margin:0;background:#fff}
+.scene{width:900px;margin:0;background:#fff}
 .topbar{
   height:84px;padding:0 30px;display:flex;align-items:center;justify-content:space-between;
   background:linear-gradient(180deg,#0e1826 0%,#111d2c 100%);color:#fff
@@ -103,7 +103,7 @@ html,body{
 .footer-brand{display:flex;justify-content:flex-end;align-items:center;gap:12px;color:#9da8b4;font-size:13px;font-weight:750}
 .footer-brand small{display:block;margin-top:2px;font-size:8px;font-weight:550;letter-spacing:.05em}
 [data-empty="true"]{display:none!important}
-@media(max-width:1080px){body,.scene{width:1080px;max-width:1080px}}
+@media(max-width:900px){body,.scene{width:900px;max-width:900px}}
 </style>
 </head>
 
@@ -282,8 +282,8 @@ function render(data){
   document.getElementById("articleSender").textContent = data.sender ? "발신: " + data.sender : "";
   document.getElementById("articleCategory").textContent = "분류: " + data.category;
   document.getElementById("articleSecurity").textContent = data.security ? "보안등급: " + data.security : "";
-  document.getElementById("articleBody").textContent = data.body;
-  document.getElementById("securityBody").textContent = data.securityNote;
+  document.getElementById("articleBody").textContent = String(data.body||"").replace(/↵/g,"\n");
+  document.getElementById("securityBody").textContent = String(data.securityNote||"").replace(/↵/g,"\n");
   document.getElementById("securityBox").dataset.empty = data.securityNote ? "false" : "true";
   document.getElementById("footerTime").textContent = data.footerTime;
   document.getElementById("articleSignature").textContent = data.signature ? "– " + data.signature + " –" : "";
