@@ -908,6 +908,52 @@ function normalizeDirection(value){
   return "in";
 }
 
+const MESSAGE_DIRS=[
+  "in","out","me","mine","self","user","u","right",
+  "sent","send","outgoing","incoming","left",
+  "나","내","본인","상대","ⓤ","Ⓤ"
+];
+
+function isKnownDirection(value){
+  return MESSAGE_DIRS.includes(
+    String(value||"").trim().toLowerCase()
+  );
+}
+
+function looksLikeMessageDate(value){
+  const s=String(value||"").trim();
+  return (
+    /\d{1,2}월\s*\d{1,2}일/.test(s) ||
+    /\d{1,2}:\d{2}/.test(s)
+  );
+}
+
+function parseMessageItem(item){
+  const f=String(item||"").split("^^");
+
+  if(isKnownDirection(f[1])){
+    return {
+      date:f[0]||"",
+      direction:normalizeDirection(f[1]),
+      en:f[2]||"",
+      kr:f[3]||"",
+      state:f[4]||""
+    };
+  }
+
+  if(f.length>=4 && looksLikeMessageDate(f[0])){
+    return {
+      date:f[0]||"",
+      direction:"in",
+      en:f[1]||"",
+      kr:f[2]||"",
+      state:f[3]||""
+    };
+  }
+
+  return null;
+}
+
 function parseData(){
   const raw=
     new URLSearchParams(location.search)
@@ -952,38 +998,9 @@ function parseData(){
 
     tail.forEach(item=>{
 
-      const f=
-        String(item)
-          .split("^^");
+      const parsed=parseMessageItem(item);
 
-      const rawDir=
-        String(f[1]||"")
-          .trim()
-          .toLowerCase();
-
-      const knownDirs=[
-        "in",
-        "out",
-        "me",
-        "mine",
-        "self",
-        "user",
-        "u",
-        "right",
-        "sent",
-        "send",
-        "outgoing",
-        "incoming",
-        "left",
-        "나",
-        "내",
-        "본인",
-        "상대",
-        "ⓤ",
-        "Ⓤ"
-      ];
-
-      if(knownDirs.includes(rawDir)){
+      if(parsed){
         messageItems.push(item);
       }else{
         leftovers.push(item);
@@ -997,21 +1014,8 @@ function parseData(){
 
   const messages=
     messageItems
-      .map(item=>{
-
-        const f=
-          String(item)
-            .split("^^");
-
-        return {
-          date:f[0]||"",
-          direction:normalizeDirection(f[1]),
-          en:f[2]||"",
-          kr:f[3]||"",
-          state:f[4]||""
-        };
-
-      })
+      .map(parseMessageItem)
+      .filter(Boolean)
       .slice(-8);
 
   return {
