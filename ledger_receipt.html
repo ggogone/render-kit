@@ -19,7 +19,7 @@
   --muted:#737373;
   --dash:#9a9a9a;
 
-  /* 모든 점선 ↔ 내용 사이 간격 */
+  /* 모든 점선과 내용 사이 공통 간격 */
   --divider-gap:10px;
 }
 
@@ -85,7 +85,9 @@ body{
 }
 
 
-/* 영수증 톱니 */
+/* ========================================
+   RECEIPT EDGE
+======================================== */
 
 .receipt::before,
 .receipt::after{
@@ -158,10 +160,8 @@ body{
 ======================================== */
 
 .rp-date{
-  margin:
-    0
-    0
-    var(--divider-gap);
+  margin:0;
+  padding:0;
 
   text-align:center;
 
@@ -172,21 +172,26 @@ body{
 
 
 /* ========================================
-   STANDARD DIVIDER
+   UNIVERSAL DIVIDER
 
-   언제나:
-   내용 ↓10px
+   내용
+   ↓ 10px
    점선
-   ↓10px 다음내용
+   ↓ 10px
+   내용
+
+   모든 점선은 이것만 사용
 ======================================== */
 
 .rule{
   width:100%;
-  height:1px;
+  height:0;
 
   margin:
     var(--divider-gap)
     0;
+
+  padding:0;
 
   border:0;
   border-top:
@@ -195,7 +200,7 @@ body{
 
 
 /* ========================================
-   SECTIONS
+   SECTION
 ======================================== */
 
 .section{
@@ -218,7 +223,7 @@ body{
 
 
 /* ========================================
-   NORMAL ROWS
+   ROW LIST
 ======================================== */
 
 .rows{
@@ -227,12 +232,20 @@ body{
   display:flex;
   flex-direction:column;
 
+  margin:0;
+  padding:0;
+
   /*
-    수입/지출/총수입/총지출 등
-    실제 내역끼리의 간격은 촘촘하게 유지
+    점선 간격과 무관.
+    일반 내역끼리만 촘촘하게 유지.
   */
-  gap:1px;
+  gap:0;
 }
+
+
+/* ========================================
+   NORMAL ROW
+======================================== */
 
 .row{
   width:100%;
@@ -247,8 +260,6 @@ body{
 
   align-items:center;
 
-  min-height:24px;
-
   margin:0;
   padding:0;
 
@@ -256,22 +267,26 @@ body{
   line-height:1.35;
 }
 
-.row .label,
-.row .amount{
-  display:flex;
-  align-items:center;
 
-  min-height:24px;
+/* 일반 내역끼리만 1px */
+
+.row + .row{
+  margin-top:1px;
 }
+
 
 .row .label{
   min-width:0;
+
+  margin:0;
+  padding:0;
 
   overflow-wrap:anywhere;
 }
 
 .row .amount{
-  justify-content:flex-end;
+  margin:0;
+  padding:0;
 
   text-align:right;
   white-space:nowrap;
@@ -282,50 +297,39 @@ body{
 
 
 /* ========================================
-   SUMMARY
+   SUMMARY EMPHASIS BLOCK
+
+   이 블록 안에서도
+   동일한 .rule을 사용함.
+
+   총지출
+      ↓10
+   점선
+      ↓10
+   이번달잔액
+      ↓10
+   점선
+      ↓10
+   비상저축금차감
 ======================================== */
 
-.summary .rows{
-  gap:1px;
-}
+.emphasis-block{
+  width:100%;
 
-.summary .row{
-  min-height:24px;
+  margin:0;
+  padding:0;
 }
 
 
 /*
-  이번달잔액
-
-  이전 내용
-       ↓10px
-  ─────────
-       ↓10px
-  이번달잔액
-       ↓10px
-  ─────────
-       ↓10px
-  다음 내용
+  일반 .row + .row 규칙에서
+  emphasis는 별도 블록이므로
+  추가 행간이 발생하지 않음.
 */
 
-.summary .row.emphasis{
-  position:relative;
-
-  margin:
-    var(--divider-gap)
-    0;
-
-  padding:
-    var(--divider-gap)
-    0;
-
-  min-height:24px;
-
-  border-top:
-    1px dashed var(--dash);
-
-  border-bottom:
-    1px dashed var(--dash);
+.emphasis-row{
+  margin:0 !important;
+  padding:0;
 
   font-size:17px;
   line-height:1.25;
@@ -333,23 +337,24 @@ body{
 }
 
 
-/*
-  남은비상저축금은
-  별도 여백을 전혀 주지 않음.
+/* ========================================
+   STRONG ROW
+======================================== */
 
-  그 아래 .rule의 10px이
-  점선 앞 간격을 전담함.
-*/
-
-.summary .row.strong{
+.strong-row{
   margin:0;
   padding:0;
 
-  min-height:24px;
-
   font-size:17px;
   line-height:1.25;
   font-weight:900;
+}
+
+
+/* strong 앞 일반 행과의 기본 1px만 유지 */
+
+.row + .strong-row{
+  margin-top:1px;
 }
 
 
@@ -371,23 +376,11 @@ body{
 
 /* ========================================
    BARCODE
-
-   메모 끝
-     ↓10px
-   점선
-     ↓10px
-   바코드
 ======================================== */
 
 .barcode-wrap{
-  margin-top:
-    var(--divider-gap);
-
-  padding-top:
-    var(--divider-gap);
-
-  border-top:
-    1px dashed var(--dash);
+  margin:0;
+  padding:0;
 
   text-align:center;
 }
@@ -420,6 +413,9 @@ body{
 }
 
 .barcode-number{
+  margin:0;
+  padding:0;
+
   font-family:
     "Courier New",
     monospace;
@@ -433,7 +429,12 @@ body{
 }
 
 .cheer{
-  margin-top:20px;
+  margin:
+    20px
+    0
+    0;
+
+  padding:0;
 
   text-align:center;
 
@@ -452,7 +453,9 @@ body{
 <div class="receipt">
 
 
-  <!-- LOGO -->
+  <!-- =====================================
+       LOGO
+  ====================================== -->
 
   <div class="logo">
 
@@ -464,7 +467,9 @@ body{
   </div>
 
 
-  <!-- RP DATE -->
+  <!-- =====================================
+       RP DATE
+  ====================================== -->
 
   <div
     class="rp-date"
@@ -521,7 +526,7 @@ body{
        SUMMARY
   ====================================== -->
 
-  <section class="section summary">
+  <section class="section">
 
     <div class="section-title">
       [ 정산 ]
@@ -554,6 +559,14 @@ body{
     </div>
 
   </section>
+
+
+  <!--
+    메모 → 점선 → 바코드도
+    위와 똑같은 .rule 사용
+  -->
+
+  <div class="rule"></div>
 
 
   <!-- =====================================
@@ -627,6 +640,7 @@ function parseRow(item){
       amount,
       flag
     };
+
   }
 
 
@@ -651,14 +665,46 @@ function parseRow(item){
       flag:""
 
     };
+
   }
 
 
   return {
+
     label:s,
+
     amount:"",
+
     flag:""
+
   };
+
+}
+
+
+/* ========================================
+   BASE ROW HTML
+======================================== */
+
+function baseRowHTML(
+  r,
+  extraClass=""
+){
+
+  return `
+    <div class="row ${extraClass}">
+
+      <div class="label">
+        ${esc(r.label)}
+      </div>
+
+      <div class="amount">
+        ${esc(r.amount)}
+      </div>
+
+    </div>
+  `;
+
 }
 
 
@@ -672,32 +718,48 @@ function rowHTML(item){
     parseRow(item);
 
 
-  const cls =
+  /*
+    강조 정산은
+    border/margin을 자체적으로 만들지 않고
+    공통 .rule 두 개 사이에 넣음.
+  */
 
+  if(
     r.flag === "emphasis"
+  ){
 
-      ? "row emphasis"
+    return `
+      <div class="emphasis-block">
 
-      : r.flag === "strong"
+        <div class="rule"></div>
 
-        ? "row strong"
+        ${baseRowHTML(
+          r,
+          "emphasis-row"
+        )}
 
-        : "row";
+        <div class="rule"></div>
 
-
-  return `
-    <div class="${cls}">
-
-      <div class="label">
-        ${esc(r.label)}
       </div>
+    `;
 
-      <div class="amount">
-        ${esc(r.amount)}
-      </div>
+  }
 
-    </div>
-  `;
+
+  if(
+    r.flag === "strong"
+  ){
+
+    return baseRowHTML(
+      r,
+      "strong-row"
+    );
+
+  }
+
+
+  return baseRowHTML(r);
+
 }
 
 
@@ -716,6 +778,7 @@ function rowsHTML(v){
     .map(rowHTML)
 
     .join("");
+
 }
 
 
@@ -744,6 +807,7 @@ function hashString(s){
 
 
   return h;
+
 }
 
 
@@ -796,6 +860,7 @@ function makeBarcodeNumber(date){
     0,
     14
   );
+
 }
 
 
@@ -853,6 +918,7 @@ function pickCheer(
     h %
     CHEERS.length
   ];
+
 }
 
 
@@ -910,6 +976,7 @@ function parseData(){
     cheer
 
   };
+
 }
 
 
