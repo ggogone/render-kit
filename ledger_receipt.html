@@ -5,8 +5,12 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>LEDGER Receipt</title>
 
-<link rel="stylesheet" as="style" crossorigin
-href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+<link
+  rel="stylesheet"
+  as="style"
+  crossorigin
+  href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css"
+>
 
 <style>
 :root{
@@ -15,7 +19,7 @@ href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretend
   --muted:#737373;
   --dash:#9a9a9a;
 
-  /* 점선 기준 공통 여백 */
+  /* 모든 점선 ↔ 내용 사이 간격 */
   --divider-gap:10px;
 }
 
@@ -23,23 +27,41 @@ href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretend
   box-sizing:border-box;
 }
 
-html,body{
+html,
+body{
   margin:0;
   padding:0;
+
   width:max-content;
   min-width:0;
   height:auto;
+
   background:transparent;
-  font-family:Pretendard,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+
+  font-family:
+    Pretendard,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
 }
 
+
+/* ========================================
+   RECEIPT
+======================================== */
+
 .receipt{
+  position:relative;
+
   width:500px;
   min-height:0;
   height:auto;
-  position:relative;
 
-  padding:58px 28px 34px;
+  padding:
+    58px
+    28px
+    34px;
 
   color:var(--ink);
 
@@ -63,13 +85,12 @@ html,body{
 }
 
 
-/* =========================
-   RECEIPT EDGE
-========================= */
+/* 영수증 톱니 */
 
 .receipt::before,
 .receipt::after{
   content:"";
+
   position:absolute;
   left:0;
 
@@ -102,9 +123,9 @@ html,body{
 }
 
 
-/* =========================
+/* ========================================
    LOGO
-========================= */
+======================================== */
 
 .logo{
   width:100%;
@@ -113,7 +134,10 @@ html,body{
   align-items:center;
   justify-content:center;
 
-  margin:8px 0 30px;
+  margin:
+    8px
+    0
+    30px;
 }
 
 .logo img{
@@ -123,16 +147,21 @@ html,body{
   max-width:100%;
   height:auto;
 
+  margin:0 auto;
+
   object-fit:contain;
 }
 
 
-/* =========================
-   DATE
-========================= */
+/* ========================================
+   RP DATE
+======================================== */
 
 .rp-date{
-  margin:0 0 17px;
+  margin:
+    0
+    0
+    var(--divider-gap);
 
   text-align:center;
 
@@ -142,25 +171,32 @@ html,body{
 }
 
 
-/* =========================
-   DIVIDER
-========================= */
+/* ========================================
+   STANDARD DIVIDER
+
+   언제나:
+   내용 ↓10px
+   점선
+   ↓10px 다음내용
+======================================== */
 
 .rule{
   width:100%;
+  height:1px;
 
   margin:
     var(--divider-gap)
     0;
 
+  border:0;
   border-top:
     1px dashed var(--dash);
 }
 
 
-/* =========================
-   SECTION
-========================= */
+/* ========================================
+   SECTIONS
+======================================== */
 
 .section{
   margin:0;
@@ -168,7 +204,12 @@ html,body{
 }
 
 .section-title{
-  margin:0 0 6px;
+  margin:
+    0
+    0
+    6px;
+
+  padding:0;
 
   font-size:17px;
   line-height:1.25;
@@ -176,9 +217,9 @@ html,body{
 }
 
 
-/* =========================
+/* ========================================
    NORMAL ROWS
-========================= */
+======================================== */
 
 .rows{
   width:100%;
@@ -186,7 +227,10 @@ html,body{
   display:flex;
   flex-direction:column;
 
-  /* 내역끼리는 촘촘하게 */
+  /*
+    수입/지출/총수입/총지출 등
+    실제 내역끼리의 간격은 촘촘하게 유지
+  */
   gap:1px;
 }
 
@@ -205,22 +249,28 @@ html,body{
 
   min-height:24px;
 
+  margin:0;
+  padding:0;
+
   font-size:15.5px;
   line-height:1.35;
+}
+
+.row .label,
+.row .amount{
+  display:flex;
+  align-items:center;
+
+  min-height:24px;
 }
 
 .row .label{
   min-width:0;
 
-  display:flex;
-  align-items:center;
-
   overflow-wrap:anywhere;
 }
 
 .row .amount{
-  display:flex;
-  align-items:center;
   justify-content:flex-end;
 
   text-align:right;
@@ -231,9 +281,9 @@ html,body{
 }
 
 
-/* =========================
+/* ========================================
    SUMMARY
-========================= */
+======================================== */
 
 .summary .rows{
   gap:1px;
@@ -246,11 +296,21 @@ html,body{
 
 /*
   이번달잔액
-  총지출 → 점선 → 이번달잔액 → 점선
-  각 점선과 글자 사이를 동일하게 맞춤
+
+  이전 내용
+       ↓10px
+  ─────────
+       ↓10px
+  이번달잔액
+       ↓10px
+  ─────────
+       ↓10px
+  다음 내용
 */
 
 .summary .row.emphasis{
+  position:relative;
+
   margin:
     var(--divider-gap)
     0;
@@ -258,6 +318,8 @@ html,body{
   padding:
     var(--divider-gap)
     0;
+
+  min-height:24px;
 
   border-top:
     1px dashed var(--dash);
@@ -273,8 +335,10 @@ html,body{
 
 /*
   남은비상저축금은
-  자체 위아래 여백을 따로 주지 않음.
-  아래 section rule이 공통 간격 담당.
+  별도 여백을 전혀 주지 않음.
+
+  그 아래 .rule의 10px이
+  점선 앞 간격을 전담함.
 */
 
 .summary .row.strong{
@@ -289,12 +353,13 @@ html,body{
 }
 
 
-/* =========================
+/* ========================================
    NOTE
-========================= */
+======================================== */
 
 .note{
   margin:0;
+  padding:0;
 
   font-size:15px;
   line-height:1.5;
@@ -304,17 +369,22 @@ html,body{
 }
 
 
-/* =========================
+/* ========================================
    BARCODE
-========================= */
+
+   메모 끝
+     ↓10px
+   점선
+     ↓10px
+   바코드
+======================================== */
 
 .barcode-wrap{
-  /*
-    메모 본문 → 점선 간격도
-    다른 divider와 동일
-  */
-  margin-top:var(--divider-gap);
-  padding-top:var(--divider-gap);
+  margin-top:
+    var(--divider-gap);
+
+  padding-top:
+    var(--divider-gap);
 
   border-top:
     1px dashed var(--dash);
@@ -327,7 +397,7 @@ html,body{
   height:58px;
 
   margin:
-    8px
+    0
     auto
     5px;
 
@@ -355,6 +425,7 @@ html,body{
     monospace;
 
   font-size:10px;
+  line-height:1.2;
 
   letter-spacing:5px;
 
@@ -380,13 +451,20 @@ html,body{
 
 <div class="receipt">
 
+
+  <!-- LOGO -->
+
   <div class="logo">
+
     <img
       src="https://ggogone.github.io/render-kit/ledger-logo.png"
       alt="LEDGER — RECORDS TODAY, A BETTER TOMORROW"
     >
+
   </div>
 
+
+  <!-- RP DATE -->
 
   <div
     class="rp-date"
@@ -397,7 +475,9 @@ html,body{
   <div class="rule"></div>
 
 
-  <!-- INCOME -->
+  <!-- =====================================
+       INCOME
+  ====================================== -->
 
   <section class="section">
 
@@ -416,7 +496,9 @@ html,body{
   <div class="rule"></div>
 
 
-  <!-- EXPENSE -->
+  <!-- =====================================
+       EXPENSE
+  ====================================== -->
 
   <section class="section">
 
@@ -435,7 +517,9 @@ html,body{
   <div class="rule"></div>
 
 
-  <!-- SUMMARY -->
+  <!-- =====================================
+       SUMMARY
+  ====================================== -->
 
   <section class="section summary">
 
@@ -454,7 +538,9 @@ html,body{
   <div class="rule"></div>
 
 
-  <!-- NOTE -->
+  <!-- =====================================
+       NOTE
+  ====================================== -->
 
   <section class="section">
 
@@ -470,7 +556,9 @@ html,body{
   </section>
 
 
-  <!-- BARCODE -->
+  <!-- =====================================
+       BARCODE
+  ====================================== -->
 
   <div class="barcode-wrap">
 
@@ -488,14 +576,15 @@ html,body{
 
   </div>
 
+
 </div>
 
 
 <script>
 
-/* =========================
+/* ========================================
    ESCAPE
-========================= */
+======================================== */
 
 function esc(v){
 
@@ -513,9 +602,9 @@ function esc(v){
 }
 
 
-/* =========================
+/* ========================================
    ROW PARSER
-========================= */
+======================================== */
 
 function parseRow(item){
 
@@ -531,6 +620,7 @@ function parseRow(item){
       amount="",
       flag=""
     ] = s.split("^^");
+
 
     return {
       label,
@@ -549,11 +639,13 @@ function parseRow(item){
     return {
 
       label:
-        s.slice(0,idx)
+        s
+          .slice(0,idx)
           .trim(),
 
       amount:
-        s.slice(idx + 1)
+        s
+          .slice(idx + 1)
           .trim(),
 
       flag:""
@@ -570,9 +662,9 @@ function parseRow(item){
 }
 
 
-/* =========================
+/* ========================================
    ROW HTML
-========================= */
+======================================== */
 
 function rowHTML(item){
 
@@ -583,12 +675,14 @@ function rowHTML(item){
   const cls =
 
     r.flag === "emphasis"
+
       ? "row emphasis"
 
-    : r.flag === "strong"
-      ? "row strong"
+      : r.flag === "strong"
 
-    : "row";
+        ? "row strong"
+
+        : "row";
 
 
   return `
@@ -607,9 +701,9 @@ function rowHTML(item){
 }
 
 
-/* =========================
+/* ========================================
    ROW LIST
-========================= */
+======================================== */
 
 function rowsHTML(v){
 
@@ -625,13 +719,14 @@ function rowsHTML(v){
 }
 
 
-/* =========================
+/* ========================================
    HASH
-========================= */
+======================================== */
 
 function hashString(s){
 
   let h = 0;
+
 
   for(
     let i = 0;
@@ -644,15 +739,17 @@ function hashString(s){
         h * 31 +
         s.charCodeAt(i)
       ) >>> 0;
+
   }
+
 
   return h;
 }
 
 
-/* =========================
+/* ========================================
    BARCODE NUMBER
-========================= */
+======================================== */
 
 function makeBarcodeNumber(date){
 
@@ -702,9 +799,9 @@ function makeBarcodeNumber(date){
 }
 
 
-/* =========================
+/* ========================================
    POSITIVE LINES
-========================= */
+======================================== */
 
 const CHEERS = [
 
@@ -739,10 +836,12 @@ function pickCheer(
   ){
 
     return override;
+
   }
 
 
   const h =
+
     hashString(
       String(
         date || "ledger"
@@ -757,9 +856,9 @@ function pickCheer(
 }
 
 
-/* =========================
+/* ========================================
    DATA
-========================= */
+======================================== */
 
 function parseData(){
 
@@ -773,7 +872,9 @@ function parseData(){
 
 
   if(!raw){
+
     return null;
+
   }
 
 
@@ -812,11 +913,12 @@ function parseData(){
 }
 
 
-/* =========================
+/* ========================================
    RENDER
-========================= */
+======================================== */
 
 function render(d){
+
 
   document
     .getElementById(
@@ -893,12 +995,13 @@ function render(d){
         d.rpDate,
         d.cheer
       );
+
 }
 
 
-/* =========================
+/* ========================================
    START
-========================= */
+======================================== */
 
 const data =
   parseData();
@@ -908,7 +1011,9 @@ render(
 
   data || {
 
+
     rpDate:
+
       "2025년 8월 / 4주차",
 
 
@@ -988,7 +1093,9 @@ render(
       "라디에이터에 1,240불 넣고 결국 고무 호스는 남이 사다 줬다.",
 
 
-    cheer:""
+    cheer:
+
+      ""
 
   }
 
