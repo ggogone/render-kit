@@ -14,6 +14,9 @@ href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretend
   --ink:#303030;
   --muted:#737373;
   --dash:#9a9a9a;
+
+  /* 점선 기준 공통 여백 */
+  --divider-gap:10px;
 }
 
 *{
@@ -36,10 +39,7 @@ html,body{
   height:auto;
   position:relative;
 
-  padding:
-    58px
-    28px
-    34px;
+  padding:58px 28px 34px;
 
   color:var(--ink);
 
@@ -70,7 +70,6 @@ html,body{
 .receipt::before,
 .receipt::after{
   content:"";
-
   position:absolute;
   left:0;
 
@@ -114,10 +113,7 @@ html,body{
   align-items:center;
   justify-content:center;
 
-  margin:
-    8px
-    0
-    30px;
+  margin:8px 0 30px;
 }
 
 .logo img{
@@ -136,10 +132,7 @@ html,body{
 ========================= */
 
 .rp-date{
-  margin:
-    0
-    0
-    17px;
+  margin:0 0 17px;
 
   text-align:center;
 
@@ -157,7 +150,7 @@ html,body{
   width:100%;
 
   margin:
-    14px
+    var(--divider-gap)
     0;
 
   border-top:
@@ -166,7 +159,7 @@ html,body{
 
 
 /* =========================
-   SECTIONS
+   SECTION
 ========================= */
 
 .section{
@@ -175,10 +168,7 @@ html,body{
 }
 
 .section-title{
-  margin:
-    0
-    0
-    7px;
+  margin:0 0 6px;
 
   font-size:17px;
   line-height:1.25;
@@ -187,7 +177,7 @@ html,body{
 
 
 /* =========================
-   ROWS
+   NORMAL ROWS
 ========================= */
 
 .rows{
@@ -196,6 +186,7 @@ html,body{
   display:flex;
   flex-direction:column;
 
+  /* 내역끼리는 촘촘하게 */
   gap:1px;
 }
 
@@ -249,16 +240,23 @@ html,body{
 }
 
 .summary .row{
-  min-height:25px;
+  min-height:24px;
 }
+
+
+/*
+  이번달잔액
+  총지출 → 점선 → 이번달잔액 → 점선
+  각 점선과 글자 사이를 동일하게 맞춤
+*/
 
 .summary .row.emphasis{
   margin:
-    4px
+    var(--divider-gap)
     0;
 
   padding:
-    7px
+    var(--divider-gap)
     0;
 
   border-top:
@@ -268,21 +266,25 @@ html,body{
     1px dashed var(--dash);
 
   font-size:17px;
+  line-height:1.25;
   font-weight:900;
 }
 
-.summary .row.strong{
-  margin:
-    3px
-    0
-    0;
 
-  padding:
-    5px
-    0
-    1px;
+/*
+  남은비상저축금은
+  자체 위아래 여백을 따로 주지 않음.
+  아래 section rule이 공통 간격 담당.
+*/
+
+.summary .row.strong{
+  margin:0;
+  padding:0;
+
+  min-height:24px;
 
   font-size:17px;
+  line-height:1.25;
   font-weight:900;
 }
 
@@ -307,9 +309,12 @@ html,body{
 ========================= */
 
 .barcode-wrap{
-  margin-top:14px;
-
-  padding-top:16px;
+  /*
+    메모 본문 → 점선 간격도
+    다른 divider와 동일
+  */
+  margin-top:var(--divider-gap);
+  padding-top:var(--divider-gap);
 
   border-top:
     1px dashed var(--dash);
@@ -322,7 +327,7 @@ html,body{
   height:58px;
 
   margin:
-    0
+    8px
     auto
     5px;
 
@@ -381,6 +386,7 @@ html,body{
       alt="LEDGER — RECORDS TODAY, A BETTER TOMORROW"
     >
   </div>
+
 
   <div
     class="rp-date"
