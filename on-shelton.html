@@ -363,6 +363,10 @@ function esc(v){
   }[c]))
 }
 
+function formatBody(v){
+  return esc(v).replace(/\s*\/\/\s*/g,"\n\n")
+}
+
 function parseComment(i){
   const[u="익명",t="",x="",l="0"]=String(i).split("^^");
   return{u,t,x,l}
@@ -443,7 +447,7 @@ function postHTML(p){
           ${esc(p.u)}${p.g?` · ${esc(p.g)}`:""}
         </div>
 
-        <div class="body">${esc(p.b)}</div>
+        <div class="body">${formatBody(p.b)}</div>
 
         <div class="stats">
           <span>◉ 조회 ${esc(p.v)}</span>
