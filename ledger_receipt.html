@@ -16,7 +16,9 @@ href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretend
   --dash:#9a9a9a;
 }
 
-*{box-sizing:border-box}
+*{
+  box-sizing:border-box;
+}
 
 html,body{
   margin:0;
@@ -43,7 +45,6 @@ html,body{
   overflow:visible;
 }
 
-/* receipt teeth */
 .receipt::before,
 .receipt::after{
   content:"";
@@ -56,12 +57,18 @@ html,body{
     linear-gradient(225deg,transparent 7px,var(--paper) 0) 7px 0/14px 14px repeat-x;
 }
 
-.receipt::before{top:-13px;transform:rotate(180deg)}
-.receipt::after{bottom:-13px}
+.receipt::before{
+  top:-13px;
+  transform:rotate(180deg);
+}
+
+.receipt::after{
+  bottom:-13px;
+}
 
 .logo{
   text-align:center;
-  margin-bottom:7px;
+  margin-bottom:8px;
 }
 
 .logo span{
@@ -72,7 +79,7 @@ html,body{
   font-weight:900;
   font-style:italic;
   letter-spacing:.8px;
-  transform:skewX(-8deg);
+  transform:skewX(-10deg);
 }
 
 .rp-date{
@@ -80,39 +87,47 @@ html,body{
   font-size:18px;
   line-height:1.3;
   font-weight:500;
-  margin-bottom:20px;
+  margin:0 0 18px;
 }
 
 .rule{
   border-top:1px dashed var(--dash);
-  margin:0 0 14px;
+  margin:16px 0;
 }
 
 .section{
-  margin:0 0 13px;
+  margin:0;
+  padding:0;
 }
 
 .section-title{
+  margin:0 0 10px;
   font-size:17px;
+  line-height:1.25;
   font-weight:800;
-  margin-bottom:6px;
 }
 
 .rows{
   width:100%;
+  display:grid;
+  gap:6px;
 }
 
 .row{
   display:grid;
   grid-template-columns:minmax(0,1fr) auto;
-  gap:14px;
-  align-items:start;
+  column-gap:16px;
+  align-items:center;
+  min-height:34px;
   font-size:15.5px;
-  line-height:1.48;
+  line-height:1.45;
 }
 
-.row + .row{
-  margin-top:2px;
+.row .label,
+.row .amount{
+  display:flex;
+  align-items:center;
+  min-height:1.45em;
 }
 
 .row .label{
@@ -121,14 +136,19 @@ html,body{
 }
 
 .row .amount{
-  white-space:nowrap;
+  justify-content:flex-end;
   text-align:right;
+  white-space:nowrap;
   font-variant-numeric:tabular-nums;
 }
 
+.summary .row{
+  min-height:36px;
+}
+
 .summary .row.emphasis{
-  margin-top:6px;
-  padding:7px 0 6px;
+  margin:0;
+  padding:8px 0;
   border-top:1px dashed var(--dash);
   border-bottom:1px dashed var(--dash);
   font-weight:900;
@@ -136,21 +156,23 @@ html,body{
 }
 
 .summary .row.strong{
-  margin-top:7px;
+  margin:0;
+  padding:8px 0 4px;
   font-weight:900;
   font-size:17px;
 }
 
 .note{
+  margin:0;
   font-size:15px;
-  line-height:1.55;
+  line-height:1.6;
   white-space:pre-line;
   overflow-wrap:anywhere;
 }
 
 .barcode-wrap{
-  margin-top:18px;
-  padding-top:18px;
+  margin-top:16px;
+  padding-top:16px;
   border-top:1px dashed var(--dash);
   text-align:center;
 }
@@ -234,40 +256,41 @@ html,body{
 
 <script>
 function esc(v){
-  return String(v??"").replace(/[&<>"']/g,c=>({
+  return String(v ?? "").replace(/[&<>"']/g, c => ({
     "&":"&amp;",
     "<":"&lt;",
     ">":"&gt;",
     '"':"&quot;",
     "'":"&#39;"
-  }[c]))
+  }[c]));
 }
 
 function parseRow(item){
-  const s=String(item||"").trim();
+  const s = String(item || "").trim();
 
   if(s.includes("^^")){
-    const [label="",amount="",flag=""] = s.split("^^");
-    return {label,amount,flag};
+    const [label="", amount="", flag=""] = s.split("^^");
+    return { label, amount, flag };
   }
 
-  const idx=s.lastIndexOf(":");
-  if(idx>-1){
-    return{
-      label:s.slice(0,idx).trim(),
-      amount:s.slice(idx+1).trim(),
-      flag:""
+  const idx = s.lastIndexOf(":");
+  if(idx > -1){
+    return {
+      label: s.slice(0, idx).trim(),
+      amount: s.slice(idx + 1).trim(),
+      flag: ""
     };
   }
 
-  return{label:s,amount:"",flag:""};
+  return { label:s, amount:"", flag:"" };
 }
 
 function rowHTML(item){
-  const r=parseRow(item);
-  const cls=
-    r.flag==="emphasis" ? "row emphasis" :
-    r.flag==="strong" ? "row strong" :
+  const r = parseRow(item);
+
+  const cls =
+    r.flag === "emphasis" ? "row emphasis" :
+    r.flag === "strong" ? "row strong" :
     "row";
 
   return `
@@ -279,7 +302,7 @@ function rowHTML(item){
 }
 
 function rowsHTML(v){
-  return String(v||"")
+  return String(v || "")
     .split("~~")
     .filter(Boolean)
     .map(rowHTML)
@@ -287,27 +310,27 @@ function rowsHTML(v){
 }
 
 function hashString(s){
-  let h=0;
+  let h = 0;
   for(let i=0;i<s.length;i++){
-    h=(h*31+s.charCodeAt(i))>>>0;
+    h = (h * 31 + s.charCodeAt(i)) >>> 0;
   }
   return h;
 }
 
 function makeBarcodeNumber(date){
-  const digits=String(date||"")
-    .replace(/[^\d]/g,"")
-    .padEnd(8,"0")
-    .slice(0,8);
+  const digits = String(date || "")
+    .replace(/[^\d]/g, "")
+    .padEnd(8, "0")
+    .slice(0, 8);
 
-  const tail=String(hashString(date||"ledger"))
-    .padStart(6,"0")
+  const tail = String(hashString(date || "ledger"))
+    .padStart(6, "0")
     .slice(-6);
 
-  return (digits+tail).slice(0,14);
+  return (digits + tail).slice(0, 14);
 }
 
-const CHEERS=[
+const CHEERS = [
   "네가 가는 길을 의심하지 마.",
   "잘하고 있어. 오늘도 충분해.",
   "천천히 가도 괜찮아.",
@@ -318,48 +341,48 @@ const CHEERS=[
   "오늘도 수고했어 :)"
 ];
 
-function pickCheer(date,override){
-  if(String(override||"").trim()) return override;
-  const h=hashString(String(date||"ledger"));
+function pickCheer(date, override){
+  if(String(override || "").trim()) return override;
+  const h = hashString(String(date || "ledger"));
   return CHEERS[h % CHEERS.length];
 }
 
 function parseData(){
-  const raw=new URLSearchParams(location.search).get("data");
-  if(!raw)return null;
+  const raw = new URLSearchParams(location.search).get("data");
+  if(!raw) return null;
 
-  const[
+  const [
     rpDate="",
     income="",
     expense="",
     summary="",
     memo="",
     cheer=""
-  ]=raw.split("||");
+  ] = raw.split("||");
 
-  return{rpDate,income,expense,summary,memo,cheer};
+  return { rpDate, income, expense, summary, memo, cheer };
 }
 
 function render(d){
-  document.getElementById("rpDate").textContent=d.rpDate||"";
+  document.getElementById("rpDate").textContent = d.rpDate || "";
 
-  document.getElementById("income").innerHTML=rowsHTML(d.income);
-  document.getElementById("expense").innerHTML=rowsHTML(d.expense);
-  document.getElementById("summary").innerHTML=rowsHTML(d.summary);
+  document.getElementById("income").innerHTML = rowsHTML(d.income);
+  document.getElementById("expense").innerHTML = rowsHTML(d.expense);
+  document.getElementById("summary").innerHTML = rowsHTML(d.summary);
 
-  document.getElementById("memo").textContent=
-    String(d.memo||"").replace(/\s*\/\/\s*/g,"\n");
+  document.getElementById("memo").textContent =
+    String(d.memo || "").replace(/\s*\/\/\s*/g, "\n");
 
-  document.getElementById("barcodeNumber").textContent=
+  document.getElementById("barcodeNumber").textContent =
     makeBarcodeNumber(d.rpDate);
 
-  document.getElementById("cheer").textContent=
-    pickCheer(d.rpDate,d.cheer);
+  document.getElementById("cheer").textContent =
+    pickCheer(d.rpDate, d.cheer);
 }
 
-const data=parseData();
+const data = parseData();
 
-render(data||{
+render(data || {
   rpDate:"2025년 8월 / 4주차",
   income:
     "대리석 베일 카메오 (라울, 수령분)^^+1,800" +
@@ -381,7 +404,7 @@ render(data||{
     "~~이번달잔액^^+3,103^^emphasis" +
     "~~비상저축금차감 (집안 빚 상환 이체)^^-2,800" +
     "~~남은비상저축금^^412^^strong",
-  memo:"“라디에이터에 1,240불 넣고 결국 고무 호스는 남이 사다 줬다.”",
+  memo:"라디에이터에 1,240불 넣고 결국 고무 호스는 남이 사다 줬다.",
   cheer:""
 });
 </script>
