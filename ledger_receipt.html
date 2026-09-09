@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>LEDGER Receipt</title>
+
+<link rel="stylesheet" as="style" crossorigin
+href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+
+<style>
+:root{
+  --paper:#f7f6f2;
+  --ink:#303030;
+  --muted:#737373;
+  --dash:#9a9a9a;
+}
+
+*{box-sizing:border-box}
+
+html,body{
+  margin:0;
+  padding:0;
+  width:max-content;
+  min-width:0;
+  height:auto;
+  background:transparent;
+  font-family:Pretendard,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+}
+
+.receipt{
+  width:500px;
+  min-height:0;
+  height:auto;
+  position:relative;
+  padding:54px 28px 34px;
+  background:
+    radial-gradient(circle at 20% 10%,rgba(0,0,0,.015),transparent 24%),
+    radial-gradient(circle at 80% 35%,rgba(0,0,0,.012),transparent 28%),
+    var(--paper);
+  color:var(--ink);
+  box-shadow:0 10px 28px rgba(0,0,0,.16);
+  overflow:visible;
+}
+
+/* receipt teeth */
+.receipt::before,
+.receipt::after{
+  content:"";
+  position:absolute;
+  left:0;
+  width:100%;
+  height:14px;
+  background:
+    linear-gradient(135deg,transparent 7px,var(--paper) 0) 0 0/14px 14px repeat-x,
+    linear-gradient(225deg,transparent 7px,var(--paper) 0) 7px 0/14px 14px repeat-x;
+}
+
+.receipt::before{top:-13px;transform:rotate(180deg)}
+.receipt::after{bottom:-13px}
+
+.logo{
+  text-align:center;
+  margin-bottom:7px;
+}
+
+.logo span{
+  display:inline-block;
+  font-family:Impact,"Arial Black",sans-serif;
+  font-size:44px;
+  line-height:1;
+  font-weight:900;
+  font-style:italic;
+  letter-spacing:.8px;
+  transform:skewX(-8deg);
+}
+
+.rp-date{
+  text-align:center;
+  font-size:18px;
+  line-height:1.3;
+  font-weight:500;
+  margin-bottom:20px;
+}
+
+.rule{
+  border-top:1px dashed var(--dash);
+  margin:0 0 14px;
+}
+
+.section{
+  margin:0 0 13px;
+}
+
+.section-title{
+  font-size:17px;
+  font-weight:800;
+  margin-bottom:6px;
+}
+
+.rows{
+  width:100%;
+}
+
+.row{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto;
+  gap:14px;
+  align-items:start;
+  font-size:15.5px;
+  line-height:1.48;
+}
+
+.row + .row{
+  margin-top:2px;
+}
+
+.row .label{
+  min-width:0;
+  overflow-wrap:anywhere;
+}
+
+.row .amount{
+  white-space:nowrap;
+  text-align:right;
+  font-variant-numeric:tabular-nums;
+}
+
+.summary .row.emphasis{
+  margin-top:6px;
+  padding:7px 0 6px;
+  border-top:1px dashed var(--dash);
+  border-bottom:1px dashed var(--dash);
+  font-weight:900;
+  font-size:17px;
+}
+
+.summary .row.strong{
+  margin-top:7px;
+  font-weight:900;
+  font-size:17px;
+}
+
+.note{
+  font-size:15px;
+  line-height:1.55;
+  white-space:pre-line;
+  overflow-wrap:anywhere;
+}
+
+.barcode-wrap{
+  margin-top:18px;
+  padding-top:18px;
+  border-top:1px dashed var(--dash);
+  text-align:center;
+}
+
+.barcode{
+  width:270px;
+  height:58px;
+  margin:0 auto 5px;
+  background:
+    repeating-linear-gradient(
+      90deg,
+      #111 0 2px,
+      transparent 2px 4px,
+      #111 4px 5px,
+      transparent 5px 8px,
+      #111 8px 11px,
+      transparent 11px 13px,
+      #111 13px 14px,
+      transparent 14px 18px
+    );
+}
+
+.barcode-number{
+  font-family:"Courier New",monospace;
+  font-size:10px;
+  letter-spacing:5px;
+  color:#575757;
+}
+
+.cheer{
+  margin-top:22px;
+  text-align:center;
+  font-size:14px;
+  line-height:1.35;
+  color:#555;
+  font-weight:500;
+}
+</style>
+</head>
+
+<body>
+
+<div class="receipt">
+  <div class="logo"><span>LEDGER</span></div>
+  <div class="rp-date" id="rpDate"></div>
+
+  <div class="rule"></div>
+
+  <section class="section">
+    <div class="section-title">[ 수입 ]</div>
+    <div class="rows" id="income"></div>
+  </section>
+
+  <div class="rule"></div>
+
+  <section class="section">
+    <div class="section-title">[ 지출 ]</div>
+    <div class="rows" id="expense"></div>
+  </section>
+
+  <div class="rule"></div>
+
+  <section class="section summary">
+    <div class="section-title">[ 정산 ]</div>
+    <div class="rows" id="summary"></div>
+  </section>
+
+  <div class="rule"></div>
+
+  <section class="section">
+    <div class="section-title">[ 메모 ]</div>
+    <div class="note" id="memo"></div>
+  </section>
+
+  <div class="barcode-wrap">
+    <div class="barcode"></div>
+    <div class="barcode-number" id="barcodeNumber"></div>
+    <div class="cheer" id="cheer"></div>
+  </div>
+</div>
+
+<script>
+function esc(v){
+  return String(v??"").replace(/[&<>"']/g,c=>({
+    "&":"&amp;",
+    "<":"&lt;",
+    ">":"&gt;",
+    '"':"&quot;",
+    "'":"&#39;"
+  }[c]))
+}
+
+function parseRow(item){
+  const s=String(item||"").trim();
+
+  if(s.includes("^^")){
+    const [label="",amount="",flag=""] = s.split("^^");
+    return {label,amount,flag};
+  }
+
+  const idx=s.lastIndexOf(":");
+  if(idx>-1){
+    return{
+      label:s.slice(0,idx).trim(),
+      amount:s.slice(idx+1).trim(),
+      flag:""
+    };
+  }
+
+  return{label:s,amount:"",flag:""};
+}
+
+function rowHTML(item){
+  const r=parseRow(item);
+  const cls=
+    r.flag==="emphasis" ? "row emphasis" :
+    r.flag==="strong" ? "row strong" :
+    "row";
+
+  return `
+    <div class="${cls}">
+      <div class="label">${esc(r.label)}</div>
+      <div class="amount">${esc(r.amount)}</div>
+    </div>
+  `;
+}
+
+function rowsHTML(v){
+  return String(v||"")
+    .split("~~")
+    .filter(Boolean)
+    .map(rowHTML)
+    .join("");
+}
+
+function hashString(s){
+  let h=0;
+  for(let i=0;i<s.length;i++){
+    h=(h*31+s.charCodeAt(i))>>>0;
+  }
+  return h;
+}
+
+function makeBarcodeNumber(date){
+  const digits=String(date||"")
+    .replace(/[^\d]/g,"")
+    .padEnd(8,"0")
+    .slice(0,8);
+
+  const tail=String(hashString(date||"ledger"))
+    .padStart(6,"0")
+    .slice(-6);
+
+  return (digits+tail).slice(0,14);
+}
+
+const CHEERS=[
+  "네가 가는 길을 의심하지 마.",
+  "잘하고 있어. 오늘도 충분해.",
+  "천천히 가도 괜찮아.",
+  "지금까지도 잘 버텨왔어.",
+  "오늘의 한 걸음도 분명히 남아.",
+  "조금 늦어도 방향은 맞아.",
+  "네 속도로 가면 돼.",
+  "오늘도 수고했어 :)"
+];
+
+function pickCheer(date,override){
+  if(String(override||"").trim()) return override;
+  const h=hashString(String(date||"ledger"));
+  return CHEERS[h % CHEERS.length];
+}
+
+function parseData(){
+  const raw=new URLSearchParams(location.search).get("data");
+  if(!raw)return null;
+
+  const[
+    rpDate="",
+    income="",
+    expense="",
+    summary="",
+    memo="",
+    cheer=""
+  ]=raw.split("||");
+
+  return{rpDate,income,expense,summary,memo,cheer};
+}
+
+function render(d){
+  document.getElementById("rpDate").textContent=d.rpDate||"";
+
+  document.getElementById("income").innerHTML=rowsHTML(d.income);
+  document.getElementById("expense").innerHTML=rowsHTML(d.expense);
+  document.getElementById("summary").innerHTML=rowsHTML(d.summary);
+
+  document.getElementById("memo").textContent=
+    String(d.memo||"").replace(/\s*\/\/\s*/g,"\n");
+
+  document.getElementById("barcodeNumber").textContent=
+    makeBarcodeNumber(d.rpDate);
+
+  document.getElementById("cheer").textContent=
+    pickCheer(d.rpDate,d.cheer);
+}
+
+const data=parseData();
+
+render(data||{
+  rpDate:"2025년 8월 / 4주차",
+  income:
+    "대리석 베일 카메오 (라울, 수령분)^^+1,800" +
+    "~~대리석 레이스 코스터 (라즐로, 수령분)^^+950" +
+    "~~베일 펜던트 커스텀 2점 (중년 부부)^^+620" +
+    "~~소형 전시작 판매 (쇼룸, 3점)^^+1,150" +
+    "~~갤러리 위탁 정산 (7월분)^^+2,400",
+  expense:
+    "식비^^-180" +
+    "~~카페^^-34" +
+    "~~교통·주유^^-95" +
+    "~~정비소 (라디에이터, 오진 부품)^^-1,240" +
+    "~~석재·소모품 (블록 2, 다이아 날, 사포)^^-1,870" +
+    "~~생활비 (공과금·수도·전기)^^-310" +
+    "~~기타 (보청기 건조제·이어몰드 세정, 배송)^^-88",
+  summary:
+    "총수입^^+6,920" +
+    "~~총지출^^-3,817" +
+    "~~이번달잔액^^+3,103^^emphasis" +
+    "~~비상저축금차감 (집안 빚 상환 이체)^^-2,800" +
+    "~~남은비상저축금^^412^^strong",
+  memo:"“라디에이터에 1,240불 넣고 결국 고무 호스는 남이 사다 줬다.”",
+  cheer:""
+});
+</script>
+
+</body>
+</html>
